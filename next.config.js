@@ -62,7 +62,7 @@ const nextConfig = {
           '@lib': path.resolve(__dirname, 'lib'),
           '@common': path.resolve(__dirname, 'common'),
           '@pages': path.resolve(__dirname, 'pages'),
-          'google-libphonenumber': path.resolve(__dirname, './src/libphonenumber-stub.js'),
+          'google-libphonenumber': path.resolve(__dirname, './libphonenumber-stub.js'),
         },
       },
     };

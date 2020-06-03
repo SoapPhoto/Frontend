@@ -3,7 +3,6 @@ import React from 'react';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import { WithApolloProps } from 'next-with-apollo';
-import { ApolloProvider } from 'react-apollo';
 
 import 'dayjs/locale/es';
 import 'dayjs/locale/zh-cn';
@@ -89,25 +88,23 @@ class MyApp extends App<IProps> {
 
   public render() {
     const {
-      Component, pageProps, apollo,
+      Component, pageProps,
     } = this.props;
     const isError = (pageProps.error && pageProps.error.statusCode >= 400) || pageProps.statusCode >= 400;
     const noHeader = pageProps && pageProps.header === false;
     return (
-      <ApolloProvider client={apollo}>
-        <RouterProvider>
-          <ThemeWrapper>
-            <BodyLayout header={!isError && !noHeader}>
-              <DefaultSeo
-                description="photo, life, happy"
-              />
-              <Component
-                {...pageProps}
-              />
-            </BodyLayout>
-          </ThemeWrapper>
-        </RouterProvider>
-      </ApolloProvider>
+      <RouterProvider>
+        <ThemeWrapper>
+          <BodyLayout header={!isError && !noHeader}>
+            <DefaultSeo
+              description="photo, life, happy"
+            />
+            <Component
+              {...pageProps}
+            />
+          </BodyLayout>
+        </ThemeWrapper>
+      </RouterProvider>
     );
   }
 }

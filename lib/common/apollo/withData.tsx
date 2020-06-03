@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { InMemoryCache } from 'apollo-boost';
 import ApolloClient from 'apollo-client';
 import { BatchHttpLink } from 'apollo-link-batch-http';
@@ -7,6 +9,7 @@ import { ApolloLink, split } from 'apollo-link';
 import withData from 'next-with-apollo';
 import { onError } from 'apollo-link-error';
 import cookie from 'js-cookie';
+import { ApolloProvider } from 'react-apollo';
 
 import { getMainDefinition } from 'apollo-utilities';
 import { server } from '../utils';
@@ -76,5 +79,12 @@ function createClient({ headers, initialState }: any) {
 }
 
 export const withApollo = withData(createClient, {
-  getDataFromTree: 'ssr',
+  render: ({ Page, props }) => {
+    const { apollo } = props;
+    return (
+      <ApolloProvider client={apollo}>
+        <Page {...props} />
+      </ApolloProvider>
+    );
+  },
 });
