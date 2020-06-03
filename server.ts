@@ -1,7 +1,7 @@
 /// <reference types="./typings/index" />
 /// <reference types="./typings/typing" />
 
-import './common/env';
+import './env';
 
 import next from 'next';
 import express, { Request, Response } from 'express';
@@ -13,8 +13,8 @@ import responseTime from 'response-time';
 import proxy from 'http-proxy-middleware';
 import LRUCache from 'lru-cache';
 
-import { routeObject } from './common/routes';
-import { LocaleTypeValues, LocaleType } from './common/enum/locale';
+import { LocaleTypeValues, LocaleType } from '@common/enum/locale';
+import { routeObject } from './lib/router';
 
 const dev = process.env.NODE_ENV !== 'production';
 // const dev = false;
