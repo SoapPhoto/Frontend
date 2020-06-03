@@ -1,0 +1,51 @@
+scalar DateTime
+
+directive @limit(number: Float) on FIELD_DEFINITION
+
+interface BaseNode {
+  id: Float!
+  createTime: DateTime
+  updateTime: DateTime
+}
+
+interface BaseList {
+  count: Float
+  page: Float
+  pageSize: Float
+  timestamp: Float
+}
+
+interface BaseCountData {
+  count: Float
+}
+
+type Status {
+  done: Boolean
+}
+
+input PicturesQueryInput {
+  "分页"
+  page: Float
+  "分页"
+  pageSize: Float
+  "时间戳"
+  timestamp: Float
+}
+
+input CommentsQueryInput {
+  "分页"
+  page: Float
+  "分页"
+  pageSize: Float
+  "时间戳"
+  timestamp: Float
+}
+
+input CollectionsQueryInput {
+  "分页"
+  page: Float
+  "分页"
+  pageSize: Float
+  "时间戳"
+  timestamp: Float
+}

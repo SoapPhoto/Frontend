@@ -1,0 +1,76 @@
+type Query {
+  "获取收藏夹详情"
+  collection(
+    id: Float!
+  ): Collection
+
+  "获取收藏夹图片列表"
+  collectionPictures(
+    "收藏夹id"
+    id: Float!
+    query: PicturesQueryInput
+  ): Pictures
+}
+
+input AddPictureCollectionInput {
+  "图片id"
+  pictureId: Float!
+}
+
+type Mutation {
+  "添加图片到收藏夹"
+  addPictureCollection(
+    "收藏夹id"
+    id: Float!
+    "图片id"
+    pictureId: Float!
+  ): Collection
+  "从收藏夹删除图片"
+  removePictureCollection(
+    "收藏夹id"
+    id: Float!
+    "图片id"
+    pictureId: Float!
+  ): Status
+  deleteCollection(
+    "收藏夹id"
+    id: Float!
+  ): Status
+}
+
+type Collections implements BaseList {
+  count: Float
+  page: Float
+  pageSize: Float
+  timestamp: Float
+  data: [Collection!]!
+}
+
+type Collection implements BaseNode {
+  "id"
+  id: Float!
+
+  "名字"
+  name: String
+
+  "介绍"
+  bio: String
+
+  "图片作者"
+  user: User
+
+  "收藏夹预览"
+  preview: [Picture!]
+
+  "私人"
+  isPrivate: Boolean
+  
+  "图片数量"
+  pictureCount: Float
+
+  "创建时间"
+  createTime: DateTime
+
+  "修改时间"
+  updateTime: DateTime
+}

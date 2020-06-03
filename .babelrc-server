@@ -1,0 +1,17 @@
+{
+  "presets": [],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./dist"
+        ],
+        "alias": {
+          "@server": "./dist/src",
+          "@common": "./dist/common",
+        }
+      }
+    ]
+  ]
+}

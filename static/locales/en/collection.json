@@ -1,0 +1,12 @@
+{
+  "collection": {
+    "label": {
+      "name": "Name",
+      "bio": "Bio"
+    },
+    "delete": "Delete Collection",
+    "edit": {
+      "title": "Edit Collection"
+    }
+  }
+}
