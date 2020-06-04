@@ -1,1 +1,1 @@
-export type IMapboxGeocodeFeature = import('@server/shared/mapbox/mapbox.interface').IMapboxGeocodeFeature;
+export type IMapboxGeocodeFeature = import('@common/types/src/shared/mapbox/mapbox.interface').IMapboxGeocodeFeature;

@@ -44,8 +44,8 @@ export const queryToMobxObservable = <T = any, TVariables = OperationVariables>(
     () => subscription!.unsubscribe(),
   );
   const clear = reaction(() => sub.current(), (info) => {
-    if (!options?.observable && info.networkStatus === 7) clear();
-    if (info.data) {
+    if (!options?.observable && info?.networkStatus === 7) clear();
+    if (info?.data) {
       cb(info.data, clear);
       resolve([info.data, clear]);
     }
@@ -85,8 +85,8 @@ export const watchQueryCacheObservable = <T = any, TVariables = OperationVariabl
     () => subscription!.unsubscribe(),
   );
   const clear = reaction(() => sub.current(), (info) => {
-    if (!options?.observable && info.networkStatus === 7) clear();
-    if (info.data) {
+    if (!options?.observable && info?.networkStatus === 7) clear();
+    if (info?.data) {
       cb(info.data, clear);
     }
   });

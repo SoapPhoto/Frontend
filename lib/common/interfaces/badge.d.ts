@@ -1,3 +1,1 @@
-import { IPaginationList } from './global';
-
-export type BadgeEntity = import('@server/modules/badge/badge.entity').BadgeEntity;
+export type BadgeEntity = import('@common/types/src/modules/badge/badge.entity').BadgeEntity;

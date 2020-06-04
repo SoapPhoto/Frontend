@@ -10,7 +10,6 @@ import { FieldInput } from '@lib/components/Formik';
 import { Button } from '@lib/components/Button';
 import { ICustomNextPage, IBaseScreenProps } from '@lib/common/interfaces/global';
 import { box } from '@lib/common/utils/themes/common';
-import { isUserName } from '@common/validator';
 import { useRouter } from 'next/router';
 import Toast from '@lib/components/Toast';
 import { useAccountStore } from '@lib/stores/hooks';
@@ -56,6 +55,10 @@ const CompleteUserInfo: ICustomNextPage<IBaseScreenProps, any> = () => {
   useEffect(() => {
     setDisabled(false);
   }, []);
+  const isUserName = (number: string) => {
+    const reg = /^(?=.*[A-z]|[\d]*_+[\d]*)[\w_]{2,15}$/;
+    return reg.test(number);
+  };
   const push = useCallback(() => {
     if (query.redirectUrl) {
       window.location = query.redirectUrl as any;

@@ -3,10 +3,23 @@ import { pick } from 'lodash';
 import { pathToRegexp, Key } from 'path-to-regexp';
 import parse from 'url-parse';
 
-import { routeObject } from '@common/routes';
+import { routeObject } from '@lib/routeObject';
 
 export interface IPathInfo extends Pick<parse, 'pathname' | 'href' | 'query'> {
   params: { [key: string]: string | undefined };
+}
+
+function setUrlPath(url: string) {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key in routeObject) {
+    if (key) {
+      const regexp = pathToRegexp(key);
+      if (regexp.test(url)) {
+        return key;
+      }
+    }
+  }
+  return undefined;
 }
 
 export const parsePath = (asPath: string) => {
@@ -30,19 +43,6 @@ export const parsePath = (asPath: string) => {
   }
   return info;
 };
-
-function setUrlPath(url: string) {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in routeObject) {
-    if (key) {
-      const regexp = pathToRegexp(key);
-      if (regexp.test(url)) {
-        return key;
-      }
-    }
-  }
-  return undefined;
-}
 
 export const histore = () => {
   if (typeof window === 'undefined') return undefined;

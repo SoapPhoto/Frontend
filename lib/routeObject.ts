@@ -1,7 +1,7 @@
+import { PicturesTypeValues } from '@common/enum/picture';
 import {
   SettingTypeValues, UserTypeValues, PictureTypeValues, CollectionTypeValues, OauthTypeValues,
-} from './enum/router';
-import { PicturesTypeValues } from './enum/picture';
+} from '../common/enum/router';
 
 export const routeObject: Record<string, string> = {
   '/login': 'views/auth/login',

@@ -14,7 +14,7 @@ import proxy from 'http-proxy-middleware';
 import LRUCache from 'lru-cache';
 
 import { LocaleTypeValues, LocaleType } from '@common/enum/locale';
-import { routeObject } from './lib/router';
+import { routeObject } from './lib/routeObject';
 
 const dev = process.env.NODE_ENV !== 'production';
 // const dev = false;

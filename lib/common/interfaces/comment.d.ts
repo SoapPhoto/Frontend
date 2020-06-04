@@ -1,2 +1,2 @@
 
-export type CommentEntity = import('@server/modules/comment/comment.entity').CommentEntity;
+export type CommentEntity = import('@common/types/src/modules/comment/comment.entity').CommentEntity;

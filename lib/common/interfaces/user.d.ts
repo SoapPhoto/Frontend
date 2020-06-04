@@ -1,12 +1,12 @@
 
-export type UserEntity = import('@server/modules/user/user.entity').UserEntity;
+export type UserEntity = import('@common/types/src/modules/user/user.entity').UserEntity;
 
-export type UpdateProfileSettingDto = import('@server/modules/user/dto/user.dto').UpdateProfileSettingDto;
+export type UpdateProfileSettingDto = import('@common/types/src/modules/user/dto/user.dto').UpdateProfileSettingDto;
 
-export type CreateUserDto = import('@server/modules/user/dto/user.dto').CreateUserDto;
+export type CreateUserDto = import('@common/types/src/modules/user/dto/user.dto').CreateUserDto;
 
-export type IGithubUserInfo = import('@server/modules/user/user.interface.ts').IGithubUserInfo;
+export type IGithubUserInfo = import('@common/types/src/modules/user/user.interface.ts').IGithubUserInfo;
 
-export type IGoogleUserInfo = import('@server/modules/user/user.interface.ts').IGoogleUserInfo;
+export type IGoogleUserInfo = import('@common/types/src/modules/user/user.interface.ts').IGoogleUserInfo;
 
-export type IOauthUserInfo = import('@server/modules/user/user.interface.ts').IOauthUserInfo;
+export type IOauthUserInfo = import('@common/types/src/modules/user/user.interface.ts').IOauthUserInfo;

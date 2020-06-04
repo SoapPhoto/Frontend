@@ -1,2 +1,2 @@
 
-export type NotificationEntity = import('@server/modules/notification/notification.entity').NotificationEntity;
+export type NotificationEntity = import('@common/types/src/modules/notification/notification.entity').NotificationEntity;
