@@ -1,1 +1,1 @@
-export type BadgeEntity = import('@common/types/src/modules/badge/badge.entity').BadgeEntity;
+export type BadgeEntity = import('@common/types/modules/badge/badge.entity').BadgeEntity;

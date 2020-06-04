@@ -1,4 +1,4 @@
 
-export type CredentialsEntity = import('@common/types/src/modules/credentials/credentials.entity').CredentialsEntity;
+export type CredentialsEntity = import('@common/types/modules/credentials/credentials.entity').CredentialsEntity;
 
-export type AuthorizeDto = import('@common/types/src/modules/credentials/dto/credentials.dto').AuthorizeDto;
+export type AuthorizeDto = import('@common/types/modules/credentials/dto/credentials.dto').AuthorizeDto;

@@ -7,6 +7,6 @@
     "module": "commonjs",
     "moduleResolution": "node"
   },
-  "include": ["src/server.ts"],
+  "include": ["server.ts"],
   "exclude": ["node_modules", "test", "**/*spec.ts", "pages/**/*", "lib/**/*"]
 }

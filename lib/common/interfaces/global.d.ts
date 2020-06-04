@@ -1,6 +1,6 @@
 import { NextComponentType } from 'next';
 import { NextRouter } from 'next/router';
-import { ApolloAppContext } from 'next-with-apollo';
+import { ApolloPageContext } from 'next-with-apollo';
 
 import { IMyMobxStore } from '@lib/stores/init';
 import { Request, Response } from 'express';
@@ -15,7 +15,7 @@ export interface IDefaultQuery {
   };
 }
 
-export interface ICustomNextContext<Q extends IDefaultQuery = IDefaultQuery> extends ApolloAppContext {
+export interface ICustomNextContext<Q extends IDefaultQuery = IDefaultQuery> extends ApolloPageContext {
   mobxStore: IMyMobxStore;
   pathname: string;
   query: Q;

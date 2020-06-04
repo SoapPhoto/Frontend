@@ -4,15 +4,11 @@
     [
       "module-resolver",
       {
-        "extensions": [".d.ts", ".ts"],
-        "stripExtensions": [".d.ts", ".ts"],
         "root": [
-          "./src"
+          "./"
         ],
         "alias": {
-        "stripExtensions": [".d.ts", ".ts"],
-          "@server": "./common/src",
-          "@common": "./common/common",
+          "@common": "./dist/common",
         }
       }
     ]

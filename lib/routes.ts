@@ -2,7 +2,7 @@ import Routes, * as routes from 'next-routes';
 import { ComponentType } from 'react';
 
 import { Link as BaseLink } from '@lib/components/Link';
-import { routeObject } from './router';
+import { routeObject } from './routeObject';
 
 
 const router = (routes as any)({

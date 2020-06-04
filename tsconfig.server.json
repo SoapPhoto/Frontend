@@ -4,6 +4,7 @@
     "typeRoots" : ["./node_modules/@types", "./typings"],
     "target": "es6",
     "module": "commonjs",
+    "outDir": "./test",
     "moduleResolution": "node"
   },
   "include": ["src/**/*", "typings/**/*", "common/**/*"],

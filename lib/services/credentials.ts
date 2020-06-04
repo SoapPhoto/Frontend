@@ -1,5 +1,5 @@
 import { request } from '@lib/common/utils/request';
-import { CredentialsEntity } from '@server/modules/credentials/credentials.entity';
+import { CredentialsEntity } from '@common/types/modules/credentials/credentials.entity';
 import { AuthorizeDto } from '@lib/common/interfaces/credentials';
 
 export const getUserCredentialList = async () => (
