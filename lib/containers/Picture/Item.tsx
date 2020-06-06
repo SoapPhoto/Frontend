@@ -4,7 +4,7 @@ import { PictureEntity } from '@lib/common/interfaces/picture';
 import { PictureStyle } from '@lib/common/utils/image';
 import { Avatar, EmojiText } from '@lib/components';
 import { A } from '@lib/components/A';
-import { Lock } from '@lib/icon';
+import { Lock, ThumbsUp } from '@lib/icon';
 import { Popover } from '@lib/components/Popover';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useAccountStore } from '@lib/stores/hooks';
@@ -13,7 +13,7 @@ import Toast from '@lib/components/Toast';
 import { useTheme } from '@lib/common/utils/themes/useTheme';
 import { PictureImage } from './Image';
 import {
-  HandleBox, InfoBox, ItemWrapper, UserBox, UserName, LockIcon, Link, LikeContent, HeartIcon,
+  HandleBox, InfoBox, ItemWrapper, UserBox, UserName, LockIcon, Link, LikeContent, HeartIcon, ChoiceBox,
 } from './styles';
 import { UserPopper } from './components/UserPopper';
 
@@ -44,6 +44,13 @@ export const PictureItem: React.FC<IPictureItemProps> = observer(({
   }, [detail, isLogin, like]);
   return (
     <ItemWrapper private={detail.isPrivate ? 1 : 0}>
+      {
+        detail.badge?.findIndex(v => v.name === 'choice') >= 0 && (
+          <ChoiceBox style={{ position: 'absolute', zIndex: 2 }}>
+            <ThumbsUp style={{ marginTop: '-2px', strokeWidth: '2.5' }} color="#fff" size={14} />
+          </ChoiceBox>
+        )
+      }
       <Link route={`/picture/${detail.id}`} />
       {
         detail.isPrivate && (

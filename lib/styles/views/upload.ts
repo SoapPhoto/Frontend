@@ -13,9 +13,9 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: ${rem('64px')};
-  margin-bottom: ${rem('64px')};
   padding: 0 ${rem('24px')};
+  padding-top: ${rem('64px')};
+  padding-bottom: ${rem('64px')};
 `;
 
 export const Image = styled.img`

@@ -307,3 +307,17 @@ export const SkeletonName = styled.div`
   left: ${rem(50)};
   ${skeletonCss}
 `;
+
+export const ChoiceBox = styled.div`
+  position: absolute;
+  z-index: 2;
+  margin-left: ${rem(12)};
+  margin-top: ${rem(12)};
+  width: ${rem(26)};
+  height: ${rem(26)};
+  background: #ff9500;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

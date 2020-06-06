@@ -78,6 +78,9 @@ fragment PictureListFragment on Pictures {
     timestamp
     data {
       ...PictureFragment
+      badge {
+        ...BadgeFragment
+      }
       blurhash
       blurhashSrc
       isPrivate
