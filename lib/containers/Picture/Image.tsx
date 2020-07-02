@@ -22,7 +22,7 @@ export const PictureImage: React.FC<IPictureImage> = ({
   const height = (1 - (detail.width - detail.height) / detail.width) * 100 || 100;
   const imgRender = (
     <div style={{ width: '100%', height: '100%', position: 'absolute' }}>
-      <ImgBox>
+      <ImgBox style={{ position: 'absolute' }}>
         <ItemImage
           src={getPictureUrl(detail.key, size)}
         />

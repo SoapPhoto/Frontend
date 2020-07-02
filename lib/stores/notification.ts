@@ -141,7 +141,7 @@ export class NotificationStore {
     query: UserNotification,
     fetchPolicy: 'cache-only',
   }), (data) => {
-    if (data.userNotification) {
+    if (data?.userNotification) {
       this.list.forEach((item) => {
         const newData = data.userNotification.find(v => v.id === item.id);
         runInAction(() => merge(item, newData));

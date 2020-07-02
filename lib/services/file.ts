@@ -101,7 +101,7 @@ export const uploadOSS = async (
           '{"userId":${x:userId},"originalname":${x:originalname},"type":${x:type},"object":${object},"bucket":${bucket},"etag":${etag},"size":${size},"mimetype":${mimeType}}',
         contentType: 'application/json',
         customValue: {
-          userId,
+          userId: userId.toString(),
           originalname: file.name,
           type,
         },

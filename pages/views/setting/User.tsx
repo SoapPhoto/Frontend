@@ -14,7 +14,7 @@ import Toast from '@lib/components/Toast';
 import { Upload } from '@lib/components/Upload';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useAccountStore } from '@lib/stores/hooks';
-import { uploadQiniu } from '@lib/services/file';
+import { uploadOSS } from '@lib/services/file';
 import { UpdateProfile } from '@lib/schemas/mutations';
 
 import { UploadType } from '@common/enum/upload';
@@ -42,7 +42,7 @@ const User: React.FC = () => {
       setBtnLoading(true);
       let key = '';
       if (avatarFile.current) {
-        key = await uploadQiniu(avatarFile.current, UploadType.AVATAR);
+        key = await uploadOSS(avatarFile.current, userInfo!.id, UploadType.AVATAR);
       }
       try {
         const response = await client.mutate<{updateProfile: UserEntity}>({

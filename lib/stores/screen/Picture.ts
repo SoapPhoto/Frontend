@@ -233,7 +233,7 @@ export class PictureScreenStore extends BaseStore {
     variables: { id: this.info.id },
     fetchPolicy: 'cache-only',
   }), (data) => {
-    if (data.picture.id !== this.info.id) return;
+    if (data?.picture?.id !== this.info?.id) return;
     runInAction(() => merge(this.info, data.picture));
   }, {
     observable: true,
