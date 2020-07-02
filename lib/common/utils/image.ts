@@ -12,6 +12,7 @@ import { imageClassify } from '@lib/services/picture';
 import { changeToDu } from './gps';
 import { round } from './math';
 import { PictureLocation } from '../interfaces/picture';
+import { isWebp } from '.';
 
 export const ORIENT_TRANSFORMS: Record<number, string> = {
   1: '',
@@ -72,14 +73,13 @@ export interface IImageInfo {
 }
 
 export const pictureStyle = {
-  full: '-pictureFull',
-  raw: '',
-  small: '-pictureSmall',
-  regular: '-pictureRegular',
-  thumb: '-pictureThumb',
-  blur: '-pictureThumbBlur',
-  itemprop: '-itemprop',
-  thumbSmall: '-pictureThumbSmall',
+  full: '@!full',
+  small: '@!small',
+  regular: '@!regular',
+  thumb: '@!thumbnail',
+  blur: '@!pictureThumbBlur',
+  itemprop: '@!itemprop',
+  thumbSmall: '@!thumbnailSmall',
 };
 
 export type PictureStyle = keyof typeof pictureStyle;
@@ -447,11 +447,15 @@ export function isImage(fileName: string) {
 }
 
 export function getPictureUrl(key: string, style: PictureStyle = 'regular') {
+  let styleName = pictureStyle[style];
+  if (isWebp) {
+    styleName += '_webp';
+  }
   if (/default.svg$/.test(key)) {
     return `${key}`;
   }
   if (/^\/\/cdn/.test(key)) {
-    return `${key}${pictureStyle[style]}`;
+    return `${key}${styleName}`;
   }
   if (/^blob:/.test(key)) {
     return key;
@@ -459,7 +463,10 @@ export function getPictureUrl(key: string, style: PictureStyle = 'regular') {
   if (/\/\//.test(key)) {
     return key;
   }
-  return `//cdn.soapphoto.com/${key}${pictureStyle[style]}`;
+  if (/^photo\//.test(key)) {
+    return `//cdn-oss.soapphoto.com/${key}${styleName}`;
+  }
+  return `//cdn-oss.soapphoto.com/photo/${key}${styleName}`;
 }
 
 export function formatLocationData(data: any): PictureLocation {

@@ -25,7 +25,7 @@ import {
 } from '@lib/styles/views/upload';
 import { Cell, Grid } from 'styled-css-grid';
 import { Switch } from '@lib/components/Switch';
-import { uploadQiniu } from '@lib/services/file';
+import { uploadOSS } from '@lib/services/file';
 import { UploadBox } from '@lib/containers/Upload/UploadBox';
 import { ICustomNextPage } from '@lib/common/interfaces/global';
 import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
@@ -43,6 +43,7 @@ import { CreatePictureAddDot, PictureLocation } from '@lib/common/interfaces/pic
 import dynamic from 'next/dynamic';
 import { useLocalStore, observer } from 'mobx-react';
 import UploadForm, { ICreatePictureData } from '@lib/containers/Upload/UploadForm';
+import { useAccountStore } from '@lib/stores/hooks';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface IProps {
@@ -55,6 +56,7 @@ const DynamicLocationModal = dynamic<any>(() => import('@lib/components/Location
 
 const Upload: ICustomNextPage<IProps, any> = observer(() => {
   const { t } = useTranslation();
+  const { userInfo } = useAccountStore();
   const imageRef = React.useRef<File>();
   const [imageData, setFile, _setImageUrl, setImageInfo, clear] = useImageInfo(imageRef);
   const {
@@ -65,9 +67,6 @@ const Upload: ICustomNextPage<IProps, any> = observer(() => {
 
   const [uploadDisabled, setUploadDisabled] = React.useState(false);
   const [uploadLoading, setUploadLoading] = React.useState(false);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_formatSpeed, seFormatSpeed] = React.useState('0Kb/s');
 
   const locationTitle = useMemo(() => {
     if (imageLocation) {
@@ -89,9 +88,8 @@ const Upload: ICustomNextPage<IProps, any> = observer(() => {
   //   }
   // }, [classify]);
 
-  const onUploadProgress = useCallback((speed: string, percent: number) => {
+  const onUploadProgress = useCallback((percent: number) => {
     setPercentComplete(percent);
-    seFormatSpeed(speed);
   }, []);
 
   const addPicture = useCallback(async (value: ICreatePictureData) => {
@@ -101,7 +99,7 @@ const Upload: ICustomNextPage<IProps, any> = observer(() => {
     setUploadLoading(true);
     if (imageRef.current) {
       // 上传到七牛获取key
-      const key = await uploadQiniu(imageRef.current, UploadType.PICTURE, onUploadProgress);
+      const key = await uploadOSS(imageRef.current, userInfo!.id, UploadType.PICTURE, onUploadProgress);
       const addData: MutablePartial<CreatePictureAddDot> = {
         info: imageInfo,
         ...value,
@@ -129,7 +127,7 @@ const Upload: ICustomNextPage<IProps, any> = observer(() => {
         setPercentComplete(0);
       }
     }
-  }, [loading, onUploadProgress, imageInfo, imageLocation, t]);
+  }, [loading, userInfo, onUploadProgress, imageInfo, imageLocation, t]);
   const handleChange = async (files: Maybe<FileList>) => {
     if (files && files[0]) {
       setFile(files[0]);

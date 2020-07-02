@@ -83,6 +83,9 @@ export function getWindowHeight() {
   return windowHeight;
 }
 
+
+export const isWebp = server ? '' : document.createElement('canvas').toDataURL('image/webp', 0.5).indexOf('data:image/webp') === 0;
+
 export const ua = server ? '' : window.navigator.userAgent;
 
 export const isSafari = ua.indexOf('Safari') !== -1 && ua.indexOf('Version') !== -1;

@@ -5,7 +5,7 @@ import React from 'react';
 import { Transition, TransitionGroup } from 'react-transition-group';
 import { TransitionStatus } from 'react-transition-group/Transition';
 import styled from 'styled-components';
-import uniqid from 'uniqid';
+import { v4 as uuid } from 'uuid';
 
 import { customMedia } from '@lib/common/utils/mediaQuery';
 
@@ -175,7 +175,7 @@ export class ToastComponent extends React.Component {
   public add = (config: IToastConfig) => {
     const newConfig = {
       ...config,
-      key: uniqid(),
+      key: uuid(),
     };
     this.addConfig(newConfig);
     if (config.duration !== 0) {

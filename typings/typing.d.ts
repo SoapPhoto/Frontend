@@ -24,6 +24,8 @@ declare module '@mapbox/mapbox-gl-language';
 
 declare module 'rc-animate';
 
+declare module 'ali-oss';
+
 declare module '*.json' {
   const value: any;
   export default value;

@@ -2,6 +2,7 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 
 import { getPictureUrl } from '@lib/common/utils/image';
+import { server } from '@lib/common/utils';
 import { IPictureItemProps } from './Item';
 import {
   ImageBox, ItemImage, Shadow, ImgBox,
@@ -58,7 +59,7 @@ export const PictureImage: React.FC<IPictureImage> = ({
         }
       </ImgBox>
       {
-        lazyload ? (
+        (lazyload || server) ? (
           <LazyLoad resize height="100%" offset={400}>
             {imgRender}
           </LazyLoad>

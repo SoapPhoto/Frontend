@@ -1,10 +1,12 @@
 import { rem } from 'polished';
 import React from 'react';
 import styled from 'styled-components';
-import { getPictureUrl } from '@lib/common/utils/image';
 import LazyLoad from 'react-lazyload';
-import { BadgeEntity } from '@lib/common/interfaces/badge';
 import { StrutAlign, BadgeCert } from '@lib/icon';
+
+import { server } from '@lib/common/utils';
+import { BadgeEntity } from '@lib/common/interfaces/badge';
+import { getPictureUrl } from '@lib/common/utils/image';
 import { Image } from '../Image';
 
 export interface IAvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -77,7 +79,7 @@ export const Avatar: React.FC<IAvatarProps> = ({
   <Wrapper {...restProps} size={size}>
     <Box onClick={onClick} isClick={!!onClick}>
       {
-        lazyload ? (
+        (lazyload || server) ? (
           <LazyLoad resize offset={400}>
             <Img src={getPictureUrl(src, 'thumb')} />
           </LazyLoad>
