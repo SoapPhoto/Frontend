@@ -26,7 +26,7 @@ const onCancel = () => {
 
 const promptsOptions = { onCancel };
 
-const getBuild = async () => new Promise((resolve， reject) => {
+const getBuild = async () => new Promise((resolve, reject) => {
   const result = spawn('npm', ['run', 'build'], { stdio: 'inherit' });
   result.on('close', (code) => {
     if (code === 0) {
