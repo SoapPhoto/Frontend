@@ -80,7 +80,7 @@ export const Avatar: React.FC<IAvatarProps> = ({
     <Box onClick={onClick} isClick={!!onClick}>
       {
         (lazyload || server) ? (
-          <LazyLoad resize offset={400}>
+          <LazyLoad once resize offset={400}>
             <Img src={getPictureUrl(src, 'thumb')} />
           </LazyLoad>
 
