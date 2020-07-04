@@ -13,7 +13,6 @@ export const withError = <P extends IBaseScreenProps>(Component: React.Component
       try {
         props = await (Component as any).getInitialProps(ctx);
       } catch (err) {
-        console.error(err);
         if (err && err.response && err.response && err.response.data && err.response.data.statusCode) {
           error = {
             statusCode: err.response.data.statusCode,
@@ -24,7 +23,14 @@ export const withError = <P extends IBaseScreenProps>(Component: React.Component
         } else if (err && err.graphQLErrors) {
           if (err.graphQLErrors instanceof Array) {
             if (err.graphQLErrors[0]) {
-              error = err.graphQLErrors[0].message;
+              if (err.graphQLErrors[0]?.extensions?.exception) {
+                error = {
+                  statusCode: err.graphQLErrors[0].extensions.exception.status,
+                  message: err.graphQLErrors[0].extensions.exception.message,
+                };
+              } else {
+                error = err.graphQLErrors[0].message;
+              }
             } else {
               error = {
                 statusCode: 500,
