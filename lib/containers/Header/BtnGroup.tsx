@@ -5,7 +5,7 @@ import { rem } from 'polished';
 import { Avatar, EmojiText } from '@lib/components';
 import { Popover } from '@lib/components/Popover';
 import {
-  Upload, User, Moon, Sun,
+  Upload, User, Moon, Sun, Settings, LogOut,
 } from '@lib/icon';
 import { AccountStore } from '@lib/stores/AccountStore';
 import { ThemeStore } from '@lib/stores/ThemeStore';
@@ -13,6 +13,7 @@ import { useTranslation } from '@lib/i18n/useTranslation';
 import { useAccountStore, useStores } from '@lib/stores/hooks';
 import { useRouter } from '@lib/router';
 import { observer } from 'mobx-react';
+import { IconButton, Button } from '@lib/components/Button';
 import { Menu, MenuItem, MenuItemLink } from './Menu';
 import {
   Href, MenuProfile, RightWrapper, UserName, SearchIcon,
@@ -24,7 +25,7 @@ export interface IProps {
   themeStore?: ThemeStore;
 }
 
-export const BtnGroup = observer(() => {
+export const BtnGroup: React.FC = observer(() => {
   const { t } = useTranslation();
   const PopoverRef = React.useRef<Popover>(null);
   const { isLogin, userInfo, logout } = useAccountStore();
@@ -50,9 +51,24 @@ export const BtnGroup = observer(() => {
     '/signupMessage',
   ].findIndex(v => v === pathname) < 0;
   let content = (
-    <Href style={{ fontSize: 0 }} route={`/login${isRedirect ? `?redirectUrl=${pathname}` : ''}`}>
-      <User />
-    </Href>
+    <>
+      {
+        theme === 'base' ? (
+          <Moon
+            onClick={switchTheme}
+            css={css`margin-right: ${rem(22)};cursor: pointer;` as any}
+          />
+        ) : (
+          <Sun
+            onClick={switchTheme}
+            css={css`margin-right: ${rem(22)};cursor: pointer;` as any}
+          />
+        )
+      }
+      <Href style={{ fontSize: 0 }} route={`/login${isRedirect ? `?redirectUrl=${pathname}` : ''}`}>
+        <User />
+      </Href>
+    </>
   );
   useEffect(() => {
     closeMenu();
@@ -94,11 +110,18 @@ export const BtnGroup = observer(() => {
                   {t('menu.setting')}
                 </MenuItemLink>
               </MenuItem>
-              {/* <MenuItem>
+              <MenuItem>
                 <MenuItemLink onClick={switchTheme}>
                   {theme === 'dark' ? t('menu.light') : t('menu.dark')}
+                  {
+                    theme === 'dark' ? (
+                      <Sun size={18} />
+                    ) : (
+                      <Moon size={18} />
+                    )
+                  }
                 </MenuItemLink>
-              </MenuItem> */}
+              </MenuItem>
               <MenuItem>
                 <MenuItemLink onClick={handleLogout}>
                   {t('menu.signout')}
@@ -122,19 +145,6 @@ export const BtnGroup = observer(() => {
       >
         <SearchIcon />
       </Href>
-      {
-        theme === 'base' ? (
-          <Moon
-            onClick={switchTheme}
-            css={css`margin-right: ${rem(22)};cursor: pointer;` as any}
-          />
-        ) : (
-          <Sun
-            onClick={switchTheme}
-            css={css`margin-right: ${rem(22)};cursor: pointer;` as any}
-          />
-        )
-      }
       {content}
     </RightWrapper>
   );

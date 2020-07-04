@@ -149,3 +149,7 @@ export const Christmas = styled(ChristmasHat)`
   left: -3px;
   transform: rotate(-41deg);
 `;
+
+export const Cover = styled.div`
+  background-image: url(http://cdn-oss.soapphoto.com/photo/UElDVFVSRQ-k7gba2qt-k7gba2qu@!small_webp);
+`;

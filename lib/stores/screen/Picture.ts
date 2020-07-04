@@ -15,6 +15,7 @@ import { Picture, Comments } from '@lib/schemas/query';
 import Fragments from '@lib/schemas/fragments';
 import { LikePicture, UnLikePicture, AddComment } from '@lib/schemas/mutations';
 import { IPaginationList } from '@lib/common/interfaces/global';
+import { constants } from '@lib/common/constants/config';
 import Toast from '@lib/components/Toast';
 import { BaseStore } from '../base/BaseStore';
 
@@ -30,6 +31,8 @@ export class PictureScreenStore extends BaseStore {
   @observable public comment: CommentEntity[] = [];
 
   @observable public id!: number;
+
+  private _likeLoading = false
 
   @action public setInfo = (data: PictureEntity) => {
     this.id = Number(data.id);
@@ -117,8 +120,11 @@ export class PictureScreenStore extends BaseStore {
     }, 300);
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   @action
   public like = async () => {
+    if (this._likeLoading) return;
+    this._likeLoading = true;
     try {
       let req;
       if (!this.info.isLike) {
@@ -160,6 +166,10 @@ export class PictureScreenStore extends BaseStore {
     // tslint:disable-next-line: no-empty
     } catch (err) {
       console.error(err);
+    } finally {
+      setTimeout(() => {
+        this._likeLoading = false;
+      }, constants.likePauseTime);
     }
   }
 

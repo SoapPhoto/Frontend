@@ -13,10 +13,7 @@ const ButtonBox = styled.div`
   position: relative;
   margin-right: 24px;
   font-size: 0;
-`;
-
-const Button = styled(IconButton)`
-  color: ${theme('colors.text')};
+  cursor: pointer;
 `;
 
 export const Notify: React.FC = observer(() => {
@@ -39,9 +36,7 @@ export const Notify: React.FC = observer(() => {
       )}
     >
       <ButtonBox>
-        <Button>
-          <Bell />
-        </Button>
+        <Bell />
         {
           unread > 0 && (
             <div

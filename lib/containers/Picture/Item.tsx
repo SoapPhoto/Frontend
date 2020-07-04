@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 
 import { PictureEntity } from '@lib/common/interfaces/picture';
 import { PictureStyle } from '@lib/common/utils/image';
@@ -11,11 +11,14 @@ import { useAccountStore } from '@lib/stores/hooks';
 import { observer } from 'mobx-react';
 import Toast from '@lib/components/Toast';
 import { useTheme } from '@lib/common/utils/themes/useTheme';
+import { constants } from '@lib/common/constants/config';
 import { PictureImage } from './Image';
 import {
   HandleBox, InfoBox, ItemWrapper, UserBox, UserName, LockIcon, Link, LikeContent, HeartIcon, ChoiceBox,
 } from './styles';
 import { UserPopper } from './components/UserPopper';
+
+const timer: number = undefined;
 
 export interface IPictureItemProps {
   detail: PictureEntity;
@@ -30,6 +33,7 @@ export const PictureItem: React.FC<IPictureItemProps> = observer(({
   lazyload,
   ...restProps
 }) => {
+  const likeLoading = useRef(false);
   const { isLogin } = useAccountStore();
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -38,16 +42,32 @@ export const PictureItem: React.FC<IPictureItemProps> = observer(({
       Toast.warning('登录之后才可以喜欢哦！');
       return;
     }
+    if (likeLoading.current) return;
     if (like) {
-      await like(detail);
+      likeLoading.current = true;
+      try {
+        await like(detail);
+      } finally {
+        setTimeout(() => likeLoading.current = false, constants.likePauseTime);
+      }
     }
   }, [detail, isLogin, like]);
+  // clear 喜欢的定时器
+  useEffect(() => () => clearTimeout(timer));
   return (
     <ItemWrapper private={detail.isPrivate ? 1 : 0}>
       {
         detail.badge?.findIndex(v => v.name === 'choice') >= 0 && (
-          <ChoiceBox style={{ position: 'absolute', zIndex: 2 }}>
-            <ThumbsUp style={{ marginTop: '-2px', strokeWidth: '2.5' }} color="#fff" size={14} />
+          <ChoiceBox style={{ position: 'absolute', zIndex: 3 }}>
+            <Popover
+              openDelay={100}
+              trigger="hover"
+              placement="top"
+              theme="dark"
+              content={<span>{t('label.choice')}</span>}
+            >
+              <ThumbsUp style={{ marginTop: '-2px', strokeWidth: '2.5' }} color="#fff" size={14} />
+            </Popover>
           </ChoiceBox>
         )
       }

@@ -14,7 +14,7 @@ import { PictureInfo } from '@lib/components/PictureInfo';
 import { withError } from '@lib/components/withError';
 import { PictureImage } from '@lib/containers/Picture/Image';
 import {
-  StrutAlign, Hash, Clock, ThumbsUp,
+  StrutAlign, Hash, Clock, ThumbsUp, Target, Heart, MessageSquare,
 } from '@lib/icon';
 import {
   BaseInfoItem,
@@ -39,6 +39,7 @@ import {
   TimeSpan,
   Choice,
   PictureContent,
+  UserHeaderInfo,
 } from '@lib/styles/views/picture';
 import { rem } from 'polished';
 import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
@@ -110,7 +111,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
       return formatLocationTitle(info.location);
     }
     return '';
-  }, [info]);
+  }, [info?.location]);
 
   const num = useMemo(() => info.width / info.height, [info.height, info.width]);
 
@@ -169,7 +170,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
               onClick={() => follow(user)}
             />
           </UserHeaderHandleBox>
-          {/* <UserHeaderInfo width={1}>
+          <UserHeaderInfo width={1}>
             <BaseInfoItem
               style={{ marginRight: rem(14) }}
             >
@@ -198,7 +199,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
               />
               <p>{info.commentCount}</p>
             </BaseInfoItem>
-          </UserHeaderInfo> */}
+          </UserHeaderInfo>
         </UserHeader>
       </UserHeaderWrapper>
       <PictureWrapper>
