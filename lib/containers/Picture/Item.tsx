@@ -18,7 +18,7 @@ import {
 } from './styles';
 import { UserPopper } from './components/UserPopper';
 
-const timer: number = undefined;
+const timer: number | undefined = undefined;
 
 export interface IPictureItemProps {
   detail: PictureEntity;
