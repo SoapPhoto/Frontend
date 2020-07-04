@@ -170,7 +170,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
               onClick={() => follow(user)}
             />
           </UserHeaderHandleBox>
-          <UserHeaderInfo width={1}>
+          {/* <UserHeaderInfo width={1}>
             <BaseInfoItem
               style={{ marginRight: rem(14) }}
             >
@@ -199,7 +199,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
               />
               <p>{info.commentCount}</p>
             </BaseInfoItem>
-          </UserHeaderInfo>
+          </UserHeaderInfo> */}
         </UserHeader>
       </UserHeaderWrapper>
       <PictureWrapper>
