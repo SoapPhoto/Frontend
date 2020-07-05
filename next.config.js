@@ -72,9 +72,8 @@ const nextConfig = {
 module.exports = composePlugins(
   [
     [withOffline, {
-      target: process.env.NEXT_TARGET || 'serverless',
       workboxOpts: {
-        swDest: 'static/service-worker.js',
+        swDest: 'service-worker.js',
         runtimeCaching: [
           {
             urlPattern: /[.](png|jpg|ico|css)/,
