@@ -86,6 +86,13 @@ module.exports = composePlugins(
             },
           },
           {
+            urlPattern: /^https:\/\/cdn-oss\.soapphoto\.com.*/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'lib-cache',
+            },
+          },
+          {
             urlPattern: /^http.*/,
             handler: 'NetworkFirst',
             options: {

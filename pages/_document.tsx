@@ -44,6 +44,9 @@ export default class MyDocument extends Document {
           <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
           <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans+SC:400,500,600|Rubik:400,500,600" />
           <script src={`//api.map.baidu.com/api?v=3.0&ak=${process.env.BAIDU_MAP_AK}`} />
+          <script async src={`${process.env.OSS_URL}static/script/jquery.min.js`} />
+          <script async src={`${process.env.OSS_URL}static/script/jquery.fancybox.js`} />
+          <link href={`${process.env.OSS_URL}static/style/jquery.fancybox.css`} rel="stylesheet" />
           {
             isProd && (
               <>

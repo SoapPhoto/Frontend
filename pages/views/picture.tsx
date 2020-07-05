@@ -120,9 +120,6 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
         <meta property="weibo:image:full_image" content={getPictureUrl(info.key, 'full')} />
         <meta name="weibo:image:create_at" content={info.createTime.toString()} />
         <meta name="weibo:image:update_at" content={info.updateTime.toString()} />
-        <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js" />
-        <link href="//cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.css" rel="stylesheet" />
-        <script src="//cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.js" />
       </Head>
       <SEO
         title={title}

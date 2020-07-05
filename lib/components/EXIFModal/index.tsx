@@ -33,7 +33,7 @@ export const EXIFModal: React.FC<IProps> = memo(({ visible, onClose, picture }) 
     focalLength, aperture, exposureTime, ISO,
   } = exif!;
   useEffect(() => {
-    setBackground(`linear-gradient(${rgba(styles.box.background, 0.8)}, ${styles.box.background} 150px), url("${getPictureUrl(key)}")`);
+    setBackground(`linear-gradient(${rgba(styles.box.background, 0.8)}, ${styles.box.background} 150px), url("${getPictureUrl(key, 'blur')}")`);
   }, [styles.box.background, key]);
   return (
     <Modal

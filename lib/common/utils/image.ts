@@ -1,4 +1,3 @@
-
 import { omit, pick, isString } from 'lodash';
 import { extname } from 'path';
 import { $enum } from 'ts-enum-util';
@@ -77,7 +76,7 @@ export const pictureStyle = {
   small: '@!small',
   regular: '@!regular',
   thumb: '@!thumbnail',
-  blur: '@!pictureThumbBlur',
+  blur: '@!thumbnailBlur',
   itemprop: '@!itemprop',
   thumbSmall: '@!thumbnailSmall',
 };
