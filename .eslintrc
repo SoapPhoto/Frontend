@@ -12,6 +12,7 @@
       "error",
       160
     ],
+    "linebreak-style": ["off"],
     "@typescript-eslint/explicit-module-boundary-types": ["off"],
     "@typescript-eslint/indent": ["error", 2],
     "import/extensions": "off",

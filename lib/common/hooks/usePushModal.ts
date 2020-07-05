@@ -18,7 +18,7 @@ export const usePushModal = (options: IOptions) => {
     let func = push;
     if (isReplace) func = replace;
     if (isPush) {
-      func(options, `${pathname}?modal=${label}`, {
+      func(options, `${pathname}#modal-${label}`, {
         shallow: true,
       });
       Histore.set('modal', `child-${label}`);

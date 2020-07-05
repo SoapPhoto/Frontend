@@ -14,7 +14,7 @@ import { PictureInfo } from '@lib/components/PictureInfo';
 import { withError } from '@lib/components/withError';
 import { PictureImage } from '@lib/containers/Picture/Image';
 import {
-  StrutAlign, Hash, Clock, ThumbsUp, Target, Heart, MessageSquare,
+  StrutAlign, Hash, Clock, ThumbsUp,
 } from '@lib/icon';
 import {
   BaseInfoItem,
@@ -39,7 +39,6 @@ import {
   TimeSpan,
   Choice,
   PictureContent,
-  UserHeaderInfo,
 } from '@lib/styles/views/picture';
 import { rem } from 'polished';
 import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
@@ -93,7 +92,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
     updateInfo(picture);
   }, [updateInfo]);
   const openLightBox = useCallback(() => {
-    setBoxVisible(true);
+    // setBoxVisible(true);
   }, []);
   const closeLightBox = useCallback(() => {
     setBoxVisible(false);
@@ -121,6 +120,9 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
         <meta property="weibo:image:full_image" content={getPictureUrl(info.key, 'full')} />
         <meta name="weibo:image:create_at" content={info.createTime.toString()} />
         <meta name="weibo:image:update_at" content={info.updateTime.toString()} />
+        <script src="//cdn.bootcss.com/jquery/3.4.1/jquery.min.js" />
+        <link href="//cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.css" rel="stylesheet" />
+        <script src="//cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.js" />
       </Head>
       <SEO
         title={title}
@@ -205,7 +207,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
       <PictureWrapper>
         <PictureContent>
           <PictureBox num={num} onClick={openLightBox}>
-            <PictureImage lazyload={false} size="regular" detail={info} />
+            <PictureImage fancybox lazyload={false} size="regular" detail={info} />
           </PictureBox>
         </PictureContent>
       </PictureWrapper>

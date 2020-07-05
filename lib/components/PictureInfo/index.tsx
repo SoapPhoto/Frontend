@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { pick } from 'lodash';
 import { observer, useLocalStore } from 'mobx-react';
 import { useMutation } from 'react-apollo';
@@ -6,7 +6,7 @@ import { useRouter as useBaseRouter } from 'next/router';
 
 import { PictureEntity, UpdatePictureDot } from '@lib/common/interfaces/picture';
 import { EXIFModal } from '@lib/components/EXIFModal';
-import { LikeButton, IconButton } from '@lib/components/Button';
+import { IconButton } from '@lib/components/Button';
 import {
   Info, Settings, Star1,
 } from '@lib/icon';
@@ -21,7 +21,7 @@ import { Histore } from '@lib/common/utils';
 import { useAccountStore } from '@lib/stores/hooks';
 import { useTheme } from '@lib/common/utils/themes/useTheme';
 import { UpdatePicture } from '@lib/schemas/mutations';
-import { WithQueryParam } from '../WithQueryParam';
+import { WithHashParam } from '../WithHashParam';
 
 interface IProps {
   info: PictureEntity;
@@ -43,9 +43,9 @@ export const PictureInfo: React.FC<IProps> = observer(({
   setPicture,
 }) => {
   const {
-    params, back, pathname, query,
+    params,
   } = useRouter();
-  const { push, replace } = useBaseRouter();
+  const { push } = useBaseRouter();
   const { t } = useTranslation();
   const modalData = useLocalStore(() => ({
     EXIFVisible: false,
@@ -65,7 +65,7 @@ export const PictureInfo: React.FC<IProps> = observer(({
   const { colors } = useTheme();
   const [update] = useMutation<{ updatePicture: PictureEntity }>(UpdatePicture);
   const openWithRoute = useCallback((label: string) => {
-    push(`/views/picture?id=${params.id}`, `/picture/${params.id}?action=${label}`, {
+    push(`/views/picture?id=${params.id}`, `/picture/${params.id}#modal-${label}`, {
       shallow: true,
     });
     Histore.set('modal', `child-${label}`);
@@ -155,7 +155,7 @@ export const PictureInfo: React.FC<IProps> = observer(({
       {
         isLogin && (
           <>
-            <WithQueryParam action="addCollection" back={backNow}>
+            <WithHashParam action="modal-addCollection" back={backNow}>
               {(visible, backView) => (
                 <AddPictureCollectionModal
                   picture={info}
@@ -165,10 +165,10 @@ export const PictureInfo: React.FC<IProps> = observer(({
                   setPicture={setPicture}
                 />
               )}
-            </WithQueryParam>
+            </WithHashParam>
             {
               isOwner && (
-                <WithQueryParam action="setting" back={backNow}>
+                <WithHashParam action="modal-setting" back={backNow}>
                   {(visible, backView) => (
                     <EditPictureModal
                       visible={visible}
@@ -182,13 +182,13 @@ export const PictureInfo: React.FC<IProps> = observer(({
                       deletePicture={deletePicture}
                     />
                   )}
-                </WithQueryParam>
+                </WithHashParam>
               )
             }
           </>
         )
       }
-      <WithQueryParam action="info" back={backNow}>
+      <WithHashParam action="modal-info" back={backNow}>
         {(visible, backView) => (
           <EXIFModal
             visible={visible}
@@ -196,7 +196,7 @@ export const PictureInfo: React.FC<IProps> = observer(({
             picture={info}
           />
         )}
-      </WithQueryParam>
+      </WithHashParam>
     </PictureBaseInfo>
   );
 });

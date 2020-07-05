@@ -228,6 +228,7 @@ export const LikeContent = styled(motion.button)`
   line-height: 20px;
   font-weight: 600;
   color: ${theme('colors.text')};
+  backdrop-filter: saturate(180%) blur(20px);
   ${handleHover}
 `;
 
@@ -252,7 +253,7 @@ export const Shadow = styled.div`
   opacity: ${theme('styles.picture.shadow.opacity')};
 `;
 
-export const ImgBox = styled.div`
+export const ImgBox = styled.a`
   width: 100%;
   height: 100%;
   overflow: hidden;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { rem } from 'polished';
 import styled from 'styled-components';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
@@ -89,7 +89,6 @@ export const CommentModal: React.FC<IProps> = ({
   const [count, setCount] = useState(0);
   const [getChildComments] = useWatchQuery<{ childComments: IPaginationList<CommentEntity> }>(ChildComments);
   useEnhancedEffect(() => {
-    console.log(visible);
     if (visible && comment) {
       (async () => {
         setLoading(true);
@@ -135,27 +134,27 @@ export const CommentModal: React.FC<IProps> = ({
         (loading || !list || !comment) ? (
           <Empty loading />
         ) : (
-            <Wrapper>
-              <Header>
-                <Title>{t('comment.all_comment.title', count.toString())}</Title>
-                <IconButton onClick={onClose}>
-                  <XButton />
-                </IconButton>
-              </Header>
-              <Content
-                options={{ sizeAutoCapable: false }}
-              >
-                <CommentListBox>
-                  <CommentList
-                    parent={comment}
-                    author={author}
-                    onConfirm={addComment}
-                    comment={list}
-                  />
-                </CommentListBox>
-              </Content>
-            </Wrapper>
-          )
+          <Wrapper>
+            <Header>
+              <Title>{t('comment.all_comment.title', count.toString())}</Title>
+              <IconButton onClick={onClose}>
+                <XButton />
+              </IconButton>
+            </Header>
+            <Content
+              options={{ sizeAutoCapable: false }}
+            >
+              <CommentListBox>
+                <CommentList
+                  parent={comment}
+                  author={author}
+                  onConfirm={addComment}
+                  comment={list}
+                />
+              </CommentListBox>
+            </Content>
+          </Wrapper>
+        )
       }
     </ModalContent>
   );

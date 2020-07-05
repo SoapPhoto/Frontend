@@ -12,17 +12,22 @@ interface IPictureImage extends IPictureItemProps {
   blur?: boolean;
   zooming?: boolean;
   opacity?: boolean;
+  fancybox?: boolean;
 }
 
 export const PictureImage: React.FC<IPictureImage> = ({
   detail,
   lazyload,
   size = 'regular',
+  fancybox,
 }) => {
   const height = (1 - (detail.width - detail.height) / detail.width) * 100 || 100;
   const imgRender = (
     <div style={{ width: '100%', height: '100%', position: 'absolute' }}>
-      <ImgBox style={{ position: 'absolute' }}>
+      <ImgBox
+        style={{ position: 'absolute', ...fancybox ? { cursor: 'zoom-in' } : {} }}
+        {...(fancybox ? { 'data-fancybox': 'images', href: getPictureUrl(detail.key, 'full') } : {})}
+      >
         <ItemImage
           src={getPictureUrl(detail.key, size)}
         />

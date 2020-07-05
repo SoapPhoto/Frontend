@@ -1,4 +1,3 @@
-
 const composePlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const withOffline = require('next-offline');
@@ -72,7 +71,31 @@ const nextConfig = {
 
 module.exports = composePlugins(
   [
-    // [withOffline],
+    [withOffline, {
+      target: process.env.NEXT_TARGET || 'serverless',
+      workboxOpts: {
+        swDest: 'static/service-worker.js',
+        runtimeCaching: [
+          {
+            urlPattern: /[.](png|jpg|ico|css)/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'assets-cache',
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            urlPattern: /^http.*/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'http-cache',
+            },
+          },
+        ],
+      },
+    }],
     // [withBundleAnalyzer, { enabled: true }],
     withGraphql,
   ],

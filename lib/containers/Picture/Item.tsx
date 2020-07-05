@@ -89,7 +89,7 @@ export const PictureItem: React.FC<IPictureItemProps> = observer(({
       }
       <LikeContent
         transformTemplate={({ scale }: any) => `translate(0, 0) scale(${scale})`}
-        whileHover={{ scale: 1.04 }}
+        whileHover={{ scale: 1 }}
         whileTap={{ scale: 0.94 }}
         onClick={onLike}
       >

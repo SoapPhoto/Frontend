@@ -6,6 +6,7 @@ import { nprogress } from './nprogress';
 import { scroll } from './scroll';
 import { scrollbar } from './scrollbar';
 import { animate } from './animate';
+import { fancybox } from './fancybox';
 
 export const GlobalStyle = createGlobalStyle<{theme?: any}>`
   body {
@@ -43,4 +44,5 @@ export const GlobalStyle = createGlobalStyle<{theme?: any}>`
   ${scroll}
   ${scrollbar}
   ${animate}
+  ${fancybox}
 `;
