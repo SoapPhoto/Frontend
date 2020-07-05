@@ -14,7 +14,7 @@ import { PictureInfo } from '@lib/components/PictureInfo';
 import { withError } from '@lib/components/withError';
 import { PictureImage } from '@lib/containers/Picture/Image';
 import {
-  StrutAlign, Hash, Clock, ThumbsUp,
+  StrutAlign, Hash, Clock, ThumbsUp, Zap,
 } from '@lib/icon';
 import {
   BaseInfoItem,
@@ -39,6 +39,7 @@ import {
   TimeSpan,
   Choice,
   PictureContent,
+  ChoiceBox,
 } from '@lib/styles/views/picture';
 import { rem } from 'polished';
 import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
@@ -204,6 +205,21 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
       <PictureWrapper>
         <PictureContent>
           <PictureBox num={num} onClick={openLightBox}>
+            {
+              info.badge?.findIndex(v => v.name === 'choice') >= 0 && (
+                <Popover
+                  openDelay={100}
+                  trigger="hover"
+                  placement="top"
+                  theme="dark"
+                  content={<span>{t('label.choice')}</span>}
+                >
+                  <ChoiceBox style={{ position: 'absolute', zIndex: 3 }}>
+                    <Zap color="#fff" size={20} />
+                  </ChoiceBox>
+                </Popover>
+              )
+            }
             <PictureImage fancybox lazyload={false} size="regular" detail={info} />
           </PictureBox>
         </PictureContent>
@@ -221,23 +237,6 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
         {
           info.title && (
             <Title>
-              {
-                info.badge?.findIndex(v => v.name === 'choice') >= 0 && (
-                  <Choice>
-                    <StrutAlign>
-                      <Popover
-                        openDelay={100}
-                        trigger="hover"
-                        placement="top"
-                        theme="dark"
-                        content={<span>{t('label.choice')}</span>}
-                      >
-                        <ThumbsUp style={{ marginTop: '-2px' }} color="#ff9500" size={28} />
-                      </Popover>
-                    </StrutAlign>
-                  </Choice>
-                )
-              }
               <EmojiText
                 text={info.title}
               />

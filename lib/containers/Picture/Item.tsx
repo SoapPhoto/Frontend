@@ -4,7 +4,7 @@ import { PictureEntity } from '@lib/common/interfaces/picture';
 import { PictureStyle } from '@lib/common/utils/image';
 import { Avatar, EmojiText } from '@lib/components';
 import { A } from '@lib/components/A';
-import { Lock, ThumbsUp } from '@lib/icon';
+import { Lock, Zap } from '@lib/icon';
 import { Popover } from '@lib/components/Popover';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useAccountStore } from '@lib/stores/hooks';
@@ -58,17 +58,17 @@ export const PictureItem: React.FC<IPictureItemProps> = observer(({
     <ItemWrapper private={detail.isPrivate ? 1 : 0}>
       {
         detail.badge?.findIndex(v => v.name === 'choice') >= 0 && (
-          <ChoiceBox style={{ position: 'absolute', zIndex: 3 }}>
-            <Popover
-              openDelay={100}
-              trigger="hover"
-              placement="top"
-              theme="dark"
-              content={<span>{t('label.choice')}</span>}
-            >
-              <ThumbsUp style={{ marginTop: '-2px', strokeWidth: '2.5' }} color="#fff" size={14} />
-            </Popover>
-          </ChoiceBox>
+          <Popover
+            openDelay={100}
+            trigger="hover"
+            placement="top"
+            theme="dark"
+            content={<span>{t('label.choice')}</span>}
+          >
+            <ChoiceBox style={{ position: 'absolute', zIndex: 3 }}>
+              <Zap color="#fff" size={14} />
+            </ChoiceBox>
+          </Popover>
         )
       }
       <Link route={`/picture/${detail.id}`} />

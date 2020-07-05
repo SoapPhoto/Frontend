@@ -185,7 +185,6 @@ export const RelateCollectionTitle = styled.h3`
   `}
 `;
 
-
 export const RelateCollection = styled.div`
   max-width: calc(${rem(customBreakpoints.medium)} + ${rem(42)});
   margin: ${rem('48px')} auto;
@@ -249,4 +248,18 @@ export const CommentWrapper = styled.div`
 
 export const Choice = styled.span`
   margin-right: ${rem(12)};
+`;
+
+export const ChoiceBox = styled.div`
+  position: absolute;
+  z-index: 2;
+  margin-left: ${rem(12)};
+  margin-top: ${rem(12)};
+  width: ${rem(36)};
+  height: ${rem(36)};
+  background-image: linear-gradient(0deg, rgb(255, 149, 0), rgb(255, 213, 154));
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
