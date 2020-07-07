@@ -33,29 +33,11 @@ export class AppStore {
 
   @observable public collectionLoading = true
 
-  @observable public loading = false;
-
   @observable public location?: ILocation;
 
   @observable public userList: Map<string, UserEntity> = new Map();
 
-  constructor() {
-    reaction(
-      () => this.loading,
-      (loading: boolean) => {
-        if (loading) {
-          NProgress.start();
-        } else {
-          NProgress.done();
-        }
-      },
-    );
-  }
-
   public setClient = (client: ApolloClient<any>) => this.client = client;
-
-  @action
-  public setLoading = (value: boolean) => this.loading = value
 
   @action
   public setRoute = (value: ILocation) => {
