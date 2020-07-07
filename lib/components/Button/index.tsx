@@ -1,6 +1,8 @@
 import React from 'react';
 import { Loading } from '../Loading';
-import { LoadingBox, StyleButton } from './styles';
+import {
+  LoadingBox, StyleButton, TextButton, ShapeButton,
+} from './styles';
 
 export * from './LikeButton';
 export * from './IconButton';
@@ -12,32 +14,66 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
    * @memberof IButtonProps
    */
   loading?: boolean;
+  icon?: React.ReactNode;
   danger?: boolean;
   text?: boolean;
   shape?: 'circle' | 'round';
   size?: 'small' | 'large';
 }
 
-type Component = React.FC<IButtonProps>;
-
-export const Button: Component = ({
+export const Button: React.FC<IButtonProps> = ({
   children,
   loading = false,
   danger,
   text,
+  shape,
+  icon,
   ...restProps
-}) => (
-  <StyleButton
-    {...restProps}
-    text={text ? 1 : 0}
-    danger={danger ? 1 : 0}
-    loading={loading ? 1 : 0}
-  >
+}) => {
+  // console.log(children);
+  const props = {
+    ...restProps,
+    danger: danger ? 1 : 0,
+    loading: loading ? 1 : 0,
+  };
+  const content = (
     <>
       {
         loading && <LoadingBox><Loading color="#fff" /></LoadingBox>
       }
-      {children}
+      {icon}
+      {
+        children && (
+          <span>
+            {children}
+          </span>
+        )
+      }
     </>
-  </StyleButton>
-);
+  );
+  if (text) {
+    return (
+      <TextButton
+        {...props}
+      >
+        {content}
+      </TextButton>
+    );
+  } if (shape) {
+    return (
+      <ShapeButton
+        {...props}
+        shape={shape}
+      >
+        {content}
+      </ShapeButton>
+    );
+  }
+  return (
+    <StyleButton
+      {...props}
+    >
+      {content}
+    </StyleButton>
+  );
+};

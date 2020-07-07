@@ -18,8 +18,9 @@ interface IProps extends IButtonProps {
 const LButton = styled.button<{ isFollowing: number; unContent: string }>`
   outline: none;
   position: relative;
-  padding: 9px 25px;
-  line-height: 1;
+  padding: 4px 25px;
+  line-height: 1.5715;
+  height: 32px;
   border: none;
   border-radius: 16px;
   font-size: ${_ => rem(theme('fontSizes[1]')(_))};

@@ -198,9 +198,13 @@ const Account = observer(() => {
                           @
                           {oauthInfoName(type, currentInfo.info!)}
                         </InfoName>
-                        <Button danger shape="circle" size="small" onClick={() => revokeConfirm(currentInfo.id)}>
-                          <X size={14} />
-                        </Button>
+                        <Button
+                          icon={<X size={14} />}
+                          danger
+                          shape="circle"
+                          size="small"
+                          onClick={() => revokeConfirm(currentInfo.id)}
+                        />
                       </CrInfo>
                     ) : (
                       <Button disabled={type === OauthType.GOOGLE} shape="round" size="small" onClick={() => authorize(type)}>
