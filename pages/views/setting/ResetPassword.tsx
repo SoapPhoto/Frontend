@@ -89,7 +89,8 @@ const Reset = () => {
               <Button
                 loading={confirmLoading}
                 style={{ marginTop: rem(46) }}
-                type="submit"
+                type="primary"
+                htmlType="submit"
                 disabled={isSubmitting}
               >
                 {t('setting.reset_password.btn.confirm')}
