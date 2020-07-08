@@ -111,7 +111,8 @@ const Form: React.FC<IFormProps> = ({ initialValues, onClose, onOk }) => {
           </FormBox>
           <Button
             style={{ marginTop: rem(42), width: '100%' }}
-            type="submit"
+            type="primary"
+            htmlType="submit"
             disabled={isSubmitting}
           >
             修改

@@ -41,10 +41,11 @@ const BtnGroup = styled.div`
     margin-left: ${rem(12)};
   }
   ${customMedia.lessThan('medium')`
-    flex-direction: column-reverse;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: ${rem(8)};
     & > :last-child {
       margin-left: 0;
-      margin-bottom: ${rem(12)};
     }
   `}
 `;
@@ -87,13 +88,12 @@ export const Confirm: React.FC<IConfirmProps> = ({
       </Content>
       <BtnGroup>
         <Button
-          text
           {...cancelProps}
           onClick={onClose}
         >
           {cancelText || t('btn.cancel')}
         </Button>
-        <Button {...confirmProps} loading={confirmLoading}>
+        <Button {...confirmProps} type="primary" loading={confirmLoading}>
           {confirmIcon}
           {confirmText || t('btn.ok')}
         </Button>

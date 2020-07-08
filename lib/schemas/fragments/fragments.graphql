@@ -200,6 +200,7 @@ fragment UserDetailFragment on User {
 
 fragment UserFollowInfoFragment on User {
   id
+  username
   isFollowing
   followerCount
   followedCount

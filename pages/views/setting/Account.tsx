@@ -201,13 +201,20 @@ const Account = observer(() => {
                         <Button
                           icon={<X size={14} />}
                           danger
+                          type="primary"
                           shape="circle"
                           size="small"
                           onClick={() => revokeConfirm(currentInfo.id)}
                         />
                       </CrInfo>
                     ) : (
-                      <Button disabled={type === OauthType.GOOGLE} shape="round" size="small" onClick={() => authorize(type)}>
+                      <Button
+                        type="primary"
+                        disabled={type === OauthType.GOOGLE}
+                        shape="round"
+                        size="small"
+                        onClick={() => authorize(type)}
+                      >
                         {t('setting.account.btn.authorize')}
                       </Button>
                     )
@@ -249,12 +256,23 @@ const Account = observer(() => {
                       )
                     }
                   </InfoName>
-                  <Button disabled shape="round" danger size="small">
+                  <Button
+                    type="primary"
+                    disabled
+                    shape="round"
+                    danger
+                    size="small"
+                  >
                     {`${t('setting.account.btn.modify')}`}
                   </Button>
                 </CrInfo>
               ) : (
-                <Button disabled shape="round" size="small">
+                <Button
+                  type="primary"
+                  disabled
+                  shape="round"
+                  size="small"
+                >
                   {`${t('setting.account.btn.authorize')}`}
                 </Button>
               )

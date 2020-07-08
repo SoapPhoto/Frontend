@@ -5,7 +5,7 @@ import { darken, lighten, rgba } from 'polished';
 const colors = {
   shadowColor: 'rgba(0, 0, 0, 0.06)',
   secondary: '#8a92a9',
-  primary: '#05f',
+  primary: 'rgb(26,92,255)',
   text: '#161b3d',
   danger: '#ff4d4f',
   background: '#fff',

@@ -169,10 +169,11 @@ export const EditPictureModal: React.FC<IProps> = ({
                     />
                   </IconButton>
                   <Button
+                    type="primary"
                     loading={confirmLoading}
                     onClick={() => handleSubmit()}
                     disabled={isSubmitting}
-                    type="submit"
+                    htmlType="submit"
                   >
                     {t('btn.save')}
                   </Button>

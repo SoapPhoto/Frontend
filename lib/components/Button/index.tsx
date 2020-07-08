@@ -14,9 +14,10 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
    * @memberof IButtonProps
    */
   loading?: boolean;
+  htmlType?: 'submit' | 'reset' | 'button';
+  type?: 'primary' | 'text';
   icon?: React.ReactNode;
   danger?: boolean;
-  text?: boolean;
   shape?: 'circle' | 'round';
   size?: 'small' | 'large';
 }
@@ -25,14 +26,17 @@ export const Button: React.FC<IButtonProps> = ({
   children,
   loading = false,
   danger,
-  text,
   shape,
   icon,
+  type,
+  htmlType = 'button',
   ...restProps
 }) => {
   // console.log(children);
   const props = {
     ...restProps,
+    type: htmlType,
+    btnType: type,
     danger: danger ? 1 : 0,
     loading: loading ? 1 : 0,
   };
@@ -51,7 +55,7 @@ export const Button: React.FC<IButtonProps> = ({
       }
     </>
   );
-  if (text) {
+  if (type === 'text') {
     return (
       <TextButton
         {...props}

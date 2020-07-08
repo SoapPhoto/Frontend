@@ -108,7 +108,8 @@ const SignUp = () => {
                 marginTop: rem(46),
                 width: '100%',
               }}
-              type="submit"
+              type="primary"
+              htmlType="submit"
               disabled={isSubmitting}
             >
               {t('auth.btn.signup')}

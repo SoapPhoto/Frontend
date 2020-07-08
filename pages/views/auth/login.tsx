@@ -146,7 +146,8 @@ const Login: React.FC<IBaseScreenProps> = () => {
             <Button
               loading={confirmLoading}
               style={{ marginTop: rem(42), width: '100%' }}
-              type="submit"
+              htmlType="submit"
+              type="primary"
               disabled={isSubmitting}
             >
               {t('auth.btn.login')}

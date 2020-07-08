@@ -109,7 +109,12 @@ const User: React.FC = () => {
                   <Cell width={1} middle>
                     <div>
                       <Upload onFileChange={handleAvatarChange}>
-                        <Button type="button">{t('setting.upload_avatar')}</Button>
+                        <Button
+                          type="primary"
+                          htmlType="button"
+                        >
+                          {t('setting.upload_avatar')}
+                        </Button>
                       </Upload>
                     </div>
                   </Cell>
@@ -151,7 +156,8 @@ const User: React.FC = () => {
                     <Button
                       loading={btnLoading}
                       disabled={isSubmitting}
-                      type="submit"
+                      type="primary"
+                      htmlType="submit"
                     >
                       {t('setting.update')}
                     </Button>

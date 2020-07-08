@@ -60,7 +60,13 @@ const AuthVerify = () => {
         <Title>验证邮箱</Title>
         <P>在继续之前，请检查您的电子邮件以验证邮箱。如果您没有收到电子邮件，请单击下面的按钮以重新发送验证邮件。</P>
         <Btn>
-          <Button loading={sendLoading} onClick={reset}>重新发送</Button>
+          <Button
+            type="primary"
+            loading={sendLoading}
+            onClick={reset}
+          >
+            重新发送
+          </Button>
         </Btn>
       </Box>
     </Wrapper>

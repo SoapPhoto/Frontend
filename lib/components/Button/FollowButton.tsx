@@ -8,25 +8,18 @@ import { useTranslation } from '@lib/i18n/useTranslation';
 import { rem, darken } from 'polished';
 import { UserEntity } from '@lib/common/interfaces/user';
 import { useAccountStore } from '@lib/stores/hooks';
-import { IButtonProps } from '.';
+import { IButtonProps, Button } from '.';
 
 interface IProps extends IButtonProps {
   isFollowing: number;
   user: UserEntity;
 }
 
-const LButton = styled.button<{ isFollowing: number; unContent: string }>`
-  outline: none;
-  position: relative;
-  padding: 4px 25px;
-  line-height: 1.5715;
-  height: 32px;
-  border: none;
-  border-radius: 16px;
-  font-size: ${_ => rem(theme('fontSizes[1]')(_))};
+const LButton = styled(Button)<{ isFollowing: number; unContent: string }>`
+  padding-left: ${rem(26)};
+  padding-right: ${rem(26)};
   font-weight: 600;
   background-color: ${theme('colors.primary')};
-  transition: background-color .2s,color .2s;
   color: #fff;
   cursor: pointer;
   text-align: center;
@@ -60,10 +53,12 @@ export const FollowButton: React.FC<IProps> = observer(({
   return (
     <LButton
       {...rest}
+      type="primary"
+      shape="round"
       unContent={t('follow.btn.un_follow')}
       isFollowing={isFollowing}
+      icon={isFollowing === 2 && (<StrutAlign><ArrowHorizontal style={{ marginRight: rem(4) }} size={11} /></StrutAlign>)}
     >
-      {isFollowing === 2 && (<StrutAlign><ArrowHorizontal style={{ marginRight: rem(4) }} size={11} /></StrutAlign>)}
       {content}
     </LButton>
   );

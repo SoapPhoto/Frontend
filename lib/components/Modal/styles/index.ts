@@ -56,8 +56,9 @@ export const LazyWrapper = styled(Lazy)<{ fullscreen: number }>`
   }
   ${Box} {
     ${_ => (!_.fullscreen ? customMedia.lessThan('mobile')`
-      max-width: calc(100% - ${rem(32)}) !important;
       width: 100%;
+      margin: 0;
+      border-radius: 12px 12px 0 0;
     ` : customMedia.lessThan('mobile')`
       max-width: 100% !important;
       width: 100%;

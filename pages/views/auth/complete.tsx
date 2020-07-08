@@ -146,9 +146,10 @@ const CompleteUserInfo: ICustomNextPage<IBaseScreenProps, any> = () => {
                   label="昵称（显示的名称）"
                 />
                 <Button
+                  type="primary"
                   loading={confirmLoading}
                   style={{ marginTop: rem(42), width: '100%' }}
-                  type="submit"
+                  htmlType="submit"
                   disabled={isDisabled || isSubmitting}
                 >
                   完成注册

@@ -138,10 +138,11 @@ export const UpdateCollectionModal: React.FC<IProps<UpdateCollectionDot>> = ({
                     />
                   </IconButton>
                   <Button
+                    type="primary"
                     loading={confirmLoading}
                     onClick={() => handleSubmit()}
                     disabled={isSubmitting}
-                    type="submit"
+                    htmlType="submit"
                   >
                     {t('btn.save')}
                   </Button>

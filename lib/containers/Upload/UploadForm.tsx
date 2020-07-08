@@ -148,6 +148,7 @@ const UploadForm: React.FC<IProps> = observer(({
           style={{ textAlign: 'right' }}
         >
           <Button
+            type="primary"
             onClick={onAdd}
             loading={loading}
             disabled={disabled}

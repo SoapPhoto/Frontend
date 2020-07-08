@@ -1,4 +1,6 @@
-import { rem, lighten, darken } from 'polished';
+import {
+  rem, lighten, darken, rgba,
+} from 'polished';
 import styled, { css, ThemedStyledProps, DefaultTheme } from 'styled-components';
 import { theme } from '@lib/common/utils/themes';
 
@@ -10,18 +12,9 @@ const loadingCss = ({ loading }: { loading: number }) => (loading
 interface IBtnIProp {
   loading: number;
   danger: number;
-  text?: number;
+  btnType?: 'primary' | 'text';
   size?: string;
   shape?: string;
-}
-interface IBtnAttr {
-  background: string;
-  danger: number;
-  text: number;
-  borderColor: string;
-  size: string;
-  shape: string;
-  height: number;
 }
 
 // eslint-disable-next-line arrow-parens
@@ -35,17 +28,31 @@ export const buttonStyle = (style: string) => <T>(context: ThemedStyledProps<IBt
     large: `${rem(6.4)} ${rem(15)}`,
   };
   const borderColors: Record<string, string> = {
-    1: context.theme.colors.danger,
+    primary: 'transparent',
+    text: 'transparent',
+  };
+  const backgroundColors: Record<string, string> = {
+    primary: context.theme.colors.primary,
+    text: 'transparent',
   };
   switch (style) {
     case 'height':
       return context.size ? heights[context.size] : rem(32);
     case 'borderColor':
-      return borderColors[context.danger] || 'transparent';
+      if (context.btnType) {
+        return context.danger ? context.theme.colors.danger : borderColors[context.btnType];
+      }
+      return context.danger ? context.theme.colors.danger : context.theme.colors.gray;
     case 'background':
-      return borderColors[context.danger] || context.theme.colors.primary;
+      if (context.btnType) {
+        return context.danger ? context.theme.colors.danger : backgroundColors[context.btnType];
+      }
+      return 'transparent';
     case 'textColor':
-      return '#fff';
+      if (context.btnType) {
+        return context.btnType === 'text' ? context.theme.colors.primary : '#fff';
+      }
+      return context.danger ? context.theme.colors.danger : context.theme.colors.text;
     case 'padding':
       return context.size ? paddings[context.size] : `${rem(4)} ${rem(15)}`;
     case 'fontsize':
@@ -98,12 +105,12 @@ export const StyleButton = styled.button<IBtnIProp>`
     margin-right: ${rem(12)};
   }
   &:hover {
-    border-color: ${_ => lighten(0.05, buttonStyle('borderColor')(_))};
-    background-color: ${_ => lighten(0.05, buttonStyle('background')(_))};
+    background-color: ${_ => (buttonStyle('background')(_) === 'transparent' ? 'transparent' : rgba(buttonStyle('background')(_), 0.8))};
+    /* border-color: ${_ => (buttonStyle('borderColor')(_) === 'transparent' ? 'transparent' : rgba(buttonStyle('borderColor')(_), 0.8))}; */
   }
   &:active {
-    border-color: ${_ => darken(0.05, buttonStyle('borderColor')(_))};
-    background-color: ${_ => darken(0.05, buttonStyle('background')(_))};
+    background-color: ${_ => (buttonStyle('background')(_) === 'transparent' ? 'transparent' : rgba(buttonStyle('background')(_), 0.9))};
+    /* border-color: ${_ => (buttonStyle('borderColor')(_) === 'transparent' ? 'transparent' : rgba(buttonStyle('borderColor')(_), 0.9))}; */
   }
   /* ${_ => _.size === 'small' && css`
     padding: 0 ${rem(12)};
@@ -133,11 +140,12 @@ export const StyleButton = styled.button<IBtnIProp>`
 export const TextButton = styled(StyleButton)<IBtnIProp>`
   background: transparent;
   border-color: transparent;
+  color: ${_ => (_.danger ? theme('colors.danger')(_) : theme('colors.primary')(_))};
   &:hover {
-    color: ${_ => lighten(0.05, _.danger ? theme('colors.danger')(_) : theme('colors.primary')(_))};
+    background: ${_ => rgba(_.danger ? theme('colors.danger')(_) : theme('colors.primary')(_), 0.2)};
   }
   &:active {
-    color: ${_ => darken(0.05, _.danger ? theme('colors.danger')(_) : theme('colors.primary')(_))};
+    background: ${_ => rgba(_.danger ? theme('colors.danger')(_) : theme('colors.primary')(_), 0.16)};
   }
 `;
 

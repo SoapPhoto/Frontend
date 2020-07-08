@@ -91,6 +91,7 @@ export const AddCollectionModal: React.FC<IProps> = ({ visible, onClose, onOk })
                   width: '100%',
                   marginTop: rem(24),
                 }}
+                type="primary"
                 loading={okLoading}
                 disabled={isSubmitting}
               >

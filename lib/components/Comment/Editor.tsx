@@ -87,7 +87,7 @@ export const CommentEditor: React.FC<IProps> = observer(({
           onClick={setInputFocus}
         >
           <span />
-          <Button loading={loading} onClick={onConfirmClick} disabled={!value}>{t('comment.send')}</Button>
+          <Button type="primary" loading={loading} onClick={onConfirmClick} disabled={!value}>{t('comment.send')}</Button>
         </HandleBox>
       </Box>
     </Wrapper>
