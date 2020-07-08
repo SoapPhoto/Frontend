@@ -112,29 +112,6 @@ export const StyleButton = styled.button<IBtnIProp>`
     background-color: ${_ => (buttonStyle('background')(_) === 'transparent' ? 'transparent' : rgba(buttonStyle('background')(_), 0.9))};
     /* border-color: ${_ => (buttonStyle('borderColor')(_) === 'transparent' ? 'transparent' : rgba(buttonStyle('borderColor')(_), 0.9))}; */
   }
-  /* ${_ => _.size === 'small' && css`
-    padding: 0 ${rem(12)};
-    font-size: ${test => rem(theme('fontSizes[30]')(test))};
-  `}
-  ${_ => _.size === 'large' && css`
-    padding: 0 ${rem(15)};
-  `} */
-  /* ${_ => _.shape === 'circle' && css`
-    border-radius: 50%;
-    width: ${rem(_.height)};
-    height: ${rem(_.height)};
-    padding: 0;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    &>svg {
-      margin-right: 0;
-    }
-  `}
-  ${_ => _.shape === 'round' && css`
-    border-radius: 50%;
-    border-radius: ${rem(_.height)};
-  `} */
 `;
 
 export const TextButton = styled(StyleButton)<IBtnIProp>`
