@@ -6,7 +6,8 @@ import {
 
 export * from './LikeButton';
 export * from './IconButton';
-export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+
+export interface IButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
   /**
    * 加载中
    *
