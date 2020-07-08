@@ -3,7 +3,6 @@ import React from 'react';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import { WithApolloProps } from 'next-with-apollo';
-import NProgress from 'nprogress';
 
 import 'dayjs/locale/es';
 import 'dayjs/locale/zh-cn';
@@ -46,16 +45,16 @@ dayjs.locale('zh-cn');
 
 Router.events.on('routeChangeStart', () => {
   timer = window.setTimeout(() => {
-    NProgress.start();
+    store.appStore.setLoading(true);
   }, 200);
 });
 Router.events.on('routeChangeComplete', () => {
   clearTimeout(timer!);
-  NProgress.done();
+  store.appStore.setLoading(false);
 });
 Router.events.on('routeChangeError', () => {
   clearTimeout(timer!);
-  NProgress.done();
+  store.appStore.setLoading(false);
 });
 
 @observer
