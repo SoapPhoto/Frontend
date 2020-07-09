@@ -52,9 +52,6 @@ const Index: ICustomNextPage<IBaseScreenProps, {}> = observer(() => {
 });
 
 Index.getInitialProps = async ({ mobxStore, route, res }: ICustomNextContext) => {
-  if (server) {
-    return {};
-  }
   const { appStore, screen, accountStore } = mobxStore;
   const { params } = route;
   const { type } = params as Record<string, string>;
