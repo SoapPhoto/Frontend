@@ -12,6 +12,7 @@ import cookie from 'js-cookie';
 import { ApolloProvider } from 'react-apollo';
 
 import { getMainDefinition } from 'apollo-utilities';
+import { isString } from 'lodash';
 import { server } from '../utils';
 
 function createClient({ headers, initialState }: any) {
@@ -35,7 +36,13 @@ function createClient({ headers, initialState }: any) {
   const errorLink = onError(
     ({ graphQLErrors, networkError }) => {
       if (graphQLErrors) {
-        graphQLErrors.map(err => console.error(`[GraphQL error]: Message: ${(err.message as any)?.error?.toString()}`));
+        graphQLErrors.forEach((err) => {
+          if (isString(err.message)) {
+            console.error(`[GraphQL error]{${err.path}}: Message: ${err.message}`);
+          } else {
+            console.error(`[GraphQL error]{${err.path}}: Message: ${(err.message as any)?.error?.toString()}`);
+          }
+        });
       }
       if (networkError) console.log(`[Network error]: ${networkError}`);
     },

@@ -4,9 +4,6 @@ import Router from 'next/router';
 import { ICustomNextPage, IBaseScreenProps } from '@lib/common/interfaces/global';
 import { validatorEmail } from '@lib/services/auth';
 import { MessagePage } from '@lib/containers/Auth';
-import { withError } from '@lib/components/withError';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { getTitle } from '@lib/common/utils';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { SEO } from '@lib/components';
@@ -63,4 +60,4 @@ ValidatorEmail.getInitialProps = async (ctx: any) => {
   }
 };
 
-export default withError(pageWithTranslation(I18nNamespace.Auth)(ValidatorEmail));
+export default ValidatorEmail;

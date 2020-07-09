@@ -12,12 +12,9 @@ import {
 } from '@lib/styles/views/auth';
 import rem from 'polished/lib/helpers/rem';
 import styled from 'styled-components';
-import { I18nNamespace } from '@lib/i18n/Namespace';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useAccountStore } from '@lib/stores/hooks';
 import { useRouter } from '@lib/router';
-import { withError } from '@lib/components/withError';
 import { IBaseScreenProps } from '@lib/common/interfaces/global';
 import { GitHubLogo } from '@lib/icon';
 import {
@@ -186,5 +183,5 @@ const Login: React.FC<IBaseScreenProps> = () => {
 };
 
 export default withAuth('guest')(
-  withError(pageWithTranslation(I18nNamespace.Auth)(Login)),
+  Login,
 );

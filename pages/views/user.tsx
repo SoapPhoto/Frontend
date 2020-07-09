@@ -11,7 +11,6 @@ import { getTitle, Histore } from '@lib/common/utils';
 import {
   Avatar, Nav, NavItem, EmojiText, SEO,
 } from '@lib/components';
-import { withError } from '@lib/components/withError';
 import { PictureList } from '@lib/containers/Picture/List';
 import { Link as LinkIcon, BadgeCert, StrutAlign } from '@lib/icon';
 import { Popover } from '@lib/components/Popover';
@@ -41,15 +40,14 @@ import { WithRouterProps } from 'next/dist/client/with-router';
 import { A } from '@lib/components/A';
 import { CollectionList } from '@lib/containers/Collection/List';
 import { UserType } from '@common/enum/router';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { useAccountStore, useStores } from '@lib/stores/hooks';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { FollowButton } from '@lib/components/Button/FollowButton';
 import { useFollower } from '@lib/common/hooks/useFollower';
 import { useRouter } from '@lib/router';
-import { WithQueryParam } from '@lib/components/WithQueryParam';
+import { WithHashParam } from '@lib/components/WithHashParam';
 import { IconButton } from '@lib/components/Button';
+import { errorFilter } from '@lib/common/utils/error';
 
 interface IProps extends IBaseScreenProps, WithRouterProps {
   username: string;
@@ -124,8 +122,8 @@ const UserInfo = observer(() => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.username]);
   const pushModalQuery = useCallback((label: string) => {
-    push(`/views/user?${qs.stringify(params as any)}`, `${pathname}?action=${label}`, {
-      shallow: true,
+    push(`/views/user?${qs.stringify(params as any)}`, `${pathname}#modal-${label}`, {
+      // shallow: true,
     });
     Histore.set('modal', `child-${label}`);
   }, [params, pathname, push]);
@@ -229,7 +227,7 @@ const UserInfo = observer(() => {
             </InfoBox>
           </Cell>
         </HeaderGrid>
-        <WithQueryParam action="follower" back={backNow}>
+        <WithHashParam action="modal-follower" back={backNow}>
           {(visible, backView) => (
             <UserFollowModal
               type="follower"
@@ -238,8 +236,8 @@ const UserInfo = observer(() => {
               onClose={backView}
             />
           )}
-        </WithQueryParam>
-        <WithQueryParam action="followed" back={backNow}>
+        </WithHashParam>
+        <WithHashParam action="modal-followed" back={backNow}>
           {(visible, backView) => (
             <UserFollowModal
               type="followed"
@@ -248,7 +246,7 @@ const UserInfo = observer(() => {
               onClose={backView}
             />
           )}
-        </WithQueryParam>
+        </WithHashParam>
       </UserHeader>
     </UserHeaderWrapper>
   );
@@ -269,40 +267,48 @@ const Picture = observer(() => {
 });
 
 User.getInitialProps = async ({
-  mobxStore, route, res,
+  mobxStore, route,
 }: ICustomNextContext) => {
-  const { params, query, pathname } = route;
+  const { params } = route;
   const { username, type } = params as { username: string; type: UserType };
-  const { appStore, screen } = mobxStore;
+  const { screen } = mobxStore;
   const { userCollectionStore, userPictureStore, userStore } = screen;
-  const { location } = appStore;
   const all = [];
   const arg: [string, UserType] = [username!, type];
-  const isPop = location && location.action === 'POP' && !server;
-  if (query.modal) {
-    if (query.action !== 'follower' && query.action !== 'followed') res?.redirect(pathname);
-  }
-  userCollectionStore.setUsername(username!);
-  userStore.setUsername(username!);
-  if (isPop) {
-    all.push(userStore.getCache(username));
-  } else {
+  if (server) {
+    userCollectionStore.setUsername(username!);
+    userStore.setUsername(username!);
     all.push(userStore.getInit(...arg));
+    switch (type!) {
+      case UserType.collections:
+        all.push(
+          userCollectionStore.getList(false),
+        );
+        break;
+      default:
+        all.push(userPictureStore.getList(...arg));
+    }
+  } else {
+    all.push(userStore.getCache(username));
+    switch (type!) {
+      case UserType.collections:
+        all.push(
+          userCollectionStore.getList(false),
+        );
+        break;
+      default:
+        all.push(userPictureStore.getCache(...arg));
+    }
   }
-  switch (type!) {
-    case UserType.collections:
-      all.push(
-        userCollectionStore.getList(false),
-      );
-      break;
-    default:
-      all.push(isPop ? userPictureStore.getCache(...arg) : userPictureStore.getList(...arg));
+  try {
+    await Promise.all(all);
+    return {
+      type,
+      username: params.username,
+    };
+  } catch (err) {
+    return errorFilter(err);
   }
-  await Promise.all(all);
-  return {
-    type,
-    username: params.username,
-  };
 };
 
-export default withError(pageWithTranslation([I18nNamespace.User, I18nNamespace.Collection])(User));
+export default User;

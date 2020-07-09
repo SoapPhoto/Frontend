@@ -12,11 +12,8 @@ import {
 } from '@lib/styles/views/auth';
 import { rem } from 'polished';
 import { useTranslation } from '@lib/i18n/useTranslation';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { useRouter } from '@lib/router';
 import { useAccountStore } from '@lib/stores/hooks';
-import { withError } from '@lib/components/withError';
 import { EmojiText, SEO } from '@lib/components';
 import { A } from '@lib/components/A';
 
@@ -122,5 +119,5 @@ const SignUp = () => {
 };
 
 export default withAuth('guest')(
-  withError(pageWithTranslation(I18nNamespace.Auth)(SignUp)),
+  SignUp,
 );

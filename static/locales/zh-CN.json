@@ -1,0 +1,251 @@
+{
+  "title": {
+    "name": "肥皂",
+    "home": "首页",
+    "setting": "设置",
+    "login": "登录",
+    "signup": "注册",
+    "search": "搜索"
+  },
+  "menu": {
+    "upload": "上传",
+    "setting": "设置",
+    "signout": "退出登录",
+    "dark": "暗色模式",
+    "light": "亮色模式"
+  },
+  "label": {
+    "collection": "收藏夹",
+    "picture": "图片",
+    "username": "用户名",
+    "password": "密码",
+    "picture_title": "标题",
+    "picture_bio": "说明",
+    "email": "邮箱",
+    "url": "网址",
+    "choice": "精选"
+  },
+  "btn": {
+    "delete": "删除",
+    "cancel": "关闭",
+    "ok": "确定",
+    "save": "保存"
+  },
+  "message": {
+    "no_more": "没有更多内容啦！",
+    "go_home": "前往首页",
+    "update_success": "修改成功！",
+    "visible_yourself": "这个{0}仅自己可见",
+    "success_modify": "修改成功！"
+  },
+  "picture_info": "图片信息",
+  "add_collection": "添加收藏",
+  "un_like": "取消喜欢",
+  "like": "喜欢",
+  "img_count": "{0} 个图片",
+  "private_xx": "私人{0}",
+  "private": "私人",
+  "delete_confirm": "确认要删除此{0}吗？删除后将不可恢复。",
+  "comment": {
+    "placeholder": "输入评论",
+    "send": "评论",
+    "empty": "暂无评论！",
+    "author": "作者",
+    "reply": "回复",
+    "close_reply": "收起回复",
+    "open_reply": "展开 {0} 条回复",
+    "open_all_comment": "查看所有评论",
+    "all_comment": {
+      "title": "评论 · {0}条评论"
+    }
+  },
+  "error_message": {
+    "404": "不存在的页面。",
+    "500": "服务器开小差啦。"
+  },
+  "home": {
+    "nav": {
+      "new": "最新",
+      "hot": "热门",
+      "choice": "精选",
+      "feed": "关注"
+    }
+  },
+  "follow": {
+    "btn": {
+      "mutual_following": "互相关注",
+      "following": "已关注",
+      "follow": "关注",
+      "un_follow": "取消关注"
+    }
+  },
+  "user": {
+    "menu": {
+      "picture": "照片",
+      "like": "喜欢",
+      "collection": "收藏夹",
+      "choice": "精选"
+    },
+    "label": {
+      "followers": "粉丝",
+      "followed": "关注",
+      "likes": "喜欢"
+    }
+  },
+  "auth": {
+    "title": {
+      "login": "登录🔑",
+      "signup": "注册🔑"
+    },
+    "btn": {
+      "login": "登录",
+      "signup": "注册"
+    },
+    "message": {
+      "login_successful": "登录成功！",
+      "signup_success": "注册成功！",
+      "auth_user_info": "认证用户信息中...",
+      "authenticate": {
+        "error_message": "认证失败，请重新登录。",
+        "success_message": "认证成功!"
+      }
+    }
+  },
+  "backend_error": {
+    "verified": "该账号已验证通过",
+    "verified_error": "验证信息失效",
+    "no_user": "用户不存在",
+    "password_error": "密码错误",
+    "no_exist_picture": "图片不存在",
+    "no_exist_collection": "收藏夹不存在",
+    "no_exist_comment": "评论失败",
+    "collected": "已收藏",
+    "no_collect": "为收藏",
+
+    "code_credentials_invalid": "代码凭证无效",
+    "client_credentials_invalid": "客户凭证无效",
+    "user_credentials_invalid": "用户凭证无效",
+    "Invalid grant: user credentials are invalid": "用户名或密码错误",
+
+    "authorized": "已授权其他账号",
+    "reserved_login": "必须留有一个登录信息",
+    "activation_email_failed": "激活邮件发送失败",
+    "validation": {
+      "username_exists": "用户名已存在",
+      "email_exists": "邮箱已被注册"
+    }
+  },
+  "collection": {
+    "label": {
+      "name": "名称",
+      "bio": "简介"
+    },
+    "delete": "删除此收藏夹",
+    "edit": {
+      "title": "编辑收藏夹"
+    }
+  },
+  "picture": {
+    "info": {
+      "title": "信息",
+      "make": "设备",
+      "model": "型号",
+      "focalLength": "焦距",
+      "aperture": "光圈",
+      "exposureTime": "快门速度",
+      "ISO": "ISO",
+      "dimensions": "尺寸",
+      "size": "大小"
+    },
+    "edit": {
+      "title": "编辑图片",
+      "success_message": "更新成功！"
+    },
+    "delete": "删除图片",
+    "collection": {
+      "title": "添加到收藏夹",
+      "add": "新增收藏夹"
+    }
+  },
+  "search": {
+    "label": {
+      "search": "搜索"
+    },
+    "message": {
+      "try": "搜一搜！"
+    }
+  },
+  "setting": {
+    "menu": {
+      "profile": "用户设置",
+      "resetPassword": "重置密码",
+      "account": "账号设置"
+    },
+    "label": {
+      "username": "用户名（登录名）",
+      "name": "昵称（显示的名称）",
+      "website": "个人网站",
+      "bio": "简介"
+    },
+    "upload_avatar": "上传头像",
+    "update": "更新设置",
+    "account": {
+      "label": {
+        "signup_type": "注册方式",
+        "no_verify": "未验证",
+        "revoke": "解绑"
+      },
+      "btn": {
+        "authorize": "绑定",
+        "modify": "修改"
+      },
+      "message": {
+        "revoke_success": "解绑成功！",
+        "require_one_login_type": "必须预留一种登录方式，请绑定其他账号或者设置密码后重试！",
+        "revoke_error": "解绑失败",
+        "google_disabled": "Google 暂不可用！",
+        "authorize_success": "绑定成功！"
+      },
+      "revoke_confirm": {
+        "title": "确定解绑吗？"
+      }
+    },
+    "reset_password": {
+      "password": "旧密码",
+      "new_password": "新密码",
+      "again_new_password": "再次输入新密码",
+      "btn": {
+        "confirm": "更改密码"
+      },
+      "message": {
+        "success": "修改成功，请重新登录！",
+        "password_inconsistent": "请确保两次密码输入一致。"
+      }
+    }
+  },
+  "upload": {
+    "share_location": {
+      "label": "分享位置信息",
+      "bio": "所有人都可以看到你图片拍摄的位置信息"
+    },
+    "edit_exif": {
+      "label": "修改EXIF信息",
+      "bio": "照片的属性信息和拍摄数据"
+    },
+    "btn": {
+      "upload": "上传"
+    },
+    "title": "上传图片",
+    "message": {
+      "success_upload": "上传成功！",
+      "error_upload": "图片上传失败！",
+      "image_format_error": "图片格式错误"
+    }
+  },
+  "validation": {
+    "yup_required": "请输入{0}！",
+    "yup_format": "{0}格式不正确!",
+    "yup_longer": "{0}必须大于{1}位！",
+    "yup_greater": "{0}不得大于{1}位！"
+  }
+}

@@ -28,7 +28,7 @@ export function withAppTranslation(WrappedComponent: typeof App) {
           'If you have a getInitialProps method in your custom _app.js file, you must explicitly return pageProps. For more information, see: https://github.com/zeit/next.js#custom-app',
         );
       }
-      const i18n = await initLocale(wrappedComponentProps.pageProps.namespacesRequired, req);
+      const i18n = await initLocale(req);
       return {
         ...wrappedComponentProps,
         i18n,

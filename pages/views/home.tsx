@@ -3,13 +3,11 @@ import { observer } from 'mobx-react';
 
 import { ICustomNextContext, ICustomNextPage, IBaseScreenProps } from '@lib/common/interfaces/global';
 import { PictureList } from '@lib/containers/Picture/List';
-import { withError } from '@lib/components/withError';
 import { useTranslation } from '@lib/i18n/useTranslation';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
 import { getTitle, server } from '@lib/common/utils';
 import { useScreenStores, useAccountStore } from '@lib/stores/hooks';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { SEO, Nav, NavItem } from '@lib/components';
+import { errorFilter } from '@lib/common/utils/error';
 
 const Index: ICustomNextPage<IBaseScreenProps, {}> = observer(() => {
   const { t } = useTranslation();
@@ -54,6 +52,9 @@ const Index: ICustomNextPage<IBaseScreenProps, {}> = observer(() => {
 });
 
 Index.getInitialProps = async ({ mobxStore, route, res }: ICustomNextContext) => {
+  if (server) {
+    return {};
+  }
   const { appStore, screen, accountStore } = mobxStore;
   const { params } = route;
   const { type } = params as Record<string, string>;
@@ -68,13 +69,16 @@ Index.getInitialProps = async ({ mobxStore, route, res }: ICustomNextContext) =>
     res.redirect('/');
   }
   homeStore.setType(newType);
-  if (isPop) {
-    await homeStore.getListCache();
-  } else {
-    await homeStore.getList(false);
+  try {
+    if (isPop) {
+      await homeStore.getListCache();
+    } else {
+      await homeStore.getList(false);
+    }
+    return {};
+  } catch (err) {
+    return errorFilter(err);
   }
-  // eslint-disable-next-line no-throw-literal
-  return {};
 };
 
-export default pageWithTranslation(I18nNamespace.User)(withError(Index));
+export default Index;

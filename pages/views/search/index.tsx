@@ -2,8 +2,6 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { theme } from '@lib/common/utils/themes';
 import { Search } from '@lib/icon';
 import { IconButton } from '@lib/components/Button';
@@ -16,7 +14,7 @@ import { PictureList } from '@lib/containers/Picture/List';
 import { Loading } from '@lib/components/Loading';
 import { SEO } from '@lib/components';
 import { useTranslation } from '@lib/i18n/useTranslation';
-import { withError } from '@lib/components/withError';
+import { errorFilter } from '@lib/common/utils/error';
 
 interface IProps {}
 
@@ -159,13 +157,17 @@ SearchScreen.getInitialProps = async ({
   const { searchPictures } = screen;
   const isPop = location && location.action === 'POP' && !server;
   searchPictures.setWords(query.q || '');
-  if (isPop && query.q) {
-    await searchPictures.getListCache();
+  try {
+    if (isPop && query.q) {
+      await searchPictures.getListCache();
+    }
+    if (server) {
+      await searchPictures.search(query.q || '');
+    }
+    return {};
+  } catch (err) {
+    return errorFilter(err);
   }
-  if (server) {
-    await searchPictures.search(query.q || '');
-  }
-  return {};
 };
 
-export default pageWithTranslation(I18nNamespace.Search)(withError(SearchScreen));
+export default SearchScreen;

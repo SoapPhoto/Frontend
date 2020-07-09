@@ -6,14 +6,13 @@ import { ICustomNextContext, ICustomNextPage, IBaseScreenProps } from '@lib/comm
 import { getTitle, server } from '@lib/common/utils';
 import { PictureList } from '@lib/containers/Picture/List';
 import { Package, Hash, StrutAlign } from '@lib/icon';
-import { withError } from '@lib/components/withError';
 import { useScreenStores } from '@lib/stores/hooks';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { WrapperBox } from '@lib/common/utils/themes/common';
 import { observer } from 'mobx-react';
 import { SEO } from '@lib/components';
 import { theme } from '@lib/common/utils/themes';
+import { errorFilter } from '@lib/common/utils/error';
 
 const Wrapper = styled.div`
 `;
@@ -89,19 +88,22 @@ TagDetail.getInitialProps = async (ctx: ICustomNextContext) => {
   const { location } = appStore;
   const isPop = location && location.action === 'POP' && !server;
   tagPictureList.setName(params.name!);
-  if (isPop) {
-    await Promise.all([
-      tagStore.getCache(params.name!),
-      tagPictureList.getListCache(),
-    ]);
-  } else {
-    await Promise.all([
-      tagStore.getInfo(params.name!),
-      tagPictureList.getList(false),
-    ]);
+  try {
+    if (isPop) {
+      await Promise.all([
+        tagStore.getCache(params.name!),
+        tagPictureList.getListCache(),
+      ]);
+    } else {
+      await Promise.all([
+        tagStore.getInfo(params.name!),
+        tagPictureList.getList(false),
+      ]);
+    }
+    return {};
+  } catch (err) {
+    return errorFilter(err);
   }
-
-  return {};
 };
 
-export default withError(pageWithTranslation()(TagDetail));
+export default TagDetail;

@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 import { rem } from 'polished';
 import { pick } from 'lodash';
 
-import { withError } from '@lib/components/withError';
 import { getTitle, Histore, server } from '@lib/common/utils';
 import { ICustomNextPage, IBaseScreenProps } from '@lib/common/interfaces/global';
 import { CollectionScreenStore } from '@lib/stores/screen/Collection';
@@ -13,14 +12,13 @@ import { A } from '@lib/components/A';
 import { theme, activate } from '@lib/common/utils/themes';
 import { PictureList } from '@lib/containers/Picture/List';
 import { Popover } from '@lib/components/Popover';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
 import { useScreenStores, useAccountStore } from '@lib/stores/hooks';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { WrapperBox } from '@lib/common/utils/themes/common';
 import { useRouter } from '@lib/router';
 import { UpdateCollectionModal } from '@lib/containers/Collection/UpdateCollectionModal';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { useTheme } from '@lib/common/utils/themes/useTheme';
+import { errorFilter } from '@lib/common/utils/error';
 
 interface IProps extends IBaseScreenProps {
   collectionStore: CollectionScreenStore;
@@ -221,18 +219,22 @@ Collection.getInitialProps = async (ctx) => {
   const { location } = appStore;
   const isPop = location && location.action === 'POP' && !server;
   collectionPictureStore.setId(Number(id!));
-  if (isPop) {
-    await Promise.all([
-      collectionStore.getCache(Number(id!)),
-      collectionPictureStore.getListCache(),
-    ]);
-  } else {
-    await Promise.all([
-      collectionStore.getInfo(Number(id!)),
-      collectionPictureStore.getList(false),
-    ]);
+  try {
+    if (isPop) {
+      await Promise.all([
+        collectionStore.getCache(Number(id!)),
+        collectionPictureStore.getListCache(),
+      ]);
+    } else {
+      await Promise.all([
+        collectionStore.getInfo(Number(id!)),
+        collectionPictureStore.getList(false),
+      ]);
+    }
+    return {};
+  } catch (err) {
+    return errorFilter(err);
   }
-  return {};
 };
 
-export default withError(pageWithTranslation(I18nNamespace.Collection)(Collection));
+export default Collection;

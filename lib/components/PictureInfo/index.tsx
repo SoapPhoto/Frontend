@@ -66,7 +66,7 @@ export const PictureInfo: React.FC<IProps> = observer(({
   const [update] = useMutation<{ updatePicture: PictureEntity }>(UpdatePicture);
   const openWithRoute = useCallback((label: string) => {
     push(`/views/picture?id=${params.id}`, `/picture/${params.id}#modal-${label}`, {
-      shallow: true,
+      // shallow: true,
     });
     Histore.set('modal', `child-${label}`);
   }, [params.id, push]);

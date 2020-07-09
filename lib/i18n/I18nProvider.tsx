@@ -2,14 +2,11 @@ import React from 'react';
 
 import { LocaleType } from '@common/enum/locale';
 import { I18nContext, II18nContext } from './I18nContext';
-import { I18nNamespace } from './Namespace';
 import { getT } from './utils';
 
 export interface II18nValue {
   locale: LocaleType;
-  value: RecordPartial<I18nNamespace, any>;
-  namespacesRequired: Array<I18nNamespace>;
-  currentNamespace: Array<I18nNamespace>;
+  value: RecordPartial<string, any>;
 }
 
 interface IProps {

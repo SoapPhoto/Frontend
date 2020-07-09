@@ -28,14 +28,12 @@ import { Switch } from '@lib/components/Switch';
 import { uploadOSS } from '@lib/services/file';
 import { UploadBox } from '@lib/containers/Upload/UploadBox';
 import { ICustomNextPage } from '@lib/common/interfaces/global';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
 import { Trash2, Edit, MapPin } from '@lib/icon';
 import { UploadType } from '@common/enum/upload';
 import { FieldItem } from '@lib/components/Formik/FieldItem';
 import { theme } from '@lib/common/utils/themes';
 import { rem } from 'polished';
 import { EXIFEditModal, IEXIFEditValues } from '@lib/components/EXIFModal/Edit';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useImageInfo } from '@lib/common/hooks/useImageInfo';
 import { CreatePictureAddDot, PictureLocation } from '@lib/common/interfaces/picture';
@@ -209,5 +207,5 @@ const Upload: ICustomNextPage<IProps, any> = observer(() => {
 });
 
 export default withAuth('user-verified')(
-  pageWithTranslation([I18nNamespace.Picture, I18nNamespace.Upload])(Upload),
+  Upload,
 );

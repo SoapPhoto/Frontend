@@ -8,12 +8,9 @@ import { store } from '@lib/stores/init';
 import Toast from '@lib/components/Toast';
 
 import { IBaseScreenProps } from '@lib/common/interfaces/global';
-import { I18nNamespace } from '@lib/i18n/Namespace';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useRouter } from '@lib/router';
 import { useAccountStore } from '@lib/stores/hooks';
-import { withError } from '@lib/components/withError';
 
 const Wrapper = styled.div`
   text-align: center;
@@ -52,4 +49,4 @@ const Authenticate: React.FC<IBaseScreenProps> = () => {
   );
 };
 
-export default withError(pageWithTranslation(I18nNamespace.Auth)(Authenticate));
+export default Authenticate;

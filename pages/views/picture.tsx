@@ -5,13 +5,12 @@ import React, {
 
 import { ICustomNextContext, ICustomNextPage, IBaseScreenProps } from '@lib/common/interfaces/global';
 import { PictureEntity } from '@lib/common/interfaces/picture';
-import { getTitle, Histore } from '@lib/common/utils';
+import { getTitle, Histore, server } from '@lib/common/utils';
 import {
   Avatar, GpsImage, EmojiText, LightBox, SEO,
 } from '@lib/components';
 import { Comment } from '@lib/components/Comment';
 import { PictureInfo } from '@lib/components/PictureInfo';
-import { withError } from '@lib/components/withError';
 import { PictureImage } from '@lib/containers/Picture/Image';
 import {
   StrutAlign, Hash, Clock, ThumbsUp, Zap,
@@ -42,8 +41,6 @@ import {
   ChoiceBox,
 } from '@lib/styles/views/picture';
 import { rem } from 'polished';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useAccountStore, useScreenStores } from '@lib/stores/hooks';
 import { observer } from 'mobx-react';
@@ -52,6 +49,7 @@ import dayjs from 'dayjs';
 import { Popover } from '@lib/components/Popover';
 import { FollowButton } from '@lib/components/Button/FollowButton';
 import { useFollower } from '@lib/common/hooks/useFollower';
+import { errorFilter } from '@lib/common/utils/error';
 
 interface IInitialProps extends IBaseScreenProps {
   screenData: PictureEntity;
@@ -340,32 +338,32 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
 Picture.getInitialProps = async ({
   mobxStore, route,
 }: ICustomNextContext) => {
-  const { params } = route;
-  const { appStore } = mobxStore;
-  // const isPicture = (
-  //   mobxStore.screen.pictureStore.id
-  //   && mobxStore.screen.pictureStore.id === Number(params.id || 0)
-  // );
-  let isPop = false;
-  let isChild = false;
-  if (appStore.location) {
-    if (appStore.location.action === 'POP') isPop = true;
-    const data = Histore!.get('modal');
-    if (
-      /^child/g.test(data)
-    ) isChild = true;
-  }
-  if (isChild) return {};
-  if (isPop) {
-    await mobxStore.screen.pictureStore.getCache(Number(params.id!));
+  try {
+    const { params } = route;
+    const { appStore } = mobxStore;
+    // const isPicture = (
+    //   mobxStore.screen.pictureStore.id
+    //   && mobxStore.screen.pictureStore.id === Number(params.id || 0)
+    // );
+    let isPop = false;
+    let isChild = false;
+    if (appStore.location) {
+      if (appStore.location.action === 'POP') isPop = true;
+      const data = Histore!.get('modal');
+      if (
+        /^child/g.test(data)
+      ) isChild = true;
+    }
+    if (isChild) return {};
+    if (isPop) {
+      await mobxStore.screen.pictureStore.getCache(Number(params.id!));
+      return {};
+    }
+    await mobxStore.screen.pictureStore.getPictureInfo(Number(params.id!));
     return {};
+  } catch (err) {
+    return errorFilter(err);
   }
-  await mobxStore.screen.pictureStore.getPictureInfo(Number(params.id!));
-  return {};
 };
 
-export default withError(
-  pageWithTranslation(I18nNamespace.Picture)(
-    Picture,
-  ),
-);
+export default Picture;

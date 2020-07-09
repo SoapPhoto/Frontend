@@ -23,7 +23,10 @@ export interface ITextareaProps extends TextareaAutosizeProps {
    * @memberof IInputProps
    */
   error?: string;
-  textareaStyle?: React.CSSProperties;
+  textareaStyle?: Omit<NonNullable<React.TextareaHTMLAttributes<HTMLTextAreaElement>['style']>, 'maxHeight' | 'minHeight'> & {
+    height?: number;
+  };
+  inputRef?: React.Ref<HTMLTextAreaElement>;
   boxStyle?: React.CSSProperties;
   focus?: boolean;
 }
@@ -56,11 +59,10 @@ export const Textarea: React.FC<ITextareaProps> = memo(({
   textareaStyle,
   boxStyle,
   error,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  ref,
   focus: inputFocus,
   onFocus,
   onBlur,
+  inputRef,
   minRows = 2,
   ...restProps
 }) => {
@@ -94,6 +96,7 @@ export const Textarea: React.FC<ITextareaProps> = memo(({
           style={textareaStyle}
           onFocus={onBaseFocus}
           onBlur={onBaseBlur}
+          ref={inputRef}
           {...restProps}
         />
       </TextareaBox>

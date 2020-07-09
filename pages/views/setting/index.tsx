@@ -8,8 +8,6 @@ import { withAuth } from '@lib/components/router/withAuth';
 import { Menu } from '@lib/components/WrapperMenu';
 import { Wrapper } from '@lib/styles/views/setting';
 import { SettingType } from '@common/enum/router';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useRouter } from '@lib/router';
 import { User, AtSign, Lock } from '@lib/icon';
@@ -68,4 +66,4 @@ const Setting = () => {
   );
 };
 
-export default withAuth<IProps>('user')(pageWithTranslation(I18nNamespace.Setting)(Setting));
+export default withAuth('user')(Setting);

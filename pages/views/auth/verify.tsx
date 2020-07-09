@@ -5,8 +5,6 @@ import { rem } from 'polished';
 import { WrapperBox, box } from '@lib/common/utils/themes/common';
 import { Button } from '@lib/components/Button';
 import { withAuth } from '@lib/components/router/withAuth';
-import { pageWithTranslation } from '@lib/i18n/pageWithTranslation';
-import { I18nNamespace } from '@lib/i18n/Namespace';
 import { useAccountStore } from '@lib/stores/hooks';
 import Toast from '@lib/components/Toast';
 import { SEO } from '@lib/components';
@@ -74,5 +72,5 @@ const AuthVerify = () => {
 };
 
 export default withAuth('user-unverified')(
-  pageWithTranslation(I18nNamespace.Common)(AuthVerify),
+  AuthVerify,
 );

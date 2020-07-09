@@ -7,6 +7,7 @@ import { WithApolloProps } from 'next-with-apollo';
 import 'dayjs/locale/es';
 import 'dayjs/locale/zh-cn';
 
+import ErrorPage from '@pages/_error';
 import { Router as RouterProvider } from '@lib/router';
 import { HttpStatus } from '@lib/common/enums/http';
 import { ICustomNextAppContext } from '@lib/common/interfaces/global';
@@ -92,6 +93,7 @@ class MyApp extends App<IProps> {
     } = this.props;
     const isError = (pageProps.error && pageProps.error.statusCode >= 400) || pageProps.statusCode >= 400;
     const noHeader = pageProps && pageProps.header === false;
+    const { error } = pageProps;
     return (
       <RouterProvider>
         <ThemeWrapper>
@@ -99,9 +101,15 @@ class MyApp extends App<IProps> {
             <DefaultSeo
               description="photo, life, happy"
             />
-            <Component
-              {...pageProps}
-            />
+            {
+              isError ? (
+                <ErrorPage error={error} statusCode={error ? error.statusCode : pageProps.statusCode} />
+              ) : (
+                <Component
+                  {...pageProps}
+                />
+              )
+            }
           </BodyLayout>
         </ThemeWrapper>
       </RouterProvider>

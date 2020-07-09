@@ -1,6 +1,6 @@
 import React, { ComponentType } from 'react';
 
-import { ICustomNextContext } from '@lib/common/interfaces/global';
+import { ICustomNextContext, IBaseScreenProps } from '@lib/common/interfaces/global';
 import { server } from '@lib/common/utils';
 import { Router } from '@lib/routes';
 import { AccountStore } from '@lib/stores/AccountStore';
@@ -14,7 +14,7 @@ const getDisplayName = <P extends {}>(
   Component: ComponentType<P>,
 ) => Component.displayName || Component.name || 'Component';
 
-export const withAuth = <P extends any>(role?: string) => (
+export const withAuth = <P extends IBaseScreenProps>(role?: string) => (
   WrappedComponent: ComponentType<P>,
 ) => class extends React.Component<P> {
   public static displayName = `withAuthSync(${getDisplayName(WrappedComponent as any)})`;

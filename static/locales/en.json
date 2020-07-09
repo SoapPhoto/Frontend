@@ -1,0 +1,251 @@
+{
+  "title": {
+    "name": "Soap",
+    "home": "Home",
+    "setting": "Setting",
+    "login": "Login",
+    "signup": "Sign Up",
+    "search": "Search"
+  },
+  "menu": {
+    "upload": "Upload",
+    "setting": "Setting",
+    "signout": "Sign Out",
+    "dark": "Dark Mode",
+    "light": "Light Mode"
+  },
+  "label": {
+    "collection": "Collection",
+    "picture": "Picture",
+    "username": "Username",
+    "password": "Password",
+    "picture_title": "Title",
+    "picture_bio": "Bio",
+    "email": "Email",
+    "url": "URL",
+    "choice": "Choice"
+  },
+  "btn": {
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "save": "Save"
+  },
+  "message": {
+    "no_more": "No more content!",
+    "go_home": "Go Home",
+    "update_success": "Update Sccuess!",
+    "visible_yourself": "This {0} is only visible to yourself.",
+    "success_modify": "Successfully modified!"
+  },
+  "picture_info": "Picture Info",
+  "add_collection": "Add Collection",
+  "un_like": "Un Like",
+  "like": "Like",
+  "img_count": "{0} pictures",
+  "private_xx": "Private {0}",
+  "private": "Private",
+  "delete_confirm": "Are you sure you want to delete this {0}? It will not be recoverable after deletion.",
+  "comment": {
+    "placeholder": "Input comment",
+    "send": "Comment",
+    "empty": "No Comment!",
+    "author": "Author",
+    "reply": "Reply",
+    "close_reply": "Cloes reply",
+    "open_reply": "Expand {0} replies",
+    "open_all_comment": "See all reviews",
+    "all_comment": {
+      "title": "Comments · {0} comments"
+    }
+  },
+  "error_message": {
+    "404": "We couldn’t find this page.",
+    "500": "Internal server error."
+  },
+  "home": {
+    "nav": {
+      "new": "Recent",
+      "hot": "Popular",
+      "choice": "Choice",
+      "feed": "Following"
+    }
+  },
+  "follow": {
+    "btn": {
+      "following": "Following",
+      "follow": "Follow",
+      "mutual_following": "Following",
+      "un_follow": "UnFollow"
+    }
+  },
+  "user": {
+    "menu": {
+      "picture": "Pictures",
+      "like": "Likes",
+      "collection": "Collections",
+      "choice": "Choice"
+    },
+    "label": {
+      "followed": "Followed",
+      "followers": "Followers",
+      "likes": "Likes"
+    }
+  },
+  "auth": {
+    "title": {
+      "login": "Login🔑",
+      "signup": "Sign Up🔑"
+    },
+    "btn": {
+      "login": "login",
+      "signup": "Sign Up"
+    },
+    "message": {
+      "login_successful": "login successful!",
+      "signup_success": "registration successful!",
+      "auth_user_info": "auth user info...",
+      "authenticate": {
+        "error_message": "Authentication failed.please login again",
+        "success_message": "Authentication success!"
+      }
+    }
+  },
+  "backend_error": {
+    "verified": "Verified",
+    "verified_error": "Verification info is invalid",
+    "no_user": "User does not exist",
+    "password_error": "password error",
+    "no_exist_picture": "picture not exist",
+    "no_exist_collection": "Collection not exist",
+    "no_exist_comment": "Comments failed",
+    "collected": "Collected",
+    "no_collect": "No Collect",
+
+    "code_credentials_invalid": "Code credentials are invalid",
+    "client_credentials_invalid": "Client credentials are invalid",
+    "user_credentials_invalid": "User credentials are invalid",
+    "Invalid grant: user credentials are invalid": "Wrong user name or password",
+
+    "authorized": "Authorized other account",
+    "reserved_login": "You must leave a login info",
+    "activation_email_failed": "Activation email failed",
+    "validation": {
+      "username_exists": "Username exists",
+      "email_exists": "Email exists"
+    }
+  },
+  "collection": {
+    "label": {
+      "name": "Name",
+      "bio": "Bio"
+    },
+    "delete": "Delete Collection",
+    "edit": {
+      "title": "Edit Collection"
+    }
+  },
+  "picture": {
+    "info": {
+      "title": "Info",
+      "make": "Camera Make",
+      "model": "Camera Model",
+      "focalLength": "Focal Length",
+      "aperture": "Focal Length",
+      "exposureTime": "Exposure Time",
+      "ISO": "ISO",
+      "dimensions": "Dimensions",
+      "size": "Size"
+    },
+    "edit": {
+      "title": "Edit Picture",
+      "success_message": "Update success！"
+    },
+    "delete": "Delete Picture",
+    "collection": {
+      "title": "Add to Collection",
+      "add": "Add Collection"
+    }
+  },
+  "search": {
+    "label": {
+      "search": "Search"
+    },
+    "message": {
+      "try": "Try!"
+    }
+  },
+  "setting": {
+    "menu": {
+      "profile": "Profile",
+      "resetPassword": "Reset Password",
+      "account": "Account"
+    },
+    "label": {
+      "username": "Username",
+      "name": "name",
+      "website": "Website",
+      "bio": "Bio"
+    },
+    "upload_avatar": "Upload avatar",
+    "update": "Update",
+    "account": {
+      "btn": {
+        "authorize": "Bind",
+        "modify": "Modify"
+      },
+      "label": {
+        "no_verify": "Unverified",
+        "revoke": "Untie",
+        "signup_type": "register"
+      },
+      "message": {
+        "authorize_success": "Bind successfully!",
+        "google_disabled": "Google is temporarily unavailable!",
+        "require_one_login_type": "You must reserve a login method, please bind another account or set a password and try again!",
+        "revoke_error": "Unbinding failed",
+        "revoke_success": "Unbundled successfully!"
+      },
+      "revoke_confirm": {
+        "title": "Are you sure you want to unbind?"
+      }
+    },
+    "reset_password": {
+      "again_new_password": "new password again",
+      "btn": {
+        "confirm": "Confirm"
+      },
+      "message": {
+        "password_inconsistent": "Please make sure you enter the password twice.",
+        "success": "Successful modification, please log in again!"
+      },
+      "new_password": "new password",
+      "password": "old password"
+    }
+  },
+  "upload": {
+    "btn": {
+      "upload": "Upload"
+    },
+    "edit_exif": {
+      "bio": "Photo attribute information and shooting data",
+      "label": "Modify EXIF ​​information"
+    },
+    "share_location": {
+      "bio": "Everyone can see where your picture was taken",
+      "label": "Share location"
+    },
+    "title": "Upload image",
+    "message": {
+      "error_upload": "Image upload failed!",
+      "image_format_error": "Picture format error",
+      "success_upload": "Uploaded successfully!"
+    }
+  },
+  "validation": {
+    "yup_required": "Please input your {0}!",
+    "yup_format": "{0} format is incorrect!",
+    "yup_longer": "{0} must be longer than or equal to {1} characters!",
+    "yup_greater": "{0} must not be greater than {1}!"
+  }
+}
