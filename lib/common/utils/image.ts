@@ -481,12 +481,12 @@ export function formatLocationData(data: any): PictureLocation {
   return newData;
 }
 
-export function formatLocationTitle(location: PictureLocation): string {
+export function formatLocationTitle(location: PictureLocation, isPois = true): string {
   let title = (location.province ?? '');
   if (location.province !== location.city) {
     title += (location.city ?? '');
   }
-  if (location.pois?.length > 0) {
+  if (location.pois?.length > 0 && isPois) {
     if (location.pois[0]) {
       title += ` · ${location.pois[0].name}`;
     }

@@ -244,6 +244,7 @@ export const CommentWrapper = styled.div`
   max-width: calc(${rem(customBreakpoints.medium)} + ${rem(42)});
   padding: 0 ${rem(24)};
   margin: 0 auto;
+  margin-bottom: ${rem('24px')};
 `;
 
 export const Choice = styled.span`

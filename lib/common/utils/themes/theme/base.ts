@@ -65,7 +65,7 @@ const theme: DefaultTheme = {
     collection: {
       background: colors.secondary,
       addPicture: {
-        background: colors.text,
+        background: '#20305a',
         color: colors.pure,
       },
     },

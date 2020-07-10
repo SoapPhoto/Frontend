@@ -34,11 +34,12 @@ const Wrapper = styled.div`
 
 const ModalContent = styled(Modal)`
   padding: 0 !important;
-  max-width: ${rem(400)} !important;
   height: ${rem(500)};
+  max-width: ${rem(400)};
   /* height: calc(100vh - ${rem(24 * 2)}) !important; */
   margin: ${rem(24)} auto !important;
   ${customMedia.lessThan('mobile')`
+    max-width: 100%;
     height: 80vh !important;
     margin-top: 20vh !important;
     margin-bottom: 0 !important;
@@ -205,7 +206,7 @@ export const UserFollowModal = observer<React.FC<IProps>>(({
                       </Info>
                       <Follow
                         isFollowing={user.isFollowing}
-                        size="small"
+                        // size="small"
                         user={user}
                         disabled={followLoading}
                         onClick={() => follow(user)}

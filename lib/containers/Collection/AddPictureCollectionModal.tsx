@@ -50,7 +50,7 @@ const CollectionItemBox = styled.button`
   width: 100%;
   height: ${rem('80px')};
   border-radius: 5px;
-  background-color: #f5f5f5;
+  background-color: ${theme('colors.gray1')};
   overflow: hidden;
   border: none;
   padding: 0;
@@ -90,6 +90,7 @@ const ItemInfoBox = styled.div<{isCollected: boolean; isPreview: boolean}>`
   padding: 17px 20px;
   color: ${theme('styles.collection.addPicture.color')};
   border-radius: 4px;
+  backdrop-filter: saturate(180%) blur(5px);
   & ${CheckIcon} {
     opacity: 0;
   }

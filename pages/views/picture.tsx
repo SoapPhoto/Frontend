@@ -13,7 +13,7 @@ import { Comment } from '@lib/components/Comment';
 import { PictureInfo } from '@lib/components/PictureInfo';
 import { PictureImage } from '@lib/containers/Picture/Image';
 import {
-  StrutAlign, Hash, Clock, ThumbsUp, Zap,
+  StrutAlign, Hash, Clock, ThumbsUp, Zap, MessageSquare, Heart, Target,
 } from '@lib/icon';
 import {
   BaseInfoItem,
@@ -39,6 +39,7 @@ import {
   Choice,
   PictureContent,
   ChoiceBox,
+  UserHeaderInfo,
 } from '@lib/styles/views/picture';
 import { rem } from 'polished';
 import { useTranslation } from '@lib/i18n/useTranslation';
@@ -157,6 +158,22 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
                   />
                 </UserName>
               </UserLink>
+              <BaseInfoItem>
+                <Popover
+                  openDelay={100}
+                  trigger="hover"
+                  placement="top"
+                  theme="dark"
+                  content={<span>{dayjs(info.createTime).format('YYYY-MM-DD HH:mm:ss')}</span>}
+                >
+                  <TimeSpan>
+                    {/* <StrutAlign>
+                      <Clock size={14} />
+                    </StrutAlign> */}
+                    {dayjs(info.createTime).fromNow()}
+                  </TimeSpan>
+                </Popover>
+              </BaseInfoItem>
             </div>
           </UserInfo>
           <UserHeaderHandleBox>
@@ -259,22 +276,6 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
             </TagBox>
           )
         }
-        <BaseInfoItem>
-          <Popover
-            openDelay={100}
-            trigger="hover"
-            placement="top"
-            theme="dark"
-            content={<span>{dayjs(info.createTime).format('YYYY-MM-DD HH:mm:ss')}</span>}
-          >
-            <TimeSpan>
-              <StrutAlign>
-                <Clock size={14} />
-              </StrutAlign>
-              {dayjs(info.createTime).fromNow()}
-            </TimeSpan>
-          </Popover>
-        </BaseInfoItem>
         {
           info.bio && (
             <Bio>
@@ -284,7 +285,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
             </Bio>
           )
         }
-        {
+        {/* {
           isLocation && (
             <GpsContent>
               {
@@ -298,7 +299,7 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
               <GpsImage gps={info!.exif!.location!} />
             </GpsContent>
           )
-        }
+        } */}
       </Content>
       {/* {
         info.relatedCollections.count > 0 && (

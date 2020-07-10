@@ -13,6 +13,8 @@ import { useTheme } from '@lib/common/utils/themes/useTheme';
 interface IProps {
   gps: number[];
   alt?: string;
+  size?: string;
+  zoom?: number;
 }
 
 const Wrapper = styled.div`
@@ -28,10 +30,12 @@ const Wrapper = styled.div`
 export const GpsImage: React.FC<IProps> = ({
   gps,
   alt = '',
+  zoom = 14,
+  size = '600x300',
 }) => {
   const { mapbox } = useTheme();
   const gpsString = useMemo(() => transform([gps[1], gps[0]], GCJ02, WGS84), [gps]).toString();
-  const src = useMemo(() => `//api.mapbox.com/styles/v1/${mapbox.style}/static/pin-s-attraction+285A98(${gpsString},14)/${gpsString},14,0,0/600x300@2x?access_token=${process.env.MAPBOX_AK}&attribution=false&logo=false`, [gpsString, mapbox.style]);
+  const src = useMemo(() => `//api.mapbox.com/styles/v1/${mapbox.style}/static/pin-s-attraction+285A98(${gpsString},${zoom})/${gpsString},${zoom},0,0/${size}@2x?access_token=${process.env.MAPBOX_AK}&attribution=false&logo=false`, [gpsString, mapbox.style, size, zoom]);
   return (
     <Wrapper>
       <img src={src} alt={alt} />

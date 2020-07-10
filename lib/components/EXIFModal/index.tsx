@@ -5,15 +5,16 @@ import React, {
 } from 'react';
 
 import { PictureEntity } from '@lib/common/interfaces/picture';
-import { getPictureUrl } from '@lib/common/utils/image';
+import { getPictureUrl, formatLocationTitle } from '@lib/common/utils/image';
 import { ThemeStore } from '@lib/stores/ThemeStore';
-import { Cell } from 'styled-css-grid';
+import { Cell, Grid } from 'styled-css-grid';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { useTheme } from '@lib/common/utils/themes/useTheme';
 import Modal from '../Modal';
 import {
   EXIFBox, EXIFInfo, EXIFTitle, Info, Title,
 } from './styles';
+import { GpsImage } from '../GpsImage';
 
 const isNull = (value: any) => value === undefined || value === null || value === '';
 
@@ -28,7 +29,7 @@ export const EXIFModal: React.FC<IProps> = memo(({ visible, onClose, picture }) 
   const { t } = useTranslation();
   const { styles } = useTheme();
   const {
-    make, model, exif, width, height, size, key,
+    make, model, exif, width, height, size, key, location, info,
   } = picture;
   const {
     focalLength, aperture, exposureTime, ISO,
@@ -36,11 +37,12 @@ export const EXIFModal: React.FC<IProps> = memo(({ visible, onClose, picture }) 
   const background = useMemo(() => (
     `linear-gradient(${rgba(styles.box.background, 0.8)}, ${styles.box.background} 150px), url("${getPictureUrl(key, 'blur')}")`
   ), [key, styles.box.background]);
+  console.log(location);
   return (
     <Modal
       visible={visible}
       onClose={onClose}
-      maxWidth={560}
+      maxWidth={500}
       boxStyle={{ padding: 0 }}
     >
       <Modal.Background background={background} />
@@ -81,6 +83,26 @@ export const EXIFModal: React.FC<IProps> = memo(({ visible, onClose, picture }) 
               <EXIFInfo>{bytes(size)}</EXIFInfo>
             </Cell>
           </EXIFBox>
+          {
+            location && (
+              <Grid
+                style={{ marginTop: rem(24) }}
+                columns="repeat(auto-fit, minmax(150px, 1fr))"
+              >
+                <Cell>
+                  <EXIFTitle>位置</EXIFTitle>
+                  <EXIFInfo>{formatLocationTitle(location)}</EXIFInfo>
+                </Cell>
+              </Grid>
+            )
+          }
+          {
+            exif?.location && (
+              <div style={{ borderRadius: '4px', marginTop: rem(32) }}>
+                <GpsImage zoom={14} size="500x200" gps={exif.location} />
+              </div>
+            )
+          }
         </Info>
       </Modal.Content>
     </Modal>
