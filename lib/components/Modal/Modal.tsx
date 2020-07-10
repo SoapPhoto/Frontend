@@ -107,7 +107,6 @@ export const Modal: React.FC<IModalProps> = memo(({
               style={{ zIndex: 1000 + _modalIndex }}
               onClick={onMaskClick}
               visible={visible}
-              maxWidth={maxWidth}
               hiddenClassName="none"
             >
               <Content
