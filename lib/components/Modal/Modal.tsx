@@ -16,6 +16,7 @@ import { PortalWrapper } from '../Portal';
 
 export interface IModalProps {
   visible: boolean;
+  centerd?: boolean;
   onClose: () => void;
   afterClose?: () => void;
   closeIcon?: boolean;
@@ -34,6 +35,7 @@ export const Modal: React.FC<IModalProps> = memo(({
   boxStyle,
   children,
   onClose,
+  centerd = true,
   closeIcon = true,
   fullscreen = true,
 }) => {
@@ -97,6 +99,7 @@ export const Modal: React.FC<IModalProps> = memo(({
           <Animate showProp="visible" transitionName="modalContent" transitionAppear>
             <LazyWrapper
               fullscreen={fullscreen ? 1 : 0}
+              centerd={centerd ? 1 : 0}
               style={{ zIndex: 1000 + _modalIndex }}
               onClick={onMaskClick}
               visible={visible}

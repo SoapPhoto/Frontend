@@ -60,13 +60,13 @@ export const CommentItem: React.FC<ICommentItem> = observer(({
   }, [comment, openModal]);
   return (
     <ItemBox id={`comment-${id}`}>
-      <A
-        route={`/@${user.username}`}
-      >
-        <UserPopper username={user.username}>
+      <UserPopper username={user.username}>
+        <A
+          route={`/@${user.username}`}
+        >
           <Avatar badge={user.badge} src={user.avatar} />
-        </UserPopper>
-      </A>
+        </A>
+      </UserPopper>
       <MainBox>
         <ContentBox>
           <ContentItem>

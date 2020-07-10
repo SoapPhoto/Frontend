@@ -54,7 +54,6 @@ const HelpIcon = styled(HelpCircle)`
   margin-right: ${rem(24)};
   ${customMedia.lessThan('medium')`
     margin-right: 0;
-    margin-top: ${rem(12)};
     margin-bottom: ${rem(12)};
     width: 34px;
     height: 34px;
@@ -78,7 +77,7 @@ export const Confirm: React.FC<IConfirmProps> = ({
       fullscreen={false}
       visible={visible}
       onClose={onClose}
-      boxStyle={{ maxWidth: rem(400) }}
+      boxStyle={{ maxWidth: rem(300) }}
     >
       <Content>
         <HelpIcon color="#faad14" />
@@ -93,8 +92,7 @@ export const Confirm: React.FC<IConfirmProps> = ({
         >
           {cancelText || t('btn.cancel')}
         </Button>
-        <Button {...confirmProps} type="primary" loading={confirmLoading}>
-          {confirmIcon}
+        <Button icon={confirmIcon} {...confirmProps} type="primary" loading={confirmLoading}>
           {confirmText || t('btn.ok')}
         </Button>
       </BtnGroup>

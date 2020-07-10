@@ -15,7 +15,8 @@ export const Box = styled.div`
   background-size: cover;
   max-width: ${rem(customBreakpoints.medium)};
   border: none;
-  margin: ${rem('24px')} auto;
+  margin: ${rem(24)} auto;
+  border-radius: 4px;
   transition-timing-function: ${timingFunctions('easeInOutSine')};
   transition: .2s all;
 `;
@@ -28,7 +29,7 @@ export const Content = styled.div`
   width: 100%;
 `;
 
-export const LazyWrapper = styled(Lazy)<{ fullscreen: number }>`
+export const LazyWrapper = styled(Lazy)<{ fullscreen: number, centerd: number }>`
   position: fixed;
   top: 0;
   right: 0;
@@ -43,7 +44,7 @@ export const LazyWrapper = styled(Lazy)<{ fullscreen: number }>`
     height: 100%;
     vertical-align: middle;
     content: '';
-    ${_ => (!_.fullscreen ? customMedia.lessThan('mobile')`
+    ${_ => ((!_.fullscreen && !_.centerd) ? customMedia.lessThan('mobile')`
       vertical-align: bottom;
     ` : customMedia.lessThan('mobile')`
     `)}
@@ -56,9 +57,8 @@ export const LazyWrapper = styled(Lazy)<{ fullscreen: number }>`
   }
   ${Box} {
     ${_ => (!_.fullscreen ? customMedia.lessThan('mobile')`
-      width: 100%;
-      margin: 0;
-      border-radius: 12px 12px 0 0;
+      max-width: calc(100% - ${rem(32)}) !important;
+      /* margin: 0; */
     ` : customMedia.lessThan('mobile')`
       max-width: 100% !important;
       width: 100%;

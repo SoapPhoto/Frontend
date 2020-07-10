@@ -4,6 +4,8 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import { WithApolloProps } from 'next-with-apollo';
 
+import 'mobx-react-lite/batchingForReactDom';
+
 import 'dayjs/locale/es';
 import 'dayjs/locale/zh-cn';
 

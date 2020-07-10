@@ -37,17 +37,17 @@ export const buttonStyle = (style: string) => <T>(context: ThemedStyledProps<IBt
   };
   switch (style) {
     case 'height':
-      return context.size ? heights[context.size] : rem(32);
+      return context.size ? heights[context.size] : rem(36);
     case 'borderColor':
       if (context.btnType) {
         return context.danger ? context.theme.colors.danger : borderColors[context.btnType];
       }
-      return context.danger ? context.theme.colors.danger : context.theme.colors.gray;
+      return context.danger ? context.theme.colors.danger : 'transparent';
     case 'background':
       if (context.btnType) {
         return context.danger ? context.theme.colors.danger : backgroundColors[context.btnType];
       }
-      return 'transparent';
+      return context.theme.colors.gray;
     case 'textColor':
       if (context.btnType) {
         return context.btnType === 'text' ? context.theme.colors.primary : '#fff';
@@ -88,7 +88,7 @@ export const BaseButtonStyle = css`
 export const StyleButton = styled.button<IBtnIProp>`
   ${BaseButtonStyle}
   height: ${buttonStyle('height')};
-  border-radius: ${rem('2px')};
+  border-radius: ${rem(4)};
   border-color: ${buttonStyle('borderColor')};
   background-color: ${buttonStyle('background')};
   color: ${_ => (_.loading ? 'transparent' : buttonStyle('textColor')(_))};
