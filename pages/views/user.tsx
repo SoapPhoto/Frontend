@@ -146,6 +146,7 @@ const UserInfo = observer(() => {
             </AvatarBox>
             <Avatar
               src={user.avatar}
+              rainbow
               size={140}
               badge={user.badge}
             />

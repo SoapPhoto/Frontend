@@ -115,7 +115,8 @@ export const EditPictureModal: React.FC<IProps> = ({
     <Modal
       visible={visible}
       onClose={onClose}
-      boxStyle={{ padding: 0, maxWidth: rem(500) }}
+      maxWidth={560}
+      boxStyle={{ padding: 0 }}
     >
       <Modal.Content>
         <Title>{t('picture.edit.title')}</Title>

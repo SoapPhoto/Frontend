@@ -1,6 +1,8 @@
 import bytes from 'bytes';
 import { rgba, rem } from 'polished';
-import React, { useEffect, useState, memo } from 'react';
+import React, {
+  useEffect, useState, memo, useMemo,
+} from 'react';
 
 import { PictureEntity } from '@lib/common/interfaces/picture';
 import { getPictureUrl } from '@lib/common/utils/image';
@@ -23,7 +25,6 @@ interface IProps {
 }
 
 export const EXIFModal: React.FC<IProps> = memo(({ visible, onClose, picture }) => {
-  const [background, setBackground] = useState('');
   const { t } = useTranslation();
   const { styles } = useTheme();
   const {
@@ -32,14 +33,15 @@ export const EXIFModal: React.FC<IProps> = memo(({ visible, onClose, picture }) 
   const {
     focalLength, aperture, exposureTime, ISO,
   } = exif!;
-  useEffect(() => {
-    setBackground(`linear-gradient(${rgba(styles.box.background, 0.8)}, ${styles.box.background} 150px), url("${getPictureUrl(key, 'blur')}")`);
-  }, [styles.box.background, key]);
+  const background = useMemo(() => (
+    `linear-gradient(${rgba(styles.box.background, 0.8)}, ${styles.box.background} 150px), url("${getPictureUrl(key, 'blur')}")`
+  ), [key, styles.box.background]);
   return (
     <Modal
       visible={visible}
       onClose={onClose}
-      boxStyle={{ padding: 0, maxWidth: rem(500) }}
+      maxWidth={560}
+      boxStyle={{ padding: 0 }}
     >
       <Modal.Background background={background} />
       <Modal.Content>

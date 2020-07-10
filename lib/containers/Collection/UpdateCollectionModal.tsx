@@ -99,7 +99,8 @@ export const UpdateCollectionModal: React.FC<IProps<UpdateCollectionDot>> = ({
   }, [client, deleteConfirmLoading, id, replaceRoute, userInfo]);
   return (
     <Modal
-      boxStyle={{ maxWidth: rem(500), padding: 0 }}
+      maxWidth={560}
+      boxStyle={{ padding: 0 }}
       visible={visible}
       onClose={onClose}
     >

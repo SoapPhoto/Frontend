@@ -24,6 +24,7 @@ export interface IModalProps {
   fullscreen?: boolean;
   boxStyle?: CSSProperties;
   className?: string;
+  maxWidth?: string | number;
 }
 
 let _modalIndex = 0;
@@ -35,6 +36,7 @@ export const Modal: React.FC<IModalProps> = memo(({
   boxStyle,
   children,
   onClose,
+  maxWidth,
   centerd = true,
   closeIcon = true,
   fullscreen = true,
@@ -82,6 +84,8 @@ export const Modal: React.FC<IModalProps> = memo(({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
+  console.log(maxWidth);
+
   const onEnd = useCallback((_: string, exists: boolean) => !exists && onDestroy(), [onDestroy]);
 
   return (
@@ -103,6 +107,7 @@ export const Modal: React.FC<IModalProps> = memo(({
               style={{ zIndex: 1000 + _modalIndex }}
               onClick={onMaskClick}
               visible={visible}
+              maxWidth={maxWidth}
               hiddenClassName="none"
             >
               <Content
@@ -111,6 +116,7 @@ export const Modal: React.FC<IModalProps> = memo(({
               >
                 <Box
                   className={className}
+                  maxWidth={maxWidth}
                   style={boxStyle as any}
                 >
                   {

@@ -6,13 +6,17 @@ const colors = {
   shadowColor: 'rgba(0, 0, 0, 0.06)',
   secondary: '#8a92a9',
   primary: 'rgb(26,92,255)',
-  text: '#161b3d',
+  text: '#2c3e50',
   danger: '#ff4d4f',
   background: '#fff',
   gray: '#eaeaea',
   pure: '#fff',
   lightgray: '#fafafa',
   baseGreen: '#47B881',
+  gray1: '#f9fcfd',
+  gray2: '#f4f7f8',
+  gray3: '#f0f3f4',
+  gray4: '#e6e9ea',
 };
 
 const theme: DefaultTheme = {
@@ -46,8 +50,8 @@ const theme: DefaultTheme = {
       color: colors.primary,
     },
     input: {
-      borderColor: colors.gray,
-      background: colors.lightgray,
+      borderColor: colors.gray2,
+      background: colors.gray2,
       shadow: 'transparent',
       disabled: {
         color: colors.gray,

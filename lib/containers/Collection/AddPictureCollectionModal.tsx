@@ -297,7 +297,8 @@ export const AddPictureCollectionModal: React.FC<IProps> = observer(({
     <Modal
       visible={visible}
       onClose={onClose}
-      boxStyle={{ padding: 0, maxWidth: rem(500) }}
+      maxWidth={460}
+      boxStyle={{ padding: 0 }}
     >
       <Modal.Background background={background} />
       <Modal.Content>

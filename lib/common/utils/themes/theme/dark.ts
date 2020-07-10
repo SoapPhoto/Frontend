@@ -13,6 +13,10 @@ const colors = {
   pure: '#000',
   background: '#1e1e1e',
   baseGreen: '#47B881',
+  gray1: '#18191c',
+  gray2: '#141417',
+  gray3: '#0f1013',
+  gray4: '#0a0b0e',
 };
 
 const theme: DefaultTheme = {

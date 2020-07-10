@@ -129,7 +129,7 @@ export const EXIFEditModal: React.FC<IProps> = ({
   <Modal
     visible={visible}
     onClose={onClose}
-    boxStyle={{ maxWidth: '560px' }}
+    maxWidth={560}
   >
     <Title>EXIF 信息修改</Title>
     <Form onOk={onOk} onClose={onClose} initialValues={initialValues} />

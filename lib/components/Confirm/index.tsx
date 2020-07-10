@@ -19,6 +19,14 @@ interface IConfirmProps extends IModalProps {
   cancelProps?: IButtonProps;
 }
 
+const StyleModal = styled(Modal)`
+  max-width: ${rem(420)} !important;
+  ${customMedia.lessThan('mobile')`
+      max-width: calc(100% - ${rem(32)});
+      /* margin: 0; */
+  `}
+`;
+
 const Title = styled.span`
   font-weight: 600;
   font-size: ${_ => rem(theme('fontSizes[2]')(_))};
@@ -73,14 +81,13 @@ export const Confirm: React.FC<IConfirmProps> = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <Modal
+    <StyleModal
       fullscreen={false}
       visible={visible}
       onClose={onClose}
-      boxStyle={{ maxWidth: rem(300) }}
     >
       <Content>
-        <HelpIcon color="#faad14" />
+        <HelpIcon color="#faad14" size={22} />
         <div>
           <Title>{title}</Title>
         </div>
@@ -96,6 +103,6 @@ export const Confirm: React.FC<IConfirmProps> = ({
           {confirmText || t('btn.ok')}
         </Button>
       </BtnGroup>
-    </Modal>
+    </StyleModal>
   );
 };

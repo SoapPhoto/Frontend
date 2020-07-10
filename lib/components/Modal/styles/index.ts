@@ -1,19 +1,20 @@
 import { rem, timingFunctions } from 'polished';
 import styled from 'styled-components';
-import { theme } from '@lib/common/utils/themes';
+import { isNumber } from 'lodash';
 
+import { theme } from '@lib/common/utils/themes';
 import { box } from '@lib/common/utils/themes/common';
 import { X } from '@lib/icon';
 import { customMedia, customBreakpoints } from '@lib/common/utils/mediaQuery';
 import { Lazy } from '../Lazy';
 
-export const Box = styled.div`
+export const Box = styled.div<{maxWidth?: string | number}>`
   position: relative;
   ${props => box(props.theme, '100%', true)}
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  max-width: ${rem(customBreakpoints.medium)};
+  max-width: ${_ => (_.maxWidth ? (isNumber(_.maxWidth) ? rem(_.maxWidth) : _.maxWidth) : rem(customBreakpoints.medium))};
   border: none;
   margin: ${rem(24)} auto;
   border-radius: 4px;
@@ -57,10 +58,10 @@ export const LazyWrapper = styled(Lazy)<{ fullscreen: number, centerd: number }>
   }
   ${Box} {
     ${_ => (!_.fullscreen ? customMedia.lessThan('mobile')`
-      max-width: calc(100% - ${rem(32)}) !important;
+      max-width: calc(100% - ${rem(32)});
       /* margin: 0; */
     ` : customMedia.lessThan('mobile')`
-      max-width: 100% !important;
+      max-width: 100%;
       width: 100%;
       height: 100%;
       margin: 0;

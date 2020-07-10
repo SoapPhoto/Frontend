@@ -83,11 +83,9 @@ export const inputCss = css<{ error?: boolean; focus?: boolean }>`
     cursor: not-allowed;
     opacity: 1;
     &:hover {
-      border-color: #ddd;
       box-shadow: none;
     }
     &:focus {
-      border-color: #ddd;
       box-shadow: none;
     }
   }
