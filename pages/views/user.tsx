@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import parse from 'url-parse';
-import { rem } from 'polished';
 import { Cell } from 'styled-css-grid';
 import { useRouter as useBaseRouter } from 'next/router';
 import qs from 'querystring';
@@ -12,8 +11,7 @@ import {
   Avatar, Nav, NavItem, EmojiText, SEO,
 } from '@lib/components';
 import { PictureList } from '@lib/containers/Picture/List';
-import { Link as LinkIcon, BadgeCert, StrutAlign } from '@lib/icon';
-import { Popover } from '@lib/components/Popover';
+import { Link as LinkIcon } from '@lib/icon';
 import { UserFollowModal } from '@lib/components/UserFollowModal';
 import {
   Bio,
@@ -60,6 +58,7 @@ interface IUserInfoProps {
 
 const server = !!(typeof window === 'undefined');
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 const User = observer<ICustomNextPage<IProps, {}>>(({ type }) => {
   const { screen } = useStores();
   const { t } = useTranslation();
@@ -267,39 +266,37 @@ const Picture = observer(() => {
   );
 });
 
+
 User.getInitialProps = async ({
-  mobxStore, route,
+  mobxStore, route, res,
 }: ICustomNextContext) => {
-  const { params } = route;
+  const { params, query, pathname } = route;
   const { username, type } = params as { username: string; type: UserType };
-  const { screen } = mobxStore;
+  const { appStore, screen } = mobxStore;
   const { userCollectionStore, userPictureStore, userStore } = screen;
+  const { location } = appStore;
   const all = [];
   const arg: [string, UserType] = [username!, type];
-  if (server) {
-    userCollectionStore.setUsername(username!);
-    userStore.setUsername(username!);
-    all.push(userStore.getInit(...arg));
-    switch (type!) {
-      case UserType.collections:
-        all.push(
-          userCollectionStore.getList(false),
-        );
-        break;
-      default:
-        all.push(userPictureStore.getList(...arg));
-    }
-  } else {
+  const isPop = location && location.action === 'POP' && !server;
+  if (query.modal) {
+    // eslint-disable-next-line no-unused-expressions
+    if (query.action !== 'follower' && query.action !== 'followed') res?.redirect(pathname);
+  }
+  userCollectionStore.setUsername(username!);
+  userStore.setUsername(username!);
+  if (isPop) {
     all.push(userStore.getCache(username));
-    switch (type!) {
-      case UserType.collections:
-        all.push(
-          userCollectionStore.getList(false),
-        );
-        break;
-      default:
-        all.push(userPictureStore.getCache(...arg));
-    }
+  } else {
+    all.push(userStore.getInit(...arg));
+  }
+  switch (type!) {
+    case UserType.collections:
+      all.push(
+        userCollectionStore.getList(false),
+      );
+      break;
+    default:
+      all.push(isPop ? userPictureStore.getCache(...arg) : userPictureStore.getList(...arg));
   }
   try {
     await Promise.all(all);

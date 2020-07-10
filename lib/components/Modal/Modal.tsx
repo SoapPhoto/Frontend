@@ -84,8 +84,6 @@ export const Modal: React.FC<IModalProps> = memo(({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible]);
 
-  console.log(maxWidth);
-
   const onEnd = useCallback((_: string, exists: boolean) => !exists && onDestroy(), [onDestroy]);
 
   return (
