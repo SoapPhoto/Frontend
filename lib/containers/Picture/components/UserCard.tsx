@@ -1,5 +1,5 @@
 import { rem } from 'polished';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { Grid } from 'styled-css-grid';
 
@@ -16,6 +16,7 @@ import { useFollower } from '@lib/common/hooks/useFollower';
 import { useTranslation } from '@lib/i18n/useTranslation';
 import { BadgeCert, StrutAlign } from '@lib/icon';
 import { Popover } from '@lib/components/Popover';
+import { VipBadge } from '@lib/icon/VipBadge';
 
 interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   user?: UserEntity;
@@ -38,7 +39,12 @@ const UserBox = styled.div`
   margin-left: ${rem('16px')};
 `;
 
-const UserName = styled.p`
+const UserNameBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const UserName = styled.span`
   font-size: ${_ => rem(_.theme.fontSizes[3])};
   font-weight: 600;
   margin-bottom: ${rem('2px')};
@@ -113,6 +119,7 @@ const UserCard: React.FC<IProps> = ({
   const [follow, followLoading] = useFollower();
   const { colors } = useTheme();
   const follower = useCallback(() => user && follow(user), [follow, user]);
+  const prestige = useMemo(() => !!user?.badge.find(v => v.name === 'prestige'), [user?.badge]);
   if (!user) {
     return (
       <LoadingBox>
@@ -127,33 +134,33 @@ const UserCard: React.FC<IProps> = ({
           <A
             route={`/@${user.username}`}
           >
-            <Avatar src={user.avatar} size={48} />
+            <Avatar src={user.avatar} rainbow={prestige} size={48} />
           </A>
           <UserBox>
-            <A
-              route={`/@${user.username}`}
-            >
-              <UserName>
-                <EmojiText
-                  text={user.fullName}
-                />
-                {
-                  user.badge.find(v => v.name === 'user-cert') && (
-                    <StrutAlign>
-                      <Popover
-                        openDelay={100}
-                        trigger="hover"
-                        placement="top"
-                        theme="dark"
-                        content={<span>认证用户</span>}
-                      >
-                        <BadgeCert style={{ marginLeft: rem(4) }} />
-                      </Popover>
-                    </StrutAlign>
-                  )
-                }
-              </UserName>
-            </A>
+            <UserNameBox>
+              {
+                prestige && (
+                  <Popover
+                    openDelay={100}
+                    trigger="hover"
+                    placement="top"
+                    theme="dark"
+                    content={<span>至臻用户</span>}
+                  >
+                    <VipBadge style={{ marginRight: 6 }} size={20} />
+                  </Popover>
+                )
+              }
+              <A
+                route={`/@${user.username}`}
+              >
+                <UserName>
+                  <EmojiText
+                    text={user.fullName}
+                  />
+                </UserName>
+              </A>
+            </UserNameBox>
             <Bio>{user.bio}</Bio>
           </UserBox>
           <FollowButton

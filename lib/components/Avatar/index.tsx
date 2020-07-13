@@ -78,10 +78,12 @@ const Box = styled.span<{ isClick: boolean, rainbow: number }>`
       width: 100%;
       height: 100%;
       border-radius: inherit;
-      z-index: -1;
-      background-image: linear-gradient(40deg,#f99b4a,#df376b 74%,#c52d91 0)!important;
+      z-index: 0;
+      background-image: linear-gradient(40deg,#f99b4a,#df376b 74%,#c52d91)!important;
     }
     ${Img} {
+      position: relative;
+      z-index: 1;
       width: calc(100% - 4px);
       height: calc(100% - 4px);
       border: 2px solid ${theme('colors.background')};
@@ -97,7 +99,6 @@ export const Avatar: React.FC<IAvatarProps> = ({
   src,
   size = 40,
   onClick,
-  badge,
   rainbow = false,
   lazyload = false,
   ...restProps
@@ -115,7 +116,7 @@ export const Avatar: React.FC<IAvatarProps> = ({
         )
       }
     </Box>
-    {
+    {/* {
       badge && badge.find(v => v.name === 'user-cert') && (
         <BadgeBox style={{ bottom: rem(-(size / 60)), right: rem(-(size / 60)) }}>
           <StrutAlign>
@@ -123,6 +124,6 @@ export const Avatar: React.FC<IAvatarProps> = ({
           </StrutAlign>
         </BadgeBox>
       )
-    }
+    } */}
   </Wrapper>
 );

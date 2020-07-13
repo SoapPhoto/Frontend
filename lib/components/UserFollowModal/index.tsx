@@ -35,7 +35,6 @@ const Wrapper = styled.div`
 const ModalContent = styled(Modal)`
   padding: 0 !important;
   height: ${rem(500)};
-  max-width: ${rem(400)};
   /* height: calc(100vh - ${rem(24 * 2)}) !important; */
   margin: ${rem(24)} auto !important;
   ${customMedia.lessThan('mobile')`
@@ -148,6 +147,7 @@ export const UserFollowModal = observer<React.FC<IProps>>(({
       visible={visible}
       onClose={onClose}
       closeIcon={false}
+      maxWidth={400}
     >
       <Wrapper>
         <Header>

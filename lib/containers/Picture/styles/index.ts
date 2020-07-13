@@ -316,7 +316,7 @@ export const ChoiceBox = styled.div`
   margin-top: ${rem(12)};
   width: ${rem(26)};
   height: ${rem(26)};
-  background-image: linear-gradient(0deg, rgb(255, 149, 0), rgb(255, 213, 154));
+  background-image: linear-gradient(0deg, #FF9500, #F5C164);
   border-radius: 100%;
   display: flex;
   align-items: center;

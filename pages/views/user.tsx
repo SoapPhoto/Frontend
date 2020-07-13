@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import parse from 'url-parse';
 import { Cell } from 'styled-css-grid';
 import { useRouter as useBaseRouter } from 'next/router';
@@ -11,7 +11,7 @@ import {
   Avatar, Nav, NavItem, EmojiText, SEO,
 } from '@lib/components';
 import { PictureList } from '@lib/containers/Picture/List';
-import { Link as LinkIcon } from '@lib/icon';
+import { Link as LinkIcon, StrutAlign } from '@lib/icon';
 import { UserFollowModal } from '@lib/components/UserFollowModal';
 import {
   Bio,
@@ -46,6 +46,8 @@ import { useRouter } from '@lib/router';
 import { WithHashParam } from '@lib/components/WithHashParam';
 import { IconButton } from '@lib/components/Button';
 import { errorFilter } from '@lib/common/utils/error';
+import { VipBadge } from '@lib/icon/VipBadge';
+import { Popover } from '@lib/components/Popover';
 
 interface IProps extends IBaseScreenProps, WithRouterProps {
   username: string;
@@ -112,6 +114,7 @@ const UserInfo = observer(() => {
   const {
     user, watch, setUsername, username,
   } = userStore;
+  const prestige = useMemo(() => !!user?.badge.find(v => v.name === 'prestige'), [user?.badge]);
   useEffect(() => {
     if (params.username !== username) {
       setUsername(params.username!);
@@ -145,7 +148,7 @@ const UserInfo = observer(() => {
             </AvatarBox>
             <Avatar
               src={user.avatar}
-              rainbow
+              rainbow={prestige}
               size={140}
               badge={user.badge}
             />
@@ -153,24 +156,24 @@ const UserInfo = observer(() => {
           <Cell>
             <UserName>
               <div>
-                <EmojiText
-                  text={user.fullName}
-                />
-                {/* {
-                  user.badge.find(v => v.name === 'user-cert') && (
+                {
+                  user.badge.find(v => v.name === 'prestige') && (
                     <StrutAlign>
                       <Popover
                         openDelay={100}
                         trigger="hover"
                         placement="top"
                         theme="dark"
-                        content={<span>认证用户</span>}
+                        content={<span>至臻用户</span>}
                       >
-                        <BadgeCert size={32} style={{ marginLeft: rem(6) }} />
+                        <VipBadge style={{ marginRight: 6 }} size={34} />
                       </Popover>
                     </StrutAlign>
                   )
-                } */}
+                }
+                <EmojiText
+                  text={user.fullName}
+                />
               </div>
               {
                 isLogin && userInfo?.username === user.username && (
@@ -200,15 +203,19 @@ const UserInfo = observer(() => {
                   <ProfileItem>
                     <ProfileItemLink href={user.website} target="__blank">
                       <LinkIcon size={14} />
-                      {parse(user.website).hostname}
+                      {parse(user.website).hostname.replace(/^www./, '')}
                     </ProfileItemLink>
                   </ProfileItem>
                 )
               }
             </Profile>
-            <Bio>
-              {user.bio}
-            </Bio>
+            {
+              user.bio && (
+                <Bio>
+                  {user.bio}
+                </Bio>
+              )
+            }
             <InfoBox>
               <Info>
                 <InfoItem click={1} onClick={() => openModal('follower')}>

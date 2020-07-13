@@ -151,5 +151,8 @@ export const Christmas = styled(ChristmasHat)`
 `;
 
 export const Cover = styled.div`
-  background-image: url(http://cdn-oss.soapphoto.com/photo/UElDVFVSRQ-k7gba2qt-k7gba2qu@!small_webp);
+  height: 260px;
+  background-size: cover;
+  background-image: url(http://cdn-oss.soapphoto.com/photo/UElDVFVSRQ-k7gba2qt-k7gba2qu@!regular_webp);
+  background-color: ${theme('colors.gray2')};
 `;
