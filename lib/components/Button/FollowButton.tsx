@@ -16,8 +16,8 @@ interface IProps extends IButtonProps {
 }
 
 const LButton = styled(Button)<{ isFollowing: number; unContent: string }>`
-  padding-left: ${rem(26)};
-  padding-right: ${rem(26)};
+  padding-left: ${rem(16)};
+  padding-right: ${rem(16)};
   font-weight: 600;
   background-color: ${theme('colors.primary')};
   color: #fff;
@@ -57,7 +57,7 @@ export const FollowButton: React.FC<IProps> = observer(({
       shape="round"
       unContent={t('follow.btn.un_follow')}
       isFollowing={isFollowing}
-      icon={isFollowing === 2 && (<StrutAlign><ArrowHorizontal style={{ marginRight: rem(4) }} size={11} /></StrutAlign>)}
+      icon={isFollowing === 2 && (<ArrowHorizontal style={{ marginRight: rem(6) }} size={11} />)}
     >
       {content}
     </LButton>

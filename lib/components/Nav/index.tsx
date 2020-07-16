@@ -28,7 +28,9 @@ export const NavItem: React.FC<INavItemProps> = (({
   return (
     <Item>
       <ItemLink active={active ? 1 : 0} route={route}>
-        {children}
+        <span>
+          {children}
+        </span>
       </ItemLink>
     </Item>
   );

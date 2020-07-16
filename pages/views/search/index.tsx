@@ -82,7 +82,7 @@ const Message = styled.div`
   font-weight: 600;
 `;
 
-const SearchScreen = observer<ICustomNextPage<IProps, {}>>(() => {
+const SearchScreen = observer<ICustomNextPage<IProps, Record<string, unknown>>>(() => {
   const { screen } = useStores();
   const { t } = useTranslation();
   const { query, pushRoute, pathname } = useRouter();

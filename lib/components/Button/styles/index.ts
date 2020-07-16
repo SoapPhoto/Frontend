@@ -83,6 +83,9 @@ export const BaseButtonStyle = css`
   &:active, &:focus {
     outline: 0;
   }
+  &>span {
+    vertical-align: text-top;
+  }
 `;
 
 export const StyleButton = styled.button<IBtnIProp>`

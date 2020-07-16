@@ -23,7 +23,7 @@ interface IProps {
 
 const Item = styled.div<{read: number}>`
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   grid-gap: ${rem(12)};
   padding: 14px 18px;
@@ -35,18 +35,23 @@ const Item = styled.div<{read: number}>`
 `;
 
 const User = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content auto;
+  grid-gap: ${rem(8)};
   align-items: center;
 `;
 
 const UserName = styled(EmojiText)`
   font-weight: 600;
   font-size: ${_ => rem(theme('fontSizes[1]')(_))};
-  margin-left: ${rem(8)};
   color: ${theme('colors.text')};
 `;
 
-const Content = styled.p`
+const Content = styled.div`
+`;
+
+const ContentHeader = styled.div`
+  margin-bottom: ${rem(4)};
 `;
 
 const Handle = styled.div``;
@@ -131,29 +136,34 @@ export const NotificationItem: React.FC<IProps> = observer(({ data }) => {
       }
     }
     return null;
-  }, [data.category, data.comment, data.picture, data.user, follow, followLoading]);
+  }, [data, follow, followLoading]);
   return (
     <Item read={data.read ? 1 : 0}>
       <User>
         <A style={{ fontSize: 0 }} route={`/@${data.publisher.username}`}>
           <Avatar size={36} src={data.publisher.avatar} />
         </A>
-        <A route={`/@${data.publisher.username}`} style={{ textDecoration: 'none' }}>
-          <UserName text={data.publisher.fullName} />
-        </A>
+        <Content>
+          <ContentHeader>
+            <A
+              route={`/@${data.publisher.username}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <UserName text={data.publisher.fullName} />
+            </A>
+            <Popover
+              openDelay={100}
+              trigger="hover"
+              placement="top"
+              theme="dark"
+              content={<span>{dayjs(data.createTime).format('YYYY-MM-DD HH:mm:ss')}</span>}
+            >
+              <Date>{dayjs(data.createTime).fromNow()}</Date>
+            </Popover>
+          </ContentHeader>
+          <EmojiText css={css`img {font-size: ${_ => rem(theme('fontSizes[2]')(_))};}` as any} text={content()} />
+        </Content>
       </User>
-      <Content>
-        <EmojiText css={css`img {font-size: ${_ => rem(theme('fontSizes[2]')(_))};}` as any} text={content()} />
-        <Popover
-          openDelay={100}
-          trigger="hover"
-          placement="top"
-          theme="dark"
-          content={<span>{dayjs(data.createTime).format('YYYY-MM-DD HH:mm:ss')}</span>}
-        >
-          <Date>{dayjs(data.createTime).fromNow()}</Date>
-        </Popover>
-      </Content>
       <Handle>{handle()}</Handle>
     </Item>
   );

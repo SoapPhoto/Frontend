@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const List = styled(OverlayScrollbarsComponent)`
-  max-height: ${rem(280)};
+  max-height: ${rem(300)};
 `;
 
 const ListBox = styled.div`
