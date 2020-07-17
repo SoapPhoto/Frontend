@@ -1,7 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState, useCallback, useEffect, useRef,
+} from 'react';
 import { rem } from 'polished';
 import styled from 'styled-components';
-import { Formik, FormikHelpers } from 'formik';
+import {
+  Formik, FormikHelpers, FormikProps, FormikErrors,
+} from 'formik';
 import { isEmpty } from 'class-validator';
 
 import { SEO } from '@lib/components';
@@ -16,6 +20,8 @@ import { useAccountStore } from '@lib/stores/hooks';
 import { A } from '@lib/components/A';
 import { ArrowLeft, StrutAlign } from '@lib/icon';
 import { getTitle } from '@lib/common/utils';
+import { useTranslation } from '@lib/i18n/useTranslation';
+import { FormikValidationFilter } from '@lib/common/utils/error';
 
 interface IValues {
   username: string;
@@ -48,6 +54,8 @@ const Content = styled.div`
 `;
 
 const CompleteUserInfo: ICustomNextPage<IBaseScreenProps, any> = () => {
+  const formRef = useRef<FormikProps<IValues>>(null);
+  const { t } = useTranslation();
   const { activeUser } = useAccountStore();
   const { query } = useRouter();
   const [isDisabled, setDisabled] = useState(true);
@@ -83,6 +91,8 @@ const CompleteUserInfo: ICustomNextPage<IBaseScreenProps, any> = () => {
         if (err.message === 'no_info') {
           Toast.error('验证信息已过期，请返回登录页面重新登录');
         }
+        // eslint-disable-next-line no-unused-expressions
+        formRef.current?.setErrors(FormikValidationFilter<IValues>(err));
         setConfirmLoading(false);
         setSubmitting(false);
       }
@@ -127,6 +137,7 @@ const CompleteUserInfo: ICustomNextPage<IBaseScreenProps, any> = () => {
               username: '',
               name: '',
             }}
+            innerRef={formRef as any}
             onSubmit={handleOk}
             validate={validate}
           >

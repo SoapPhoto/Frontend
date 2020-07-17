@@ -56,7 +56,7 @@ export const MessagePage: React.FC<IProps> = ({
         {
           message && (
             <Message>
-              {message}
+              {message || '登录失败，请重试！'}
             </Message>
           )
         }

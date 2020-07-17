@@ -142,7 +142,7 @@ export const oauthSuccess = (e: MessageEvent, cb: (data: IOauthSuccessData) => v
         window.postMessage({ fromParent: true }, window.location.href);
         if (isFunction(ok)) ok();
       } else {
-        setTimeout(() => window.postMessage({ fromParent: true }, window.location.href), 1000);
+        setTimeout(() => window.postMessage({ fromParent: true }, window.location.href), 10000);
       }
     }
   }

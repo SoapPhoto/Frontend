@@ -1,3 +1,6 @@
+import { t } from '@lib/i18n/utils';
+import { FormikErrors } from 'formik';
+
 export function apolloErrorLog(err: any) {
   if (err?.name !== 'Invariant Violation') {
     console.error(err);
@@ -42,4 +45,14 @@ export function errorFilter(err?: any) {
     };
   }
   return { error };
+}
+
+export function FormikValidationFilter<IValues>(err: any) {
+  const errors: FormikErrors<IValues> = {};
+  if (err.error) {
+    err.message.forEach((e: any) => {
+      errors[e.param as keyof IValues] = e.message.map(v => t(`backend_error.validation.${v}`)).toString();
+    });
+  }
+  return errors;
 }

@@ -40,7 +40,8 @@ const UserBox = styled.div`
 `;
 
 const UserNameBox = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: max-content 1fr;
   align-items: center;
 `;
 

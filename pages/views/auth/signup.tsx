@@ -1,5 +1,5 @@
-import { Formik, FormikHelpers } from 'formik';
-import React, { useCallback } from 'react';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
+import React, { useCallback, useRef } from 'react';
 
 import { SignUpSchema } from '@lib/common/dto/auth';
 import { getTitle } from '@lib/common/utils';
@@ -16,6 +16,8 @@ import { useRouter } from '@lib/router';
 import { useAccountStore } from '@lib/stores/hooks';
 import { EmojiText, SEO } from '@lib/components';
 import { A } from '@lib/components/A';
+import { FormikValidationFilter } from '@lib/common/utils/error';
+import { isString } from 'lodash';
 
 interface IValues {
   email: string;
@@ -24,6 +26,7 @@ interface IValues {
 }
 
 const SignUp = () => {
+  const formRef = useRef<FormikProps<IValues>>(null);
   const { t } = useTranslation();
   const { query } = useRouter();
   const { signup } = useAccountStore();
@@ -45,9 +48,13 @@ const SignUp = () => {
         push();
       }, 400);
       Toast.success(t('auth.message.signup_success'));
-    } catch (error) {
-      console.error(error);
-      Toast.error(t(error.message));
+    } catch (err) {
+      if (isString(err.message)) {
+        Toast.error(t(err.message));
+      }
+      const errors = FormikValidationFilter<IValues>(err);
+      // eslint-disable-next-line no-unused-expressions
+      formRef.current?.setErrors(errors);
       setSubmitting(false);
     } finally {
       setConfirmLoading(false);
@@ -76,6 +83,7 @@ const SignUp = () => {
           username: '',
           password: '',
         }}
+        innerRef={formRef as any}
         onSubmit={handleOk}
         validationSchema={SignUpSchema(t)}
       >
