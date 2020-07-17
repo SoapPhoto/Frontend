@@ -16,8 +16,8 @@ interface IProps extends IButtonProps {
 }
 
 const LButton = styled(Button)<{ isFollowing: number; unContent: string }>`
-  padding-left: ${rem(16)};
-  padding-right: ${rem(16)};
+  padding-left: ${rem(22)};
+  padding-right: ${rem(22)};
   font-weight: 600;
   background-color: ${theme('colors.primary')};
   color: #fff;

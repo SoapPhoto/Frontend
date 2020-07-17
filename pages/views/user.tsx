@@ -8,10 +8,12 @@ import qs from 'querystring';
 import { IBaseScreenProps, ICustomNextPage, ICustomNextContext } from '@lib/common/interfaces/global';
 import { getTitle, Histore } from '@lib/common/utils';
 import {
-  Avatar, Nav, NavItem, EmojiText, SEO,
+  Nav, NavItem, EmojiText, SEO,
 } from '@lib/components';
 import { PictureList } from '@lib/containers/Picture/List';
-import { Link as LinkIcon, StrutAlign } from '@lib/icon';
+import {
+  Link as LinkIcon, StrutAlign, Edit, UploadCloud,
+} from '@lib/icon';
 import { UserFollowModal } from '@lib/components/UserFollowModal';
 import {
   Bio,
@@ -30,9 +32,13 @@ import {
   InfoItemLabel,
   InfoBox,
   AvatarContent,
+  Avatar,
   FollowBox,
   UserHeaderWrapper,
   Cover,
+  CoverImage,
+  CoverBtn,
+  CoverUpload,
 } from '@lib/styles/views/user';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { A } from '@lib/components/A';
@@ -48,6 +54,8 @@ import { IconButton } from '@lib/components/Button';
 import { errorFilter } from '@lib/common/utils/error';
 import { VipBadge } from '@lib/icon/VipBadge';
 import { Popover } from '@lib/components/Popover';
+import { UserSettingCoverModal } from '@lib/components/UserSettingCoverModal';
+import { getPictureUrl } from '@lib/common/utils/image';
 
 interface IProps extends IBaseScreenProps, WithRouterProps {
   username: string;
@@ -73,7 +81,7 @@ const User = observer<ICustomNextPage<IProps, {}>>(({ type }) => {
         description={`${user.bio ? `${user.bio}-` : ''}查看${user.name}的Soap照片。`}
       />
       <UserInfo />
-      <Nav>
+      <Nav style={{ textAlign: 'center' }}>
         <NavItem route={`/@${user.username}`}>
           {t('user.menu.picture')}
         </NavItem>
@@ -137,9 +145,37 @@ const UserInfo = observer(() => {
       shallow: true,
     });
   }, [params, pathname, push]);
+  const isOwner = useMemo(() => (userInfo && userInfo.id.toString() === user.id.toString()) || false, [user.id, userInfo]);
   const follower = useCallback(() => user && follow(user), [follow, user]);
   return (
     <UserHeaderWrapper>
+      <Cover>
+        {
+          isOwner && (
+            <CoverBtn
+              transformTemplate={({ scale }: any) => `translate(0, 0) scale(${scale})`}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              onClick={() => openModal('cover-setting')}
+            >
+              {
+                user.cover ? (
+                  <Edit size={16} />
+                ) : (
+                  <div style={{ margin: '0 24px' }}>设置封面</div>
+                )
+              }
+            </CoverBtn>
+          )
+        }
+        {
+          user.cover && (
+            <>
+              <CoverImage src={getPictureUrl(user.cover, 'regular')} />
+            </>
+          )
+        }
+      </Cover>
       <UserHeader>
         <HeaderGrid columns="140px auto" gap="32px">
           <AvatarContent>
@@ -149,13 +185,12 @@ const UserInfo = observer(() => {
             <Avatar
               src={user.avatar}
               rainbow={prestige}
-              size={140}
               badge={user.badge}
             />
           </AvatarContent>
           <Cell>
             <UserName>
-              <div>
+              <div style={{ zIndex: 1 }}>
                 {
                   user.badge.find(v => v.name === 'prestige') && (
                     <StrutAlign>
@@ -166,7 +201,7 @@ const UserInfo = observer(() => {
                         theme="dark"
                         content={<span>至臻用户</span>}
                       >
-                        <VipBadge style={{ marginRight: 6 }} size={34} />
+                        <VipBadge style={{ marginRight: 6 }} size="1.2em" />
                       </Popover>
                     </StrutAlign>
                   )
@@ -185,7 +220,7 @@ const UserInfo = observer(() => {
                 )
               }
               {
-                userInfo?.username !== user.username && (
+                  userInfo?.username !== user.username && (
                   <FollowBox>
                     <FollowButton
                       disabled={followLoading}
@@ -197,25 +232,25 @@ const UserInfo = observer(() => {
                 )
               }
             </UserName>
-            <Profile>
-              {
-                user.website && (
-                  <ProfileItem>
-                    <ProfileItemLink href={user.website} target="__blank">
-                      <LinkIcon size={14} />
-                      {parse(user.website).hostname.replace(/^www./, '')}
-                    </ProfileItemLink>
-                  </ProfileItem>
+            {/* <Profile>
+                {
+                  user.website && (
+                    <ProfileItem>
+                      <ProfileItemLink href={user.website} target="__blank">
+                        <LinkIcon size={14} />
+                        {parse(user.website).hostname.replace(/^www./, '')}
+                      </ProfileItemLink>
+                    </ProfileItem>
+                  )
+                }
+              </Profile> */}
+            {/* {
+                user.bio && (
+                  <Bio>
+                    {user.bio}
+                  </Bio>
                 )
-              }
-            </Profile>
-            {
-              user.bio && (
-                <Bio>
-                  {user.bio}
-                </Bio>
-              )
-            }
+              } */}
             <InfoBox>
               <Info>
                 <InfoItem click={1} onClick={() => openModal('follower')}>
@@ -254,6 +289,20 @@ const UserInfo = observer(() => {
             />
           )}
         </WithHashParam>
+        {
+          isOwner && (
+            <WithHashParam action="modal-cover-setting" back={backNow}>
+              {(visible, backView) => (
+                <UserSettingCoverModal
+                  visible={visible}
+                  userId={user.id}
+                  onClose={backView}
+                  cover={user.cover ? getPictureUrl(user.cover, 'regular') : undefined}
+                />
+              )}
+            </WithHashParam>
+          )
+        }
       </UserHeader>
     </UserHeaderWrapper>
   );

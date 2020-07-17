@@ -9,11 +9,12 @@ export interface INavItemProps {
   route: string;
 }
 
-export const Nav: React.FC = ({
+export const Nav: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children,
+  ...props
 }) => (
   <WrapperSsr>
-    <Box>
+    <Box {...props}>
       {children}
     </Box>
   </WrapperSsr>

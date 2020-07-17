@@ -47,6 +47,11 @@ mutation UpdateProfile($data: UpdateProfileInput!) {
     ...UserFragment
   }
 }
+mutation UpdateCover($cover: String!) {
+  updateCover(cover: $cover) {
+    ...UserFragment
+  }
+}
 
 mutation FollowUser($input: FollowUserInput!) {
   followUser(input: $input) {

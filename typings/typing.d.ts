@@ -68,6 +68,7 @@ declare module '*/mutations.graphql' {
   export const RemovePictureCollection: DocumentNode;
   export const DeleteCollection: DocumentNode;
   export const UpdateProfile: DocumentNode;
+  export const UpdateCover: DocumentNode;
   export const AddComment: DocumentNode;
   export const FollowUser: DocumentNode;
   export const UnFollowUser: DocumentNode;

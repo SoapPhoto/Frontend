@@ -169,6 +169,7 @@ fragment UserFragment on User {
   website
   createTime
   updateTime
+  cover
 }
 
 fragment UserBaseFragment on User {

@@ -8,6 +8,7 @@ import { server } from '@lib/common/utils';
 import { BadgeEntity } from '@lib/common/interfaces/badge';
 import { getPictureUrl } from '@lib/common/utils/image';
 import { theme } from '@lib/common/utils/themes';
+import { isString } from 'lodash';
 import { Image } from '../Image';
 
 export interface IAvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
@@ -21,10 +22,10 @@ export interface IAvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * 尺寸： `24` `32` `48`
    *
-   * @type {number}
+   * @type {number | string}
    * @memberof IAvatarProps
    */
-  size?: number;
+  size?: number | string;
 
   /**
    * 是否懒加载
@@ -39,12 +40,12 @@ export interface IAvatarProps extends React.HTMLAttributes<HTMLSpanElement> {
   badge?: BadgeEntity[];
 }
 
-const Wrapper = styled.div<{ size: number }>`
+const Wrapper = styled.div<{ size: number | string }>`
   position: relative;
-  width: ${props => rem(props.size)};
-  height: ${props => rem(props.size)};
-  min-width: ${props => rem(props.size)};
-  min-height: ${props => rem(props.size)};
+  width: ${props => props.size};
+  height: ${props => props.size};
+  min-width: ${props => props.size};
+  min-height: ${props => props.size};
 `;
 
 
@@ -103,7 +104,10 @@ export const Avatar: React.FC<IAvatarProps> = ({
   lazyload = false,
   ...restProps
 }) => (
-  <Wrapper {...restProps} size={size}>
+  <Wrapper
+    {...restProps}
+    size={isString(size) ? size : rem(size)}
+  >
     <Box rainbow={rainbow ? 1 : 0} onClick={onClick} isClick={!!onClick}>
       {
         (lazyload || server) ? (
