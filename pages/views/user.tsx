@@ -38,7 +38,6 @@ import {
   Cover,
   CoverImage,
   CoverBtn,
-  CoverUpload,
 } from '@lib/styles/views/user';
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { A } from '@lib/components/A';
