@@ -51,7 +51,7 @@ export function FormikValidationFilter<IValues>(err: any) {
   const errors: FormikErrors<IValues> = {};
   if (err.error) {
     err.message.forEach((e: any) => {
-      errors[e.param as keyof IValues] = e.message.map(v => t(`backend_error.validation.${v}`)).toString();
+      errors[e.param as keyof IValues] = e.message.map((v: string) => t(`backend_error.validation.${v}`)).toString();
     });
   }
   return errors;
