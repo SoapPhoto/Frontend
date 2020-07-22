@@ -7,31 +7,33 @@ interface IAnimateInput {
   outStyle: string;
   inTiming?: string;
   outTiming?: string;
+  duration?: number;
 }
 
 const animateFunc = ({
   name,
   inStyle,
   outStyle,
+  duration = 0.23,
   inTiming = 'ease-in',
   outTiming = 'ease-in',
 }: IAnimateInput) => css`
   .${name}-enter {
     opacity: 0;
-    animation-duration: 0.2s;
+    animation-duration: ${duration}s;
     animation-fill-mode: both;
     animation-timing-function: ${inTiming};
     animation-play-state: paused;
   }
   .${name}-appear {
     opacity: 0;
-    animation-duration: 0.2s;
+    animation-duration: ${duration}s;
     animation-fill-mode: both;
     animation-timing-function: ${outTiming};
     animation-play-state: paused;
   }
   .${name}-leave {
-    animation-duration: 0.2s;
+    animation-duration: ${duration}s;
     animation-fill-mode: both;
     animation-timing-function: ${inTiming};
     animation-play-state: paused;
@@ -76,8 +78,9 @@ export const animate = css`
         opacity: 0;
       }
     `,
-    inTiming: timingFunctions('easeInOutSine'),
-    outTiming: timingFunctions('easeOutSine'),
+    inTiming: 'cubic-bezier(0.08, 0.82, 0.17, 1)',
+    outTiming: 'cubic-bezier(0.6, 0.04, 0.98, 0.34)',
+    duration: 0.4,
   })
 }
   ${
@@ -86,25 +89,26 @@ export const animate = css`
     inStyle: `
       0% {
         opacity: 0;
-        transform: scale3d(0.98, 0.98, 0.98);
+        transform: translate3d(0, 20px, 0);
       }
       100% {
         opacity: 1;
-        transform: scale3d(1, 1, 1);
+        transform: translate3d(0, 0, 0);
       }
     `,
     outStyle: `
       0% {
         opacity: 1;
-        transform: scale3d(1, 1, 1);
+        transform: translate3d(0, 0, 0);
       }
       100% {
         opacity: 0;
-        transform: scale3d(0.98, 0.98, 0.98);
+        transform: translate3d(0, 20px, 0);
       }
     `,
-    inTiming: timingFunctions('easeInOutSine'),
-    outTiming: timingFunctions('easeOutSine'),
+    inTiming: 'cubic-bezier(0.08, 0.82, 0.17, 1)',
+    outTiming: 'cubic-bezier(0.6, 0.04, 0.98, 0.34)',
+    duration: 0.4,
   })
 }
   ${
@@ -130,8 +134,9 @@ export const animate = css`
         transform: scale3d(0.98, 0.98, 0.98);
       }
     `,
-    inTiming: timingFunctions('easeInOutSine'),
-    outTiming: timingFunctions('easeOutSine'),
+    inTiming: 'cubic-bezier(0.08, 0.82, 0.17, 1)',
+    outTiming: 'cubic-bezier(0.6, 0.04, 0.98, 0.34)',
+    duration: 0.32,
   })
 }
 `;

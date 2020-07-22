@@ -105,7 +105,7 @@ export const InfoItem = styled.div`
 export const InfoItemCount = styled.span`
   margin-right: ${rem(8)};
   font-weight: 600;
-  font-family: Rubik;
+  font-family: ${theme('enFont')};
 `;
 
 export const InfoItemLabel = styled.span`

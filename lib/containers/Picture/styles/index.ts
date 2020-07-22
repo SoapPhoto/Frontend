@@ -221,7 +221,7 @@ export const LikeContent = styled(motion.button)`
   justify-content: center;
   background: ${_ => rgba(_.theme.colors.pure, 0.8)};
   padding: ${rem(4)} ${rem(14)};
-  font-family: Rubik;
+  font-family: ${theme('enFont')};
   font-size: ${_ => rem(_.theme.fontSizes[0])};
   border: none;
   border-radius: 20px;

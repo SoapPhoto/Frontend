@@ -1,8 +1,9 @@
 /* eslint-disable max-len */
 import { css } from 'styled-components';
+import { theme } from '@lib/common/utils/themes';
 
 const font = `
-  Rubik, "Noto Sans SC", PingFang SC, PingFang TC, Microsoft YaHei,
+  "Noto Sans SC", PingFang SC, PingFang TC, Microsoft YaHei,
   -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", "Helvetica", Hiragino Sans GB, STHeiti, "WenQuanYi Micro Hei", sans-serif
 `;
 
@@ -20,7 +21,7 @@ const normalize = () => css`
     line-height: 1.5;
     overflow-y: scroll;
     overflow-x: hidden;
-    font-family: ${font};
+    font-family: ${theme('enFont')}, ${font};
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
