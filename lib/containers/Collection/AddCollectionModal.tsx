@@ -32,6 +32,7 @@ const Title = styled.h2`
 export const AddCollectionModal: React.FC<IProps> = ({ visible, onClose, onOk }) => {
   const [okLoading, setOkLoading] = useState(false);
   const onSubmit = async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+    console.log(values);
     setOkLoading(true);
     try {
       const { data } = await addCollection(values);
@@ -94,6 +95,7 @@ export const AddCollectionModal: React.FC<IProps> = ({ visible, onClose, onOk })
                   width: '100%',
                   marginTop: rem(24),
                 }}
+                htmlType="submit"
                 type="primary"
                 loading={okLoading}
                 disabled={isSubmitting}

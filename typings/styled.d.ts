@@ -65,6 +65,7 @@ declare module 'styled-components' {
         };
       };
       scrollbar: {
+        graidient: string;
         background: string;
         hover: string;
         active: string;

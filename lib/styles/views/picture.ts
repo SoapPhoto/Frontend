@@ -82,7 +82,7 @@ export const PictureBox = styled.div<{ num: number }>`
 
 export const Content = styled.div`
   max-width: calc(${rem(customBreakpoints.medium)} + ${rem(42)});
-  margin: ${rem('34px')} auto;
+  margin: ${rem('34px')} auto ${rem(12)} auto;
   padding: 0 ${rem(24)};
   margin-top: 0;
 `;
@@ -177,34 +177,35 @@ export const TagA = styled(A)`
 `;
 
 export const RelateCollectionTitle = styled.h3`
-  font-size: ${_ => rem(theme('fontSizes[3]')(_))};
+  font-size: ${_ => rem(theme('fontSizes[2]')(_))};
   margin-bottom: ${rem('12px')};
   ${customMedia.lessThan('mobile')`
-    margin-left: ${rem(34)};
-    margin-right: ${rem(34)};
+    padding: 0 ${rem(24)};
   `}
+`;
+
+export const RelateCollectionBox = styled.div`
+  /* background-color: ${theme('layout.picture.wrapper.backgroundColor')}; */
+  padding: ${rem(24)} 0 ${rem(12)} 0;
 `;
 
 export const RelateCollection = styled.div`
   max-width: calc(${rem(customBreakpoints.medium)} + ${rem(42)});
-  margin: ${rem('48px')} auto;
+  padding: 0 ${rem(24)};
+  margin: 0 auto;
   ${customMedia.lessThan('mobile')`
-    margin-left: -${rem(32)};
-    width: calc(100% + ${rem(64)});
+    padding: 0;
   `}
 `;
 
-const columnsMinWidth = math(`(${customBreakpoints.mobile} - 64px - 24px) / 3`);
-
 export const RelateCollectionList = styled.div`
-  width: 100%;
-  min-width: min-content;
+  width: auto;
   display: grid;
-  grid-template-columns: repeat(3 ,minmax(${columnsMinWidth}, 1fr));
   grid-gap: ${rem(12)};
+  grid-template-columns: repeat(3 , calc(33.333% - ${rem(8)}));
   ${customMedia.lessThan('mobile')`
-    padding-left: ${rem(34)};
-    padding-right: ${rem(34)};
+    grid-template-columns: repeat(3 , calc(66% - ${rem(8)}));
+    padding: 0 ${rem(24)};
   `}
 `;
 
@@ -244,6 +245,7 @@ export const CommentWrapper = styled.div`
   max-width: calc(${rem(customBreakpoints.medium)} + ${rem(42)});
   padding: 0 ${rem(24)};
   margin: 0 auto;
+  margin-top: ${rem(24)};
   margin-bottom: ${rem('24px')};
 `;
 

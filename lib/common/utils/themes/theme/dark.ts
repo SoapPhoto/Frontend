@@ -76,6 +76,7 @@ const theme: DefaultTheme = {
       },
     },
     scrollbar: {
+      graidient: 'rgba(0,0,0,.9)',
       background: 'rgba(0,0,0,.45)',
       hover: 'rgba(0,0,0,.55)',
       active: 'rgba(0,0,0,.7)',

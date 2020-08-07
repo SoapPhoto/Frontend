@@ -18,10 +18,12 @@ import {
 interface IProps {
   info: CollectionEntity;
   themeStore?: ThemeStore;
+  count?: boolean;
 }
 
 export const CollectionItem: React.FC<IProps> = ({
   info,
+  count = true,
 }) => {
   const { styles, colors } = useTheme();
   const { t } = useTranslation();
@@ -82,9 +84,13 @@ export const CollectionItem: React.FC<IProps> = ({
             text={name}
           />
         </Title>
-        <PictureCount>
-          {t('img_count', pictureCount.toString())}
-        </PictureCount>
+        {
+          count && (
+            <PictureCount>
+              {t('img_count', pictureCount.toString())}
+            </PictureCount>
+          )
+        }
       </ItemInfo>
     </Collection>
   );

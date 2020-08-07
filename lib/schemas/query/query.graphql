@@ -63,6 +63,12 @@ query UserCollectionsByName(
   }
 }
 
+query PictureRelatedCollection($id: Float!) {
+  pictureRelatedCollection(id: $id) {
+    ...RelatedCollectionFragment
+  }
+}
+
 query Collection($id: Float!) {
   collection(id: $id) {
     ...CollectionDetailFragment
