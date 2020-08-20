@@ -103,7 +103,7 @@ class MyApp extends App<IProps> {
         <Head>
           {
             ico ? (
-              <link rel="shortcut icon" type="image/jpg" href={getPictureUrl(ico, 'ico')} />
+              <link rel="shortcut icon" type="image/jpg" href={getPictureUrl(ico, 'ico', false)} />
             ) : (
 
               <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />

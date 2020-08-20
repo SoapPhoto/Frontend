@@ -446,9 +446,9 @@ export function isImage(fileName: string) {
   return imgType.indexOf(ext.toLocaleLowerCase()) >= 0;
 }
 
-export function getPictureUrl(key: string, style: PictureStyle = 'regular') {
+export function getPictureUrl(key: string, style: PictureStyle = 'regular', webp = true) {
   let styleName = pictureStyle[style];
-  if (isWebp) {
+  if (isWebp && webp) {
     styleName += '_webp';
   }
   if (/default.svg$/.test(key)) {
