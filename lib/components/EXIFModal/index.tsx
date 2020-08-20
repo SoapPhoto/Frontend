@@ -37,7 +37,6 @@ export const EXIFModal: React.FC<IProps> = memo(({ visible, onClose, picture }) 
   const background = useMemo(() => (
     `linear-gradient(${rgba(styles.box.background, 0.8)}, ${styles.box.background} 150px), url("${getPictureUrl(key, 'blur')}")`
   ), [key, styles.box.background]);
-  console.log(location);
   return (
     <Modal
       visible={visible}

@@ -24,6 +24,8 @@ import { DefaultSeo } from 'next-seo';
 import { withMobx } from '@lib/stores/withMobx';
 import { withAppTranslation } from '@lib/i18n/withAppTranslation';
 import { observer } from 'mobx-react';
+import Head from 'next/head';
+import { getPictureUrl } from '@lib/common/utils/image';
 
 interface IProps extends WithApolloProps<any> {
   pageProps: IPageProps;
@@ -95,9 +97,19 @@ class MyApp extends App<IProps> {
     } = this.props;
     const isError = (pageProps.error && pageProps.error.statusCode >= 400) || pageProps.statusCode >= 400;
     const noHeader = pageProps && pageProps.header === false;
-    const { error } = pageProps;
+    const { error, ico } = pageProps;
     return (
       <RouterProvider>
+        <Head>
+          {
+            ico ? (
+              <link rel="shortcut icon" type="image/jpg" href={getPictureUrl(ico, 'ico')} />
+            ) : (
+
+              <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+            )
+          }
+        </Head>
         <ThemeWrapper>
           <BodyLayout header={!isError && !noHeader}>
             <DefaultSeo

@@ -362,6 +362,7 @@ User.getInitialProps = async ({
     return {
       type,
       username: params.username,
+      ico: userStore.user.avatar,
     };
   } catch (err) {
     return errorFilter(err);

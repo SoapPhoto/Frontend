@@ -170,7 +170,6 @@ const Picture: ICustomNextPage<IInitialProps, any> = observer(() => {
         <meta property="weibo:image:full_image" content={getPictureUrl(info.key, 'full')} />
         <meta name="weibo:image:create_at" content={info.createTime.toString()} />
         <meta name="weibo:image:update_at" content={info.updateTime.toString()} />
-        <link rel="shortcut icon" type="image/jpg" href={getPictureUrl(info.key, 'ico')} />
       </Head>
       <SEO
         title={title}
@@ -443,7 +442,7 @@ Picture.getInitialProps = async ({
       return {};
     }
     await mobxStore.screen.pictureStore.getPictureInfo(Number(params.id!));
-    return {};
+    return { ico: mobxStore.screen.pictureStore.info.key };
   } catch (err) {
     return errorFilter(err);
   }
