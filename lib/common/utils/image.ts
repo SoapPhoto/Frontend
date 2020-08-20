@@ -79,6 +79,7 @@ export const pictureStyle = {
   blur: '@!thumbnailBlur',
   itemprop: '@!itemprop',
   thumbSmall: '@!thumbnailSmall',
+  ico: '@!ico',
 };
 
 export type PictureStyle = keyof typeof pictureStyle;

@@ -55,6 +55,7 @@ import { VipBadge } from '@lib/icon/VipBadge';
 import { Popover } from '@lib/components/Popover';
 import { UserSettingCoverModal } from '@lib/components/UserSettingCoverModal';
 import { getPictureUrl } from '@lib/common/utils/image';
+import Head from 'next/head';
 
 interface IProps extends IBaseScreenProps, WithRouterProps {
   username: string;
@@ -75,6 +76,9 @@ const User = observer<ICustomNextPage<IProps, {}>>(({ type }) => {
   const { user } = userStore;
   return (
     <Wrapper>
+      <Head>
+        <link rel="shortcut icon" type="image/jpg" href={getPictureUrl(user.avatar, 'ico')} />
+      </Head>
       <SEO
         title={getTitle(`${user.fullName} (@${user.username})`, t)}
         description={`${user.bio ? `${user.bio}-` : ''}查看${user.name}的Soap照片。`}
