@@ -15,7 +15,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { isString } from 'lodash';
 import { server } from '../utils';
 
-function createClient({ headers, initialState }: any) {
+export function createClient({ headers, initialState, ...teet }: any) {
   const URL = `${(server && process.env.NODE_ENV === 'production') ? 'http://127.0.0.1:3001' : process.env.API_URL}/graphql`;
   const ssrMode = !(process as any).browser;
 
@@ -79,19 +79,8 @@ function createClient({ headers, initialState }: any) {
     splitLink,
   ]);
   return new ApolloClient({
+    ssrMode: typeof window === 'undefined',
     link,
-    ssrMode,
     cache: new InMemoryCache().restore(initialState || {}),
   });
 }
-
-export const withApollo = withData(createClient, {
-  render: ({ Page, props }) => {
-    const { apollo } = props;
-    return (
-      <ApolloProvider client={apollo}>
-        <Page {...props} />
-      </ApolloProvider>
-    );
-  },
-});

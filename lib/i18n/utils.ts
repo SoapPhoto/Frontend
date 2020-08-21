@@ -9,7 +9,6 @@ import { server } from '@lib/common/utils';
 import { II18nValue } from './I18nProvider';
 import { TFunction } from './interface';
 
-
 let globalValue: RecordPartial<string, any> = {};
 
 let currentLocale: LocaleType;
@@ -39,7 +38,10 @@ export const initLocale = async (req?: Request): Promise<II18nValue> => {
   } else if (cookie.get('locale') && LocaleTypeValues.includes(cookie.get('locale') as LocaleType)) {
     currentLocale = cookie.get('locale') as LocaleType;
   }
-  const data = await fetchI18n(currentLocale);
+  let data = globalValue;
+  if (server) {
+    data = await fetchI18n(currentLocale);
+  }
   const value = {
     ...data,
   };
