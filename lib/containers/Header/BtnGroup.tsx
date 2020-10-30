@@ -16,7 +16,7 @@ import { observer } from 'mobx-react';
 import { IconButton, Button } from '@lib/components/Button';
 import { Menu, MenuItem, MenuItemLink } from './Menu';
 import {
-  Href, MenuProfile, RightWrapper, UserName, SearchIcon,
+  Href, MenuProfile, RightWrapper, UserName, SearchIcon, UploadCloudIcon,
 } from './styles';
 import { Notify } from './Notify';
 
@@ -35,11 +35,13 @@ export const BtnGroup: React.FC = observer(() => {
   const closeMenu = () => {
     if (PopoverRef.current) PopoverRef.current!.close();
   };
+  console.log(theme);
   const handleLogout = useCallback(() => {
     closeMenu();
     logout();
   }, [logout]);
   const switchTheme = useCallback(() => {
+    console.log(theme);
     setTheme(theme === 'dark' ? 'base' : 'dark');
   }, [setTheme, theme]);
   const isRedirect = [
@@ -99,12 +101,12 @@ export const BtnGroup: React.FC = observer(() => {
                   </MenuProfile>
                 </MenuItemLink>
               </MenuItem>
-              <MenuItem>
+              {/* <MenuItem>
                 <MenuItemLink onClick={closeMenu} route="/upload">
                   {t('menu.upload')}
                   <Upload size={18} />
                 </MenuItemLink>
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem>
                 <MenuItemLink onClick={closeMenu} route="/setting/profile">
                   {t('menu.setting')}
@@ -144,6 +146,12 @@ export const BtnGroup: React.FC = observer(() => {
         route="/search"
       >
         <SearchIcon />
+      </Href>
+      <Href
+        css={css`margin-right: ${rem(22)}; font-size: 0;` as any}
+        route="/upload"
+      >
+        <UploadCloudIcon />
       </Href>
       {content}
     </RightWrapper>

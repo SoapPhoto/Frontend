@@ -1,11 +1,15 @@
 import { mergeStore } from '@lib/common/utils/store';
-import { action, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import ApolloClient from 'apollo-client';
 
 export class BaseStore {
   public client!: ApolloClient<any>;
 
   @observable public isInit = false;
+
+  constructor() {
+    makeObservable(this);
+  }
 
   public setClient = (client: ApolloClient<any>) => this.client = client;
 

@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
 
 import { UserPictures } from '@lib/schemas/query';
 import { IPictureListRequest } from '@lib/common/interfaces/picture';
@@ -52,6 +52,7 @@ export class UserScreenPictureList {
         },
       }),
     };
+    makeObservable(this);
   }
 
   public getList = async (username: string, type?: UserType) => {

@@ -7,7 +7,7 @@ import { A } from '@lib/components/A';
 import { theme } from '@lib/common/utils/themes';
 import { IconButton } from '@lib/components/Button';
 import { ChristmasHat } from '@lib/icon/ChristmasHat';
-import { Search } from 'react-feather';
+import { Search, UploadCloud } from 'react-feather';
 
 export const verifyHeight = 35;
 
@@ -117,6 +117,11 @@ export const Close = styled(IconButton)`
 `;
 
 export const SearchIcon = styled(Search)`
+  color: ${theme('colors.text')};
+`;
+
+
+export const UploadCloudIcon = styled(UploadCloud)`
   color: ${theme('colors.text')};
 `;
 

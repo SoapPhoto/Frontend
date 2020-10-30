@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
 import { TagEntity } from '@lib/common/interfaces/tag';
 import { queryToMobxObservable } from '@lib/common/apollo';
@@ -16,6 +16,7 @@ export class TagScreenStore extends BaseStore {
 
   constructor() {
     super();
+    makeObservable(this);
   }
 
   public getInfo = async (name: string) => {

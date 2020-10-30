@@ -1,4 +1,6 @@
-import { observable, action, runInAction } from 'mobx';
+import {
+  observable, action, runInAction, makeObservable,
+} from 'mobx';
 import { ApolloClient } from 'apollo-boost';
 
 import { NotificationEntity } from '@lib/common/interfaces/notification';
@@ -26,6 +28,10 @@ export class NotificationStore {
   private waitQueue: NotificationEntity[] = []
 
   private init = false
+
+  constructor() {
+    makeObservable(this);
+  }
 
   public close = () => this.io && this.io.close()
 

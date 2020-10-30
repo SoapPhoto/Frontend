@@ -1,4 +1,6 @@
-import { action, observable, runInAction } from 'mobx';
+import {
+  action, makeObservable, observable, runInAction,
+} from 'mobx';
 
 import { queryToMobxObservable, watchQueryCacheObservable } from '@lib/common/apollo';
 import { UserEntity } from '@lib/common/interfaces/user';
@@ -22,6 +24,7 @@ export class UserScreenStore extends BaseStore {
 
   constructor() {
     super();
+    makeObservable(this);
   }
 
   @action

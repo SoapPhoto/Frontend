@@ -151,9 +151,9 @@ const Upload: ICustomNextPage<IProps, any> = observer(() => {
     <Wrapper>
       <Head>
         <title>{getTitle('upload.title', t)}</title>
-        <script src="//unpkg.com/exif-js@2.3.0/exif.js" />
-        <script src="//unpkg.com/fast-average-color@5.0.0/dist/index.js" />
-        <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
+        <script src="//cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js" />
+        <script src="//cdn.jsdelivr.net/npm/fast-average-color@6.0.2/dist/index.min.js" />
+        <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
       </Head>
       <Box>
         {

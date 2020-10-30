@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
 import { SearchPictures } from '@lib/schemas/query';
 import { PictureListStore } from '../../base/PictureListStore';
@@ -14,6 +14,7 @@ export class SearchScreenPictures extends PictureListStore<{words: string}> {
         words: '',
       },
     });
+    makeObservable(this);
   }
 
   @action public setWords = (words: string) => {

@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 
 import { IPictureListRequest } from '@lib/common/interfaces/picture';
 import { TagPictures } from '@lib/schemas/query';
@@ -23,6 +23,7 @@ export class TagScreenPictureList extends PictureListStore<ICollectionPictureQue
         name: '',
       },
     });
+    makeObservable(this);
   }
 
   @action public setName = (name: string) => {

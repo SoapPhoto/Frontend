@@ -1,4 +1,4 @@
-import { action } from 'mobx';
+import { action, makeObservable } from 'mobx';
 
 import { CollectionEntity, ICollectionListRequest } from '@lib/common/interfaces/collection';
 import { UserCollectionsByName } from '@lib/schemas/query';
@@ -17,6 +17,7 @@ export class UserScreenCollectionList extends ListStore<CollectionEntity, {usern
         username: '',
       },
     });
+    makeObservable(this);
   }
 
   @action public setUsername = (username: string) => {

@@ -1,4 +1,4 @@
-import { action } from 'mobx';
+import { action, makeObservable } from 'mobx';
 
 import { CollectionPictures } from '@lib/schemas/query';
 import { PictureListStore } from '../base/PictureListStore';
@@ -18,6 +18,7 @@ export class CollectionScreenPictureList extends PictureListStore<ICollectionPic
       //   id: '',
       // },
     });
+    makeObservable(this);
   }
 
   @action public setId = (id: number) => {

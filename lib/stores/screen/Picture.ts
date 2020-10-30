@@ -1,5 +1,5 @@
 import {
-  action, observable, computed, runInAction,
+  action, observable, computed, runInAction, makeObservable,
 } from 'mobx';
 import { merge, pick } from 'lodash';
 import animateScrollTo from 'animated-scroll-to';
@@ -33,6 +33,11 @@ export class PictureScreenStore extends BaseStore {
   @observable public id!: number;
 
   private _likeLoading = false
+
+  constructor() {
+    super();
+    makeObservable(this);
+  }
 
   @action public setInfo = (data: PictureEntity) => {
     this.id = Number(data.id);

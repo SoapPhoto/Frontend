@@ -1,5 +1,5 @@
 import {
-  observable, action,
+  observable, action, makeObservable,
 } from 'mobx';
 
 import { CollectionEntity, UpdateCollectionDot } from '@lib/common/interfaces/collection';
@@ -21,6 +21,12 @@ export class CollectionScreenStore extends BaseStore {
   @observable public id!: number;
 
   @observable public info?: CollectionEntity;
+
+  constructor() {
+    super();
+    makeObservable(this);
+  }
+
 
   public updateCollection = async (value: UpdateCollectionDot) => {
     await updateCollection(this.id, value);

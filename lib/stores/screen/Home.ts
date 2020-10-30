@@ -1,4 +1,4 @@
-import { action } from 'mobx';
+import { action, makeObservable } from 'mobx';
 
 import { Pictures } from '@lib/schemas/query';
 import { PicturesType } from '@common/enum/picture';
@@ -20,6 +20,7 @@ export class HomeScreenStore extends PictureListStore<{type: PicturesType}> {
         type: PicturesType.HOT,
       },
     });
+    makeObservable(this);
   }
 
   @action public setType = (type: string) => {

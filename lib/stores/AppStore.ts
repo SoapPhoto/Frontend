@@ -1,5 +1,5 @@
 import {
-  action, observable, reaction, runInAction,
+  action, makeAutoObservable, observable, reaction, runInAction,
 } from 'mobx';
 
 import NProgress from 'nprogress';
@@ -29,17 +29,18 @@ interface ILocation {
 export class AppStore {
   public client!: ApolloClient<any>;
 
-  @observable public userCollection = observable.array<CollectionEntity>([])
+  public userCollection = observable.array<CollectionEntity>([])
 
-  @observable public collectionLoading = true
+  public collectionLoading = true
 
-  @observable public loading = false;
+  public loading = false;
 
-  @observable public location?: ILocation;
+  public location?: ILocation;
 
-  @observable public userList: Map<string, UserEntity> = new Map();
+  public userList: Map<string, UserEntity> = new Map();
 
   constructor() {
+    makeAutoObservable(this);
     reaction(
       () => this.loading,
       (loading: boolean) => {
@@ -54,15 +55,12 @@ export class AppStore {
 
   public setClient = (client: ApolloClient<any>) => this.client = client;
 
-  @action
   public setLoading = (value: boolean) => this.loading = value
 
-  @action
   public setRoute = (value: ILocation) => {
     this.location = value;
   }
 
-  @action
   public getCollection = async () => {
     const { accountStore } = store;
     if (accountStore.userInfo) {
@@ -83,5 +81,5 @@ export class AppStore {
     }
   }
 
-  @action public addCollection = (data: CollectionEntity) => this.userCollection.unshift(data)
+  public addCollection = (data: CollectionEntity) => this.userCollection.unshift(data)
 }

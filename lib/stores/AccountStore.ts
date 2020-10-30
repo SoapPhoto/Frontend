@@ -1,4 +1,6 @@
-import { action, computed, observable } from 'mobx';
+import {
+  action, computed, makeObservable, observable,
+} from 'mobx';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { CreateUserDto, UpdateProfileSettingDto, UserEntity } from '@lib/common/interfaces/user';
@@ -27,6 +29,10 @@ export class AccountStore {
   @observable public userInfo?: UserEntity;
 
   @observable public userCredentials: CredentialsEntity[] = [];
+
+  constructor() {
+    makeObservable(this);
+  }
 
   // 用来初始化
   public update = (store?: Partial<AccountStore>) => {
