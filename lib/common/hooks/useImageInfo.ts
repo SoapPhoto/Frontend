@@ -14,7 +14,7 @@ import {
   useCallback, useRef, MutableRefObject,
 } from 'react';
 import { useApolloClient } from 'react-apollo';
-import { useLocalStore } from 'mobx-react';
+import { useLocalObservable } from 'mobx-react';
 
 import Toast from '@lib/components/Toast';
 import { useTranslation } from '@lib/i18n/useTranslation';
@@ -48,7 +48,7 @@ export const useImageInfo = (imageRef: MutableRefObject<File | undefined>): Retu
   const { t } = useTranslation();
   const apollo = useApolloClient();
   const base64Ref = useRef('');
-  const imageData = useLocalStore<IImageData>(() => ({
+  const imageData = useLocalObservable<IImageData>(() => ({
     imageInfo: undefined,
     imageUrl: '',
     classify: [],

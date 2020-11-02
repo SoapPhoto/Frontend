@@ -11,7 +11,7 @@ import { debounce } from 'lodash';
 import useMedia from '@lib/common/utils/useMedia';
 import { Empty } from '@lib/components/Empty';
 import { customBreakpoints } from '@lib/common/utils/mediaQuery';
-import { observer, useLocalStore } from 'mobx-react';
+import { observer, useLocalObservable } from 'mobx-react';
 import {
   PictureContent, Wrapper, SkeletonContent, SkeletonItem, SkeletonAvatar, SkeletonName,
 } from './styles';
@@ -65,7 +65,7 @@ export const PictureList: React.FC<IProps> = observer(({
   style,
   noMore = false,
 }) => {
-  const store = useLocalStore(() => ({
+  const store = useLocalObservable(() => ({
     clientList: [] as PictureEntity[][],
     setClientList(arr: PictureEntity[][]) {
       this.clientList = arr;

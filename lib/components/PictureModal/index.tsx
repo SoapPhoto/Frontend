@@ -6,7 +6,7 @@ import { getScrollWidth, setBodyCss } from '@lib/common/utils';
 import { request } from '@lib/common/utils/request';
 import { PictureImage } from '@lib/containers/Picture/Image';
 import { Router } from '@lib/routes';
-import { observable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import {
   Box, Content, ImgBox, Mask, Wrapper,
@@ -23,6 +23,11 @@ export class PictureModal extends React.Component<IProps> {
   public wrapperRef = React.createRef<HTMLDivElement>();
 
   public initStyle?: () => void;
+
+  constructor(props: IProps) {
+    super(props);
+    makeObservable(this);
+  }
 
   public componentDidMount() {
     this.getDetail();

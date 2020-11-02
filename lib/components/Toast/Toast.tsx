@@ -1,4 +1,6 @@
-import { IObservableArray, observable, action } from 'mobx';
+import {
+  IObservableArray, observable, action, makeObservable,
+} from 'mobx';
 import { observer } from 'mobx-react';
 import { rem, timingFunctions } from 'polished';
 import React from 'react';
@@ -171,6 +173,15 @@ const ToastBox = styled.div<{type?: ToastType}>`
 @observer
 export class ToastComponent extends React.Component {
   @observable public configList: IObservableArray<IToastConfig> = observable.array([]);
+
+  constructor(props: Record<string, any>) {
+    super(props);
+    makeObservable(this, {
+      configList: observable,
+      addConfig: action,
+      removeConfig: action,
+    });
+  }
 
   public add = (config: IToastConfig) => {
     const newConfig = {

@@ -1,5 +1,5 @@
 import Document, {
-  DocumentContext, Head, Main, NextScript,
+  DocumentContext, Head, Main, NextScript, Html,
 } from 'next/document';
 import React from 'react';
 import { ServerStyleSheet } from 'styled-components';
@@ -34,7 +34,7 @@ export default class MyDocument extends Document {
 
   public render() {
     return (
-      <html lang="zh-CN">
+      <Html>
         <Head>
           <meta charSet="utf-8" />
           <meta name="renderer" content="webkit" />
@@ -67,7 +67,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

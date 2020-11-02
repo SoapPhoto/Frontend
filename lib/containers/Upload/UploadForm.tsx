@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { Cell, Grid } from 'styled-css-grid';
 import { rem } from 'polished';
-import { useLocalStore, observer } from 'mobx-react';
+import { useLocalObservable, observer } from 'mobx-react';
 import { css } from 'styled-components';
 import { pick, merge } from 'lodash';
 import { isEmpty } from 'class-validator';
@@ -55,7 +55,7 @@ const UploadForm: React.FC<IProps> = observer(({
   const { t } = useTranslation();
   const [EXIFVisible, setEXIFVisible] = React.useState(false);
   const [titleError, setTitleError] = useState<string>();
-  const data = useLocalStore<ICreatePictureData>(() => ({
+  const data = useLocalObservable<ICreatePictureData>(() => ({
     ...initUploadData,
   }));
   // eslint-disable-next-line arrow-parens

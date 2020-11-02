@@ -1,7 +1,7 @@
 import { isFunction, debounce } from 'lodash';
 import React, { Children } from 'react';
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { observable, makeObservable, action } from 'mobx';
 import {
   Instance, Placement,
 } from '@popperjs/core';
@@ -80,8 +80,20 @@ export class Popover extends React.Component<IPopoverProps> {
 
   public popper?: Instance;
 
+  constructor(props: any) {
+    super(props);
+    makeObservable(this, {
+      visible: observable,
+      isMini: observable,
+      placement: observable,
+      setVisible: action,
+    });
+  }
+
   public componentDidMount() {
-    this.isMini = isMobile();
+    action(() => {
+      this.isMini = isMobile();
+    });
     window.addEventListener('resize', this.handleResize);
   }
 
@@ -94,7 +106,9 @@ export class Popover extends React.Component<IPopoverProps> {
   };
 
   public handleResize = debounce(() => {
-    this.isMini = isMobile();
+    action(() => {
+      this.isMini = isMobile();
+    });
   }, 1000)
 
   public arrowRef = (ref: HTMLDivElement) => {

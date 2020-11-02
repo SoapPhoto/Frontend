@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { pick } from 'lodash';
-import { observer, useLocalStore } from 'mobx-react';
+import { observer, useLocalObservable } from 'mobx-react';
 import { useMutation } from 'react-apollo';
 import { useRouter as useBaseRouter } from 'next/router';
 
@@ -47,7 +47,7 @@ export const PictureInfo: React.FC<IProps> = observer(({
   } = useRouter();
   const { push } = useBaseRouter();
   const { t } = useTranslation();
-  const modalData = useLocalStore(() => ({
+  const modalData = useLocalObservable(() => ({
     EXIFVisible: false,
     collectionVisible: false,
     editVisible: false,
