@@ -40,11 +40,9 @@ export default class MyDocument extends Document {
           <meta name="renderer" content="webkit" />
           {/* eslint-disable-next-line max-len */}
           <meta name="keywords" content="soap, picture, great photographers, photographers, photography images, photography, photos, sell photos online, sell your photos, share photos, your photos, 图片, 照片" />
-          {/* <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: http://localhost 'unsafe-eval'; script-src * 'unsafe-eval'; style-src * 'unsafe-inline'; media-src *; connect-src *"/> */}
           <link rel="manifest" href="/manifest.json" />
           {/* <link rel="shortcut icon" type="image/ico" href="/favicon.ico" /> */}
           <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans+SC:400,500,600|Rubik:400,500,600" />
-          <script src={`//api.map.baidu.com/api?v=3.0&ak=${process.env.BAIDU_MAP_AK}`} />
           <script async src={`${process.env.OSS_URL}static/script/jquery.min.js`} />
           <script async src={`${process.env.OSS_URL}static/script/jquery.fancybox.js`} />
           <link href={`${process.env.OSS_URL}static/style/jquery.fancybox.css`} rel="stylesheet" />

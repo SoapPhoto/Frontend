@@ -9,7 +9,7 @@ import Toast from '@lib/components/Toast';
 import { useWatchQuery } from './useWatchQuery';
 import { UserEntity } from '../interfaces/user';
 
-export function useFollower(): [(user: UserEntity) => Promise<void>, boolean] {
+export function useFollower(): [(user: UserEntity) => any, boolean] {
   const { mutate } = useApolloClient();
   const { userInfo } = useAccountStore();
   const [followLoading, setFollowLoading] = useState(false);

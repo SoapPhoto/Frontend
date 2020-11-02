@@ -23,7 +23,6 @@ export class ThemeStore {
   }
 
   get themeData() {
-    console.log(123123);
     return getTheme(this.theme);
   }
 

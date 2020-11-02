@@ -35,13 +35,11 @@ export const BtnGroup: React.FC = observer(() => {
   const closeMenu = () => {
     if (PopoverRef.current) PopoverRef.current!.close();
   };
-  console.log(theme);
   const handleLogout = useCallback(() => {
     closeMenu();
     logout();
   }, [logout]);
   const switchTheme = useCallback(() => {
-    console.log(theme);
     setTheme(theme === 'dark' ? 'base' : 'dark');
   }, [setTheme, theme]);
   const isRedirect = [

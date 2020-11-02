@@ -35,7 +35,9 @@ const ssrCache = new LRUCache({
 
 app.prepare().then(() => {
   const server = express();
-  server.use(helmet());
+  server.use(helmet({
+    contentSecurityPolicy: false,
+  }));
   server.use(cookieParser());
   server.use(responseTime());
   server.use(express.static('static'));
