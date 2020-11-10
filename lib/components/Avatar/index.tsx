@@ -1,7 +1,7 @@
 import { rem } from 'polished';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import LazLoadComponents from 'react-lazyload';
+import LazLoadComponents, { LazyLoadProps } from 'react-lazyload';
 import { StrutAlign, BadgeCert } from '@lib/icon';
 
 import { server } from '@lib/common/utils';
@@ -56,7 +56,7 @@ const Img = styled(Image)`
   background-color: ${theme('colors.gray1')};
 `;
 
-const LazyLoad = styled(LazLoadComponents)`
+const LazyLoad = styled(LazLoadComponents)<LazyLoadProps>`
   width: 100%;
   height: 100%;
 `;
