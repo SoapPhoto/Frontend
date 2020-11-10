@@ -1,7 +1,7 @@
 import { rem } from 'polished';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import LazyLoad from 'react-lazyload';
+import LazLoadComponents from 'react-lazyload';
 import { StrutAlign, BadgeCert } from '@lib/icon';
 
 import { server } from '@lib/common/utils';
@@ -48,13 +48,17 @@ const Wrapper = styled.div<{ size: number | string }>`
   min-height: ${props => props.size};
 `;
 
-
 const Img = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
   background-color: ${theme('colors.gray1')};
+`;
+
+const LazyLoad = styled(LazLoadComponents)`
+  width: 100%;
+  height: 100%;
 `;
 
 const Box = styled.span<{ isClick: boolean, rainbow: number }>`

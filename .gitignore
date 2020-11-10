@@ -58,7 +58,7 @@ uploads/
 
 docker-data/
 
-static/test
+public/static/test
 
 .idea
 # yarn.lock

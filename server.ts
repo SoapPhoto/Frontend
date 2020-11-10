@@ -5,7 +5,7 @@ import './env';
 
 import next from 'next';
 import express, { Request, Response } from 'express';
-import { useStaticRendering } from 'mobx-react';
+import { enableStaticRendering } from 'mobx-react';
 import path from 'path';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
@@ -23,7 +23,7 @@ const app = next({ dev, quiet: false });
 const handle = app.getRequestHandler();
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-useStaticRendering(true);
+enableStaticRendering(true);
 
 const tranLocate = (value: string) => value.replace(/_/g, '-').replace(/\s/g, '').toLowerCase().split(',')[0];
 
@@ -40,7 +40,7 @@ app.prepare().then(() => {
   }));
   server.use(cookieParser());
   server.use(responseTime());
-  server.use(express.static('static'));
+  server.use(express.static('public'));
   server.use((req: any, res: any, nextCb) => {
     const header = req.get('accept-language');
     const cookie = req.cookies.locate;
