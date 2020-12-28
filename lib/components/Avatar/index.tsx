@@ -56,10 +56,10 @@ const Img = styled(Image)`
   background-color: ${theme('colors.gray1')};
 `;
 
-const LazyLoad = styled(LazLoadComponents)<LazyLoadProps>`
-  width: 100%;
-  height: 100%;
-`;
+// const LazyLoad = styled(LazLoadComponents)<LazyLoadProps>`
+//   width: 100%;
+//   height: 100%;
+// `;
 
 const Box = styled.span<{ isClick: boolean, rainbow: number }>`
   width: 100%;
@@ -115,9 +115,9 @@ export const Avatar: React.FC<IAvatarProps> = ({
     <Box rainbow={rainbow ? 1 : 0} onClick={onClick} isClick={!!onClick}>
       {
         (lazyload || server) ? (
-          <LazyLoad once resize offset={400}>
+          <LazLoadComponents classNamePrefix="avatar-lazyload" once resize offset={400}>
             <Img src={getPictureUrl(src, 'thumb')} />
-          </LazyLoad>
+          </LazLoadComponents>
 
         ) : (
           <Img src={getPictureUrl(src, 'thumb')} />

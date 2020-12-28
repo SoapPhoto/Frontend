@@ -27,7 +27,6 @@ export class CollectionScreenStore extends BaseStore {
     makeObservable(this);
   }
 
-
   public updateCollection = async (value: UpdateCollectionDot) => {
     await updateCollection(this.id, value);
   }

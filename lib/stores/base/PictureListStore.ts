@@ -1,4 +1,5 @@
 import {
+  makeObservable,
   runInAction,
 } from 'mobx';
 
@@ -16,6 +17,7 @@ interface IPictureListData<T> extends IListStoreData<T> {
 export class PictureListStore<Query = {}> extends ListStore<PictureEntity, Query> {
   constructor(data: IPictureListData<Query>) {
     super(data);
+    makeObservable(this);
   }
 
   public like = async (picture: PictureEntity) => {

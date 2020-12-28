@@ -52,7 +52,9 @@ export class UserScreenPictureList {
         },
       }),
     };
-    makeObservable(this);
+    makeObservable(this, {
+      list: observable,
+    });
   }
 
   public getList = async (username: string, type?: UserType) => {

@@ -38,6 +38,10 @@ export const GlobalStyle = createGlobalStyle<{theme?: any}>`
   .none {
     display: none;
   }
+  .avatar-lazyload-wrapper {
+    width: 100%;
+    height: 100%;
+  }
 
   ${nprogress}
   ${normalize}

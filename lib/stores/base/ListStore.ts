@@ -1,4 +1,6 @@
-import { observable, action, computed } from 'mobx';
+import {
+  observable, action, computed, makeObservable,
+} from 'mobx';
 import { DocumentNode } from 'graphql';
 
 import { IPaginationList, IBaseQuery } from '@lib/common/interfaces/global';
@@ -63,6 +65,7 @@ export class ListStore<List, Query = any> extends BaseStore {
     this.label = label;
     this.query = query;
     if (restQuery) this.restQuery = restQuery;
+    makeObservable(this);
   }
 
   /**

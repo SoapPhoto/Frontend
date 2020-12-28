@@ -71,37 +71,37 @@ const nextConfig = {
 
 module.exports = composePlugins(
   [
-    [withOffline, {
-      workboxOpts: {
-        swDest: 'service-worker.js',
-        runtimeCaching: [
-          {
-            urlPattern: /[.](png|jpg|ico|css)/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'assets-cache',
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/cdn-oss\.soapphoto\.com.*/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'lib-cache',
-            },
-          },
-          {
-            urlPattern: /^http.*/,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'http-cache',
-            },
-          },
-        ],
-      },
-    }],
+    // [withOffline, {
+    //   workboxOpts: {
+    //     swDest: 'service-worker.js',
+    //     runtimeCaching: [
+    //       {
+    //         urlPattern: /[.](png|jpg|ico|css)/,
+    //         handler: 'CacheFirst',
+    //         options: {
+    //           cacheName: 'assets-cache',
+    //           cacheableResponse: {
+    //             statuses: [0, 200],
+    //           },
+    //         },
+    //       },
+    //       {
+    //         urlPattern: /^https:\/\/cdn-oss\.soapphoto\.com.*/,
+    //         handler: 'CacheFirst',
+    //         options: {
+    //           cacheName: 'lib-cache',
+    //         },
+    //       },
+    //       {
+    //         urlPattern: /^http.*/,
+    //         handler: 'NetworkFirst',
+    //         options: {
+    //           cacheName: 'http-cache',
+    //         },
+    //       },
+    //     ],
+    //   },
+    // }],
     // [withBundleAnalyzer, { enabled: true }],
     withGraphql,
   ],
