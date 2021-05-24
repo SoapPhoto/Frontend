@@ -10,6 +10,7 @@ const createLogger = require('progress-estimator');
 const path = require('path');
 const rimraf = require('rimraf');
 const qiniu = require('qiniu');
+const OSS = require('ali-oss');
 const FileHound = require('filehound');
 
 const PUBLIC_PATH = path.join(__dirname, '../.next');
@@ -85,7 +86,23 @@ const uploadQiniu = async () => {
 };
 
 const uploadOSS = async () => {
+  const store = new OSS({
+    region: process.env.OSS_REGION,
+    bucket: process.env.OSS_BUCKET,
+    accessKeyId: process.env.OSS_KEY_ID,
+    accessKeySecret: process.env.OSS_KEY_SECRET,
+  });
 
+  const src = `${PUBLIC_PATH}/static`;
+  const files = await FileHound.create()
+    .paths(src)
+    .find();
+  return Promise.all(files.map(async (v) => {
+    const key = v.replace(PUBLIC_PATH, PREFIX).replace(/\\/g, '/');
+    return store.put(key, v).then((result) => {
+      console.log(result.url);
+    });
+  }));
 };
 
 const build = async () => {
@@ -101,7 +118,7 @@ const build = async () => {
   }
   await logger(getBuild(), '打包文件');
   if (upQiniu) {
-    await logger(uploadQiniu(), '上传前端打包文件到七牛');
+    await logger(uploadOSS(), '上传前端打包文件到七牛');
   }
   console.log(`${chalk.green('✓')} 打包成功！`);
 };

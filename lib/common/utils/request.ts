@@ -37,7 +37,7 @@ instance.interceptors.response.use(
         // const message = t(response.data.message);
         switch (response.status) {
           case 401:
-            if (isRefreshTokenOk && response.data.message === 'Unauthorized') {
+            if (isRefreshTokenOk() && response.data.message === 'Unauthorized') {
               if (!isRefreshing) {
                 isRefreshing = true;
                 try {
