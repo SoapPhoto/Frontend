@@ -84,6 +84,10 @@ const uploadQiniu = async () => {
   }));
 };
 
+const uploadOSS = async () => {
+
+};
+
 const build = async () => {
   const { value } = await prompts({
     type: 'confirm',
@@ -105,6 +109,5 @@ const build = async () => {
 const main = async () => {
   build();
 };
-
 
 main();
