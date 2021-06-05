@@ -34,11 +34,10 @@ export interface ICustomNextAppContext<Q extends IDefaultQuery = IDefaultQuery> 
   ctx: ICustomNextContext<Q>;
 }
 
-export interface ICustomNextPage<P = {}, IP = P> {
+export interface ICustomNextPage<P = unknown, IP = P> {
   (props: P): JSX.Element;
   getInitialProps?(ctx: ICustomNextContext): Promise<IP>;
 }
-
 
 export interface IPaginationList<T> {
   timestamp: number;

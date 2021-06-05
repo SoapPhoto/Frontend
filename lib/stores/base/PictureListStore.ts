@@ -3,7 +3,7 @@ import {
   runInAction,
 } from 'mobx';
 
-import { IPictureLikeRequest, PictureEntity } from '@lib/common/interfaces/picture';
+import { PictureEntity } from '@lib/common/interfaces/picture';
 import { LikePicture, UnLikePicture } from '@lib/schemas/mutations';
 import Fragments from '@lib/schemas/fragments';
 import { apolloErrorLog } from '@lib/common/utils/error';
@@ -14,7 +14,7 @@ interface IPictureListData<T> extends IListStoreData<T> {
 
 }
 
-export class PictureListStore<Query = {}> extends ListStore<PictureEntity, Query> {
+export class PictureListStore<Query = unknown> extends ListStore<PictureEntity, Query> {
   constructor(data: IPictureListData<Query>) {
     super(data);
     makeObservable(this);
@@ -22,9 +22,9 @@ export class PictureListStore<Query = {}> extends ListStore<PictureEntity, Query
 
   public like = async (picture: PictureEntity) => {
     try {
-      let req: IPictureLikeRequest;
+      let req: PictureEntity;
       if (!picture.isLike) {
-        const { data } = await this.client.mutate<{likePicture: IPictureLikeRequest}>({
+        const { data } = await this.client.mutate<{likePicture: PictureEntity}>({
           mutation: LikePicture,
           variables: {
             id: picture.id,
@@ -32,7 +32,7 @@ export class PictureListStore<Query = {}> extends ListStore<PictureEntity, Query
         });
         req = data!.likePicture;
       } else {
-        const { data } = await this.client.mutate<{unlikePicture: IPictureLikeRequest}>({
+        const { data } = await this.client.mutate<{unlikePicture: PictureEntity}>({
           mutation: UnLikePicture,
           variables: {
             id: picture.id,
@@ -53,13 +53,13 @@ export class PictureListStore<Query = {}> extends ListStore<PictureEntity, Query
           data: {
             ...cacheData,
             isLike: req.isLike,
-            likedCount: req.count,
+            likedCount: req.likedCount,
           } as PictureEntity,
         });
       }
       runInAction(() => {
         picture.isLike = req.isLike;
-        picture.likedCount = req.count;
+        picture.likedCount = req.likedCount;
       });
     // tslint:disable-next-line: no-empty
     } catch (err) {
