@@ -5,7 +5,7 @@ import { merge, pick } from 'lodash';
 import animateScrollTo from 'animated-scroll-to';
 
 import { CommentEntity } from '@lib/common/interfaces/comment';
-import { PictureEntity, IPictureLikeRequest } from '@lib/common/interfaces/picture';
+import { PictureEntity } from '@lib/common/interfaces/picture';
 import {
   deletePicture,
 } from '@lib/services/picture';
@@ -133,7 +133,7 @@ export class PictureScreenStore extends BaseStore {
     try {
       let req;
       if (!this.info.isLike) {
-        const { data } = await this.client.mutate<{likePicture: IPictureLikeRequest}>({
+        const { data } = await this.client.mutate<{likePicture: PictureEntity}>({
           mutation: LikePicture,
           variables: {
             id: this.info.id,
@@ -141,7 +141,7 @@ export class PictureScreenStore extends BaseStore {
         });
         req = data!.likePicture;
       } else {
-        const { data } = await this.client.mutate<{unlikePicture: IPictureLikeRequest}>({
+        const { data } = await this.client.mutate<{unlikePicture: PictureEntity}>({
           mutation: UnLikePicture,
           variables: {
             id: this.info.id,
@@ -150,7 +150,7 @@ export class PictureScreenStore extends BaseStore {
         req = data!.unlikePicture;
       }
       this.info.isLike = req.isLike;
-      this.info.likedCount = req.count;
+      this.info.likedCount = req.likedCount;
       const cacheData = this.client.readFragment<PictureEntity>({
         fragment: Fragments,
         fragmentName: 'PictureFragment',
@@ -164,7 +164,7 @@ export class PictureScreenStore extends BaseStore {
           data: {
             ...cacheData,
             isLike: req.isLike,
-            likedCount: req.count,
+            likedCount: req.likedCount,
           } as PictureEntity,
         });
       }
