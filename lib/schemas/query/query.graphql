@@ -118,14 +118,14 @@ query ChildComments($id: Float!, $query: CommentsQueryInput) {
   }
 }
 
-query FollowedUsers($id: Float!, $limit: Float!, $offset: Float!) {
-  followedUsers(id: $id, limit: $limit, offset: $offset) {
+query FollowedUsers($id: Float!, $query: FollowUsersQueryInput) {
+  followedUsers(id: $id, query: $query) {
     ...UserDetailFragment
   }
 }
 
-query FollowerUsers($id: Float!, $limit: Float!, $offset: Float!) {
-  followerUsers(id: $id, limit: $limit, offset: $offset) {
+query FollowerUsers($id: Float!, $query: FollowUsersQueryInput) {
+  followerUsers(id: $id, query: $query) {
     ...UserDetailFragment
   }
 }

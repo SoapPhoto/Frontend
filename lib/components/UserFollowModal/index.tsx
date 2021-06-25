@@ -47,7 +47,6 @@ const ModalContent = styled(Modal)`
   `}
 `;
 
-
 const Content = styled(OverlayScrollbarsComponent)`
   flex: 1;
   background-color: ${theme('colors.background')};
@@ -61,7 +60,6 @@ const Header = styled.header`
   padding: ${rem(14)};
   border-bottom: 1px solid ${theme('colors.shadowColor')};
 `;
-
 
 const Title = styled.h2`
   font-size: ${_ => rem(theme('fontSizes[3]')(_))};
@@ -129,8 +127,10 @@ export const UserFollowModal = observer<React.FC<IProps>>(({
       setUserList(data[`${type}Users` as any]);
     }, {
       id: userId,
-      limit: 30,
-      offset: 0,
+      query: {
+        page: 1,
+        pageSize: 30,
+      },
     });
     const clear = watch((data: any) => {
       if (data[`${type}Users` as any]) {

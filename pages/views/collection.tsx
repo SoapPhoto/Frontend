@@ -43,7 +43,6 @@ const Title = styled.h2`
   justify-content: center;
 `;
 
-
 const PictureNumber = styled.p`
   display: flex;
   align-items: center;
@@ -82,7 +81,6 @@ const EditIcon = styled(Settings)`
   cursor: pointer;
   ${activate(0.8)}
 `;
-
 
 const useUpdateVisible = (isOwner: boolean): [boolean, (value: boolean) => void] => {
   const [visible, seVisible] = useState(false);
