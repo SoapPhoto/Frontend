@@ -20,7 +20,7 @@ const A = styled.a`
 
 export const Footer = () => (
   <Wrapper>
-    <div style={{ marginRight: rem(24) }}>©2021 All Rights Reserved</div>
-    <div><A target="__blank" href="https://beian.miit.gov.cn/">闽ICP备18021344号-1</A></div>
+    <div style={{ marginRight: rem(24) }}>© 2021 HZFEStudio</div>
+    {/* <div><A target="__blank" href="https://beian.miit.gov.cn/">闽ICP备18021344号-1</A></div> */}
   </Wrapper>
 );

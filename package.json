@@ -7,7 +7,7 @@
   "scripts": {
     "build": "next build",
     "start": "cross-env NODE_ENV=production node dist/server.js",
-    "dev": "nodemon server.ts",
+    "dev": "cross-env NODE_ENV=development nodemon server.ts",
     "soap": "node script/build.js",
     "build:view-server": "tsc -p tsconfig.build-view.json && babel --no-babelrc --config-file ./.babelrc-server -d dist dist",
     "env": "sync-dotenv",

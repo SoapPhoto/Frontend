@@ -109,7 +109,7 @@ const theme: DefaultTheme = {
           background: colors.lightgray,
         },
       },
-      logo: colors.primary,
+      logo: '#000',
     },
     picture: {
       wrapper: {
