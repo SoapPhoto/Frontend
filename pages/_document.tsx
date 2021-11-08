@@ -42,10 +42,13 @@ export default class MyDocument extends Document {
           <meta name="keywords" content="soap, picture, great photographers, photographers, photography images, photography, photos, sell photos online, sell your photos, share photos, your photos, 图片, 照片" />
           <link rel="manifest" href="/static/manifest.json" />
           {/* <link rel="shortcut icon" type="image/ico" href="/favicon.ico" /> */}
-          <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans+SC:400,500,600|Rubik:400,500,600" />
+          <link rel="stylesheet" href="//fonts.geekzu.org/css?family=Rubik:400,500,600" />
+          {/* <link rel="stylesheet" href="https://cdn-oss.soapphoto.com/fonts/LXGWWenKai.cf3df82d-25cb-48a0-9a35-0b13c8eb4151.css" /> */}
+          <link rel="stylesheet" href="https://cdn-oss.soapphoto.com/fonts/OPPOSans.cf3df82d-25cb-48a0-9a35-0b13c8eb4151.css" />
           <script src={`${process.env.OSS_URL}static/script/jquery.min.js`} />
           <script src={`${process.env.OSS_URL}static/script/jquery.fancybox.js`} />
           <link href={`${process.env.OSS_URL}static/style/jquery.fancybox.css`} rel="stylesheet" />
+          {/* <script data-ad-client="ca-pub-6853711451561555" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" /> */}
           {
             isProd && (
               <>

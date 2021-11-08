@@ -1,4 +1,4 @@
-import { observer } from 'mobx-react';
+import { observer, useObserver } from 'mobx-react';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import parse from 'url-parse';
 import { Cell } from 'styled-css-grid';
@@ -67,50 +67,6 @@ interface IUserInfoProps {
 }
 
 const server = !!(typeof window === 'undefined');
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-const User = observer<ICustomNextPage<IProps, {}>>(({ type }) => {
-  const { screen } = useStores();
-  const { t } = useTranslation();
-  const { userStore, userCollectionStore } = screen;
-  const { user } = userStore;
-  return (
-    <Wrapper>
-      <Head>
-        <link rel="shortcut icon" type="image/jpg" href={getPictureUrl(user.avatar, 'ico')} />
-      </Head>
-      <SEO
-        title={getTitle(`${user.fullName} (@${user.username})`, t)}
-        description={`${user.bio ? `${user.bio}-` : ''}查看${user.name}的Soap照片。`}
-      />
-      <UserInfo />
-      <Nav style={{ textAlign: 'center' }}>
-        <NavItem route={`/@${user.username}`}>
-          {t('user.menu.picture')}
-        </NavItem>
-        <NavItem route={`/@${user.username}/like`}>
-          {t('user.menu.like')}
-        </NavItem>
-        <NavItem route={`/@${user.username}/choice`}>
-          {t('user.menu.choice')}
-        </NavItem>
-        <NavItem route={`/@${user.username}/collections`}>
-          {t('user.menu.collection')}
-        </NavItem>
-      </Nav>
-      {
-        type === 'collections' ? (
-          <CollectionList
-            list={userCollectionStore.list}
-            noMore={userCollectionStore.isNoMore}
-          />
-        ) : (
-          <Picture />
-        )
-      }
-    </Wrapper>
-  );
-});
 
 const UserInfo = observer(() => {
   const {
@@ -223,7 +179,7 @@ const UserInfo = observer(() => {
                 )
               }
               {
-                  userInfo?.username !== user.username && (
+                userInfo?.username !== user.username && (
                   <FollowBox>
                     <FollowButton
                       disabled={followLoading}
@@ -311,21 +267,63 @@ const UserInfo = observer(() => {
   );
 });
 
-const Picture = observer(() => {
+const Picture = () => {
   const { screen } = useStores();
   const { userPictureStore } = screen;
   const { type: PictureType, list } = userPictureStore;
-  return (
+  return useObserver(() => (
     <PictureList
       noMore={list[PictureType].isNoMore}
       data={list[PictureType].list}
       like={list[PictureType].like}
       onPage={list[PictureType].getPageList}
     />
+  ));
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+const User = observer<ICustomNextPage<IProps, {}>>(({ type }) => {
+  const { screen } = useStores();
+  const { t } = useTranslation();
+  const { userStore, userCollectionStore } = screen;
+  const { user } = userStore;
+  return (
+    <Wrapper>
+      <Head>
+        <link rel="shortcut icon" type="image/jpg" href={getPictureUrl(user.avatar, 'ico')} />
+      </Head>
+      <SEO
+        title={getTitle(`${user.fullName} (@${user.username})`, t)}
+        description={`${user.bio ? `${user.bio}-` : ''}查看${user.name}的Soap照片。`}
+      />
+      <UserInfo />
+      <Nav style={{ textAlign: 'center' }}>
+        <NavItem route={`/@${user.username}`}>
+          {t('user.menu.picture')}
+        </NavItem>
+        <NavItem route={`/@${user.username}/like`}>
+          {t('user.menu.like')}
+        </NavItem>
+        <NavItem route={`/@${user.username}/choice`}>
+          {t('user.menu.choice')}
+        </NavItem>
+        <NavItem route={`/@${user.username}/collections`}>
+          {t('user.menu.collection')}
+        </NavItem>
+      </Nav>
+      {
+        type === 'collections' ? (
+          <CollectionList
+            list={userCollectionStore.list}
+            noMore={userCollectionStore.isNoMore}
+          />
+        ) : (
+          <Picture />
+        )
+      }
+    </Wrapper>
   );
 });
-
-
 User.getInitialProps = async ({
   mobxStore, route, res,
 }: ICustomNextContext) => {

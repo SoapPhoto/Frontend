@@ -135,7 +135,7 @@ export const ProfileItem = styled.div`
   align-items: center;
   margin-right: ${rem('24px')};
   min-width: 0;
-  font-family: ${theme('enFont')};
+  // font-family: ${theme('enFont')};
   color: ${theme('colors.secondary')};
   & svg {
     margin-right: ${rem('4px')};
@@ -150,7 +150,7 @@ export const ProfileItemLink = styled.a`
 
 export const Bio = styled.p`
   font-size: ${_ => rem(theme('fontSizes[1]')(_))};
-  font-family: ${theme('enFont')};
+  // font-family: ${theme('enFont')};
   color: ${theme('colors.secondary')};
   ${customMedia.lessThan('mobile')`
     text-align: center;

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createGlobalStyle } from 'styled-components';
 
 import { theme } from '@lib/common/utils/themes';
@@ -8,8 +9,14 @@ import { scrollbar } from './scrollbar';
 import { animate } from './animate';
 import { fancybox } from './fancybox';
 
+const font = `
+  Rubik, "OPPOSans", "Noto Sans SC", PingFang SC, PingFang TC, Microsoft YaHei,
+  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", "Helvetica", Hiragino Sans GB, STHeiti, "WenQuanYi Micro Hei", sans-serif
+`;
+
 export const GlobalStyle = createGlobalStyle<{theme?: any}>`
   body {
+    font-family: ${font};
     background-color: ${theme('colors.background')};
     color: ${theme('colors.text')};
   }

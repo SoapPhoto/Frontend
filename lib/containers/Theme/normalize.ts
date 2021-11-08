@@ -1,11 +1,5 @@
 /* eslint-disable max-len */
 import { css } from 'styled-components';
-import { theme } from '@lib/common/utils/themes';
-
-const font = `
-  "Noto Sans SC", PingFang SC, PingFang TC, Microsoft YaHei,
-  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", "Helvetica", Hiragino Sans GB, STHeiti, "WenQuanYi Micro Hei", sans-serif
-`;
 
 // _: ThemedStyledProps<{}, DefaultTheme>
 
@@ -21,7 +15,6 @@ const normalize = () => css`
     line-height: 1.5;
     overflow-y: scroll;
     overflow-x: hidden;
-    font-family: ${theme('enFont')}, ${font};
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
@@ -65,7 +58,6 @@ const normalize = () => css`
     overflow: visible;
   }
   pre {
-    font-family: ${font};
     font-size: 1em; /* 2 */
   }
   a {
@@ -89,7 +81,6 @@ const normalize = () => css`
   optgroup,
   select,
   textarea {
-    font-family: ${font};
     font-size: 100%;
     line-height: 1.15;
     margin: 0;
