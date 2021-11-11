@@ -50,7 +50,7 @@ fragment PictureDetailFragment on Picture {
     currentCollections {
       ...CollectionFragment
     }
-    # relatedCollections(limit: 3) {
+    # relatedCollections {
     #   ...RelatedCollectionFragment
     # }
     user {
@@ -192,7 +192,7 @@ fragment UserDetailFragment on User {
   isPassword
   signupType
   status
-  pictures(limit: 3) {
+  pictures {
     ...PicturePreviewFragment
   }
   badge {
@@ -297,7 +297,7 @@ fragment CommentFragment on Comment {
   parentComment {
     ...CommentBaseFragment
   }
-  childComments(limit: 3) {
+  childComments {
     ...CommentChildFragment
   }
   user {
@@ -367,7 +367,7 @@ fragment PictureLocationFragment on PictureLocation {
     lat
     lng
   }
-  pois(limit: 3) {
+  pois {
     addr
     name
     poiType
