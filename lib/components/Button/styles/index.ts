@@ -63,7 +63,6 @@ export const buttonStyle = (style: string) => <T>(context: ThemedStyledProps<IBt
 };
 
 export const BaseButtonStyle = css`
-  line-height: 1.5715;
   position: relative;
   display: inline-block;
   font-weight: 400;
